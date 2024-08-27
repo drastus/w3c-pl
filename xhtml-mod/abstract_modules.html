@@ -1,0 +1,1804 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="pl" lang="pl">
+
+<head>
+<title>Modularyzacja XHTML – Moduły abstrakcyjne XHTML</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="stylesheet" type="text/css" href="../W3C-REC.css" />
+<link rel="stylesheet" type="text/css" href="xhtml.css" />
+<link rel="stylesheet" type="text/css" href="../trans.css" />
+<style type="text/css">
+table {border: 1px ridge}
+th, td {border: 1px groove}
+</style>
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-35090831-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+</head>
+
+<body>
+
+
+<div class="navbar">[<a href="abstraction">poprzedni</a>] [<a href="schema_module_rules">następny</a>] [<a href="overview#toc">spis treści</a>] 
+<hr />
+</div>
+
+<h1><a name="s_xhtmlmodules" id="s_xhtmlmodules">5.</a> Moduły abstrakcyjne XHTML</h1>
+
+<div class='subtoc'>
+<p><strong>Zawartość</strong></p>
+<ul class="toc">
+<li class='tocline'>5.1. <a href="#s_commonatts" class="tocxref">Zestawy atrybutów</a></li>
+<li class='tocline'>5.2. <a href="#sec_5.2." class="tocxref">Moduły jądra</a> 
+<ul class="toc">
+<li class='tocline'>5.2.1. <a href="#s_structuremodule" class="tocxref">Moduł struktury &#8212; Structure</a></li>
+<li class='tocline'>5.2.2. <a href="#s_textmodule" class="tocxref">Moduł tekstu &#8212; Text</a></li>
+<li class='tocline'>5.2.3. <a href="#s_hypertextmodule" class="tocxref">Moduł hipertekstu &#8212; Hypertext</a></li>
+<li class='tocline'>5.2.4. <a href="#s_listmodule" class="tocxref">Moduł wykazów &#8212; List</a></li>
+</ul></li>
+<li class='tocline'>5.3. <a href="#s_appletmodule" class="tocxref">Moduł apletu &#8212; Applet</a></li>
+<li class='tocline'>5.4. <a href="#s_text" class="tocxref">Moduły rozszerzeń tekstu</a> 
+<ul class="toc">
+<li class='tocline'>5.4.1. <a href="#s_presentationmodule" class="tocxref">Moduł prezentacji &#8212; Presentation</a></li>
+<li class='tocline'>5.4.2. <a href="#s_editmodule" class="tocxref">Moduł edycji &#8212; Edit</a></li>
+<li class='tocline'>5.4.3. <a href="#s_bdomodule" class="tocxref">Moduł tekstu dwukierunkowego &#8212; Bi-directional Text</a></li>
+</ul></li>
+<li class='tocline'>5.5. <a href="#s_forms" class="tocxref">Moduły formularzy</a> 
+<ul class="toc">
+<li class='tocline'>5.5.1. <a href="#s_sformsmodule" class="tocxref">Moduł prostych formularzy &#8212; Basic Forms</a></li>
+<li class='tocline'>5.5.2. <a href="#s_extformsmodule" class="tocxref">Moduł formularzy &#8212; Forms</a></li>
+</ul></li>
+<li class='tocline'>5.6. <a href="#sec_5.6." class="tocxref">Moduły tabel</a> 
+<ul class="toc">
+<li class='tocline'>5.6.1. <a href="#s_simpletablemodule" class="tocxref">Moduł prostych tabel &#8212; Basic Tables</a></li>
+<li class='tocline'>5.6.2. <a href="#s_tablemodule" class="tocxref">Moduł tabel &#8212; Tables</a></li>
+</ul></li>
+<li class='tocline'>5.7. <a href="#s_imagemodule" class="tocxref">Moduł obrazów &#8212; Image</a></li>
+<li class='tocline'>5.8. <a href="#s_imapmodule" class="tocxref">Moduł map obrazkowych po stronie klienta &#8212; Client-side Image Map</a></li>
+<li class='tocline'>5.9. <a href="#s_servermapmodule" class="tocxref">Moduł map obrazkowych po stronie serwera &#8212; Server-side Image Map</a></li>
+<li class='tocline'>5.10. <a href="#s_objectmodule" class="tocxref">Moduł obiektu &#8212; Object</a></li>
+<li class='tocline'>5.11. <a href="#s_framesmodule" class="tocxref">Moduł ramek &#8212; Frames</a></li>
+<li class='tocline'>5.12. <a href="#s_targetmodule" class="tocxref">Moduł celu &#8212; Target</a></li>
+<li class='tocline'>5.13. <a href="#s_iframemodule" class="tocxref">Moduł ramek pływających &#8212; Iframe</a></li>
+<li class='tocline'>5.14. <a href="#s_intrinsiceventsmodule" class="tocxref">Moduł zdarzeń wewnętrznych &#8212; Intrinsic Events</a></li>
+<li class='tocline'>5.15. <a href="#s_metamodule" class="tocxref">Moduł metainformacji &#8212; Metainformation</a></li>
+<li class='tocline'>5.16. <a href="#s_scriptmodule" class="tocxref">Moduł skryptów &#8212; Scripting</a></li>
+<li class='tocline'>5.17. <a href="#s_stylemodule" class="tocxref">Moduł arkuszy stylów &#8212; Style Sheet</a></li>
+<li class='tocline'>5.18. <a href="#s_styleattributemodule" class="tocxref">Moduł atrybutu stylów &#8212; Style Attribute</a></li>
+<li class='tocline'>5.19. <a href="#s_linkmodule" class="tocxref">Moduł łączy &#8212; Link</a></li>
+<li class='tocline'>5.20. <a href="#s_basemodule" class="tocxref">Moduł bazy &#8212; Base</a></li>
+<li class='tocline'>5.21. <a href="#s_nameidentmodule" class="tocxref">Moduł identyfikacji nazw &#8212; Name Identification</a></li>
+<li class='tocline'>5.22. <a href="#s_legacymodule" class="tocxref">Moduł staroci &#8212; Legacy</a></li>
+</ul>
+</div>
+
+<p>Ten rozdział ma charakter<em> normatywny</em>.</p>
+
+<p>Ten rozdział stanowi specyfikację zawartości modułów abstrakcyjnych XHTML. Moduły te są abstrakcyjnymi definicjami zestawów elementów, atrybutów oraz ich modeli zawartości.
+Te moduły abstrakcyjne mogą być przeobrażone w każdy odpowiedni mechanizm specyfikacji. Na przykład <a href="dtd_module_defs#a_dtd_module_defs">implementacje modułów XHTML w DTD</a> przeobrażają te moduły w DTD w sposób
+opisany w <a href="references#ref_xml">[XML]</a>.</p>
+
+<p>Twórcy treści oraz projektanci urządzeń powinni traktować ten rozdział jako przewodnik po definicji funkcjonalności dostarczanej przez różne moduły zdefiniowane w XHTML. Podczas tworzenia dokumentów lub
+definiowania profilu dla klasy dokumentów, twórcy treści mogą określić, które z tych modułów są niezbędne dla przekazania ich informacji. Przy projektowaniu oprogramowania klienckiego, projektanci urządzeń powinni opracowywać profile swoich urządzeń poprzez wybranie spośród zdefiniowanych tutaj modułów abstrakcyjnych.</p>
+
+<p>Znaczenia tych elementów i atrybutów są zdefiniowane w <a href="references#ref_html40">[HTML4]</a>, chyba że zmieniono je tym dokumencie.</p>
+
+<h2><a name="s_commonatts" id="s_commonatts">5.1.</a> Zestawy atrybutów</h2>
+
+<p>Wiele z modułów abstrakcyjnych w tym rozdziale definiuje atrybuty wymagane dla elementów. Poniższa tabela definiuje kilka zestawów atrybutów, do których odwołują się wszystkie moduły.
+Wyrażenia te nie powinny być w żaden sposób uważane za normatywne czy obowiązkowe. Są one  przyjęte w tym dokumencie dla dogodności redakcyjnej. Używane w pozostałej części tego rozdziału, są one rozwinięciami normatywnych terminów, a nie terminami samymi w sobie.</p>
+
+<p>Następujące podstawowe zestawy atrybutów są używane w wielu elementach. W każdym wypadku ich użycia, są one identyfikowane poprzez nazwę zestawu, a nie przez wyliczenie całej listy.</p>
+
+<table summary="Definicje zestawów atrybutów">
+<thead>
+<tr>
+<th>Nazwa zestawu</th>
+<th>Atrybuty w zestawie</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><a id="s_core_collection" name="s_core_collection">Core</a></td>
+<td>class (<span class="datatype"><a href="abstraction#dt_NMTOKENS">NMTOKENS</a></span>), id (<span class="datatype"><a href="abstraction#dt_ID">ID</a></span>), title (<span class=
+"datatype"><a href="abstraction#dt_CDATA">CDATA</a></span>)</td>
+</tr>
+
+<tr>
+<td><a id="s_i18n_collection" name="s_i18n_collection">I18N</a></td>
+<td>xml:lang (<span class="datatype"><a href="abstraction#dt_NMTOKEN">NMTOKEN</a></span>)</td>
+</tr>
+
+<tr>
+<td><a id="s_events_collection" name="s_events_collection">Events</a></td>
+<td>onclick (<span class="datatype"><a href="abstraction#dt_Script">Script</a></span>), ondblclick (<span class="datatype"><a href="abstraction#dt_Script">Script</a></span>), onmousedown
+(<span class="datatype"><a href="abstraction#dt_Script">Script</a></span>), onmouseup (<span class="datatype"><a href="abstraction#dt_Script">Script</a></span>), onmouseover (<span class= 
+"datatype"><a href="abstraction#dt_Script">Script</a></span>), onmousemove (<span class="datatype"><a href="abstraction#dt_Script">Script</a></span>), onmouseout (<span class="datatype"><a
+href="abstraction#dt_Script">Script</a></span>), onkeypress (<span class="datatype"><a href="abstraction#dt_Script">Script</a></span>), onkeydown (<span class="datatype"><a href= 
+"abstraction#dt_Script">Script</a></span>), onkeyup (<span class="datatype"><a href="abstraction#dt_Script">Script</a></span>)</td>
+</tr>
+
+<tr>
+<td><a id="s_style_collection" name="s_style_collection">Style</a></td>
+<td>style (<span class="datatype"><a href="abstraction#dt_CDATA">CDATA</a></span>)</td>
+</tr>
+
+<tr>
+<td><a id="s_common_collection" name="s_common_collection">Common</a></td>
+<td><span class="collection"><a href="#s_core_collection">Core</a></span> + <span class="collection"><a href="#s_events_collection">Events</a></span> + <span class="collection"><a href= 
+"#s_i18n_collection">I18N</a></span> + <span class="collection"><a href="#s_style_collection">Style</a></span></td>
+</tr>
+</tbody>
+</table>
+
+<p>Weź pod uwagę, że zestaw Events jest zdefiniowany tylko wtedy, gdy wybrany jest moduł Intrinsic Events. W przeciwnym wypadku zestaw Events jest pusty.</p>
+
+<p>Weź też pod uwagę, że zestaw Style jest zdefiniowany tylko wtedy, gdy wybrany jest moduł Style Attribute. W przeciwnym wypadku zestaw Style jest pusty.</p>
+
+<h2><a name="sec_5.2." id="sec_5.2.">5.2.</a> Moduły jądra</h2>
+
+<p>Moduły jądra to moduły, których obecność jest wymagana w każdym <a href="conformance#s_conform_document_type">typie dokumentu zgodnym ze standardami rodziny XHTML</a>.</p>
+
+<h3><a name="s_structuremodule" id="s_structuremodule">5.2.1.</a> Moduł struktury &#8212; Structure</h3>
+
+<p>Moduł Structure definiuje główne elementy strukturalne XHTML. Elementy te pełnią faktycznie funkcję podstawy modelu zawartości wielu typów dokumentu z rodziny XHTML. Elementy i atrybuty zawarte w tym module to:</p>
+
+<table summary="Elementy i atrybuty modułu Structure">
+<thead>
+<tr>
+<th>Elementy</th>
+<th>Atrybuty</th>
+<th>Minimalny model zawartości</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>body</td>
+<td><span class="collection"><a href="#s_common_collection">Common</a></span></td>
+<td>(Heading | Block | List)*</td>
+</tr>
+
+<tr>
+<td>head</td>
+<td><span class="collection"><a href="#s_i18n_collection">I18N</a></span>, profile (<span class="datatype"><a href="abstraction#dt_URI">URI</a></span>)</td>
+<td>title</td>
+</tr>
+
+<tr>
+<td>html</td>
+<td><span class="collection"><a href="#s_i18n_collection">I18N</a></span>, version (<span class="datatype"><a href="abstraction#dt_CDATA">CDATA</a></span>), xmlns (<span class="datatype"><a
+href="abstraction#dt_URI">URI</a></span> = "http://www.w3.org/1999/xhtml")</td>
+<td>head, body</td>
+</tr>
+
+<tr>
+<td>title</td>
+<td><span class="collection"><a href="#s_i18n_collection">I18N</a></span></td>
+<td>PCDATA</td>
+</tr>
+</tbody>
+</table>
+
+<p>Ten moduł jest podstawową strukturalną definicją dla zawartości XHTML. Element <code>html</code> pełni funkcję elementu głównego we wszystkich typach dokumentów rodziny XHTML.</p>
+
+<p>Weź pod uwagę, że wartość atrybutu <code>xmlns</code> jest zdefiniowana jako "http://www.w3.org/1999/xhtml". Weź też pod uwagę, że z powodu szczególnego traktowania atrybutu <code>xmlns</code> przez parsery XML obsługujące przestrzenie nazw [<a href="references#ref_xmlns">XMLNAMES</a>],
+dopuszczalna jest obecność tego atrybutu w każdym z elementów. Jednak za każdym razem, gdy atrybut <code>xmlns</code> jest użyty w kontekście modułu XHTML, obojętnie czy z prefiksem
+czy bez, wartość tego atrybutu powinna być przestrzenią nazw XHTML zdefiniowaną tutaj. Więcej o regułach dotyczących używania przestrzeni nazw w modułach rodziny XHTML w podrozdziale <a href="dtd_module_rules#s_module_namespace">Definiowanie przestrzeni nazw modułu</a>.</p>
+
+<p>Implementacja: <a href="dtd_module_rules#a_module_Structure">DTD</a></p>
+
+<h3><a name="s_textmodule" id="s_textmodule">5.2.2.</a> Moduł tekstu &#8212; Text</h3>
+
+<p>Ten moduł definiuje wszystkie podstawowe elementy mogące zawierać tekst, atrybuty, oraz ich model zawartości:</p>
+
+<table class="moduledef" summary="Elementy i atrybuty modułu Text">
+<thead>
+<tr>
+<th>Element</th>
+<th>Atrybuty</th>
+<th>Minimalny model zawartości</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>abbr</td>
+<td><span class="collection"><a href="#s_common_collection">Common</a></span></td>
+<td>(PCDATA | Inline)*</td>
+</tr>
+
+<tr>
+<td>acronym</td>
+<td><span class="collection"><a href="#s_common_collection">Common</a></span></td>
+<td>(PCDATA | Inline)*</td>
+</tr>
+
+<tr>
+<td>address</td>
+<td><span class="collection"><a href="#s_common_collection">Common</a></span></td>
+<td>(PCDATA | Inline)*</td>
+</tr>
+
+<tr>
+<td>blockquote</td>
+<td><span class="collection"><a href="#s_common_collection">Common</a></span>, cite (<span class="datatype"><a href="abstraction#dt_URI">URI</a></span>)</td>
+<td>(PCDATA | Heading | Block | List)*</td>
+</tr>
+
+<tr>
+<td>br</td>
+<td><span class="collection"><a href="#s_core_collection">Core</a></span></td>
+<td>EMPTY</td>
+</tr>
+
+<tr>
+<td>cite</td>
+<td><span class="collection"><a href="#s_common_collection">Common</a></span></td>
+<td>(PCDATA | Inline)*</td>
+</tr>
+
+<tr>
+<td>code</td>
+<td><span class="collection"><a href="#s_common_collection">Common</a></span></td>
+<td>(PCDATA | Inline)*</td>
+</tr>
+
+<tr>
+<td>dfn</td>
+<td><span class="collection"><a href="#s_common_collection">Common</a></span></td>
+<td>(PCDATA | Inline)*</td>
+</tr>
+
+<tr>
+<td>div</td>
+<td><span class="collection"><a href="#s_common_collection">Common</a></span></td>
+<td>(PCDATA | Flow)*</td>
+</tr>
+
+<tr>
+<td>em</td>
+<td><span class="collection"><a href="#s_common_collection">Common</a></span></td>
+<td>(PCDATA | Inline)*</td>
+</tr>
+
+<tr>
+<td>h1</td>
+<td><span class="collection"><a href="#s_common_collection">Common</a></span></td>
+<td>(PCDATA | Inline)*</td>
+</tr>
+
+<tr>
+<td>h2</td>
+<td><span class="collection"><a href="#s_common_collection">Common</a></span></td>
+<td>(PCDATA | Inline)*</td>
+</tr>
+
+<tr>
+<td>h3</td>
+<td><span class="collection"><a href="#s_common_collection">Common</a></span></td>
+<td>(PCDATA | Inline)*</td>
+</tr>
+
+<tr>
+<td>h4</td>
+<td><span class="collection"><a href="#s_common_collection">Common</a></span></td>
+<td>(PCDATA | Inline)*</td>
+</tr>
+
+<tr>
+<td>h5</td>
+<td><span class="collection"><a href="#s_common_collection">Common</a></span></td>
+<td>(PCDATA | Inline)*</td>
+</tr>
+
+<tr>
+<td>h6</td>
+<td><span class="collection"><a href="#s_common_collection">Common</a></span></td>
+<td>(PCDATA | Inline)*</td>
+</tr>
+
+<tr>
+<td>kbd</td>
+<td><span class="collection"><a href="#s_common_collection">Common</a></span></td>
+<td>(PCDATA | Inline)*</td>
+</tr>
+
+<tr>
+<td>p</td>
+<td><span class="collection"><a href="#s_common_collection">Common</a></span></td>
+<td>(PCDATA | Inline)*</td>
+</tr>
+
+<tr>
+<td>pre</td>
+<td><span class="collection"><a href="#s_common_collection">Common</a></span>, xml:space="preserve"</td>
+<td>(PCDATA | Inline)*</td>
+</tr>
+
+<tr>
+<td>q</td>
+<td><span class="collection"><a href="#s_common_collection">Common</a></span>, cite (<span class="datatype"><a href="abstraction#dt_URI">URI</a></span>)</td>
+<td>(PCDATA | Inline)*</td>
+</tr>
+
+<tr>
+<td>samp</td>
+<td><span class="collection"><a href="#s_common_collection">Common</a></span></td>
+<td>(PCDATA | Inline)*</td>
+</tr>
+
+<tr>
+<td>span</td>
+<td><span class="collection"><a href="#s_common_collection">Common</a></span></td>
+<td>(PCDATA | Inline)*</td>
+</tr>
+
+<tr>
+<td>strong</td>
+<td><span class="collection"><a href="#s_common_collection">Common</a></span></td>
+<td>(PCDATA | Inline)*</td>
+</tr>
+
+<tr>
+<td>var</td>
+<td><span class="collection"><a href="#s_common_collection">Common</a></span></td>
+<td>(PCDATA | Inline)*</td>
+</tr>
+</tbody>
+</table>
+
+<p>Minimalny model zawartości tego modułu definiuje kilka zbiorów zawartości:</p>
+
+<dl>
+<dt>Heading</dt>
+
+<dd><span class="content">h1 | h2 | h3 | h4 | h5 | h6</span></dd>
+
+<dt>Block</dt>
+
+<dd><span class="content">address | blockquote | div | p | pre</span></dd>
+
+<dt>Inline</dt>
+
+<dd><span class="content">abbr | acronym | br | cite | code | dfn | em | kbd | q | samp | span | strong | var</span></dd>
+
+<dt>Flow</dt>
+
+<dd><span class="content">Heading | Block | Inline</span></dd>
+</dl>
+
+<p>Implementacja: <a href="dtd_module_defs#a_module_Text">DTD</a></p>
+
+<h3><a name="s_hypertextmodule" id="s_hypertextmodule">5.2.3.</a> Moduł hipertekstu &#8212; Hypertext</h3>
+
+<p>Moduł Hypertext dostarcza elementu używanego do definiowania hipertekstowych łączy do innych zasobów. Ten moduł obsługuje następujący element i atrybuty:</p>
+
+<table class="moduledef" summary="Element A i jego atrybuty">
+<thead>
+<tr>
+<th>Element</th>
+<th>Atrybuty</th>
+<th>Minimalny model zawartości</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>a</td>
+<td><span class="collection"><a href="#s_common_collection">Common</a></span>, accesskey (<span class="datatype"><a href="abstraction#dt_Character">Character</a></span>), charset (<span class= 
+"datatype"><a href="abstraction#dt_Charset">Charset</a></span>), href (<span class="datatype"><a href="abstraction#dt_URI">URI</a></span>), hreflang (<span class="datatype"><a href= 
+"abstraction#dt_LanguageCode">LanguageCode</a></span>), rel (<span class="datatype"><a href="abstraction#dt_LinkTypes">LinkTypes</a></span>), rev (<span class="datatype"><a href= 
+"abstraction#dt_LinkTypes">LinkTypes</a></span>), tabindex (<span class="datatype"><a href="abstraction#dt_Number">Number</a></span>), type (<span class="datatype"><a href= 
+"abstraction#dt_ContentType">ContentType</a></span>)</td>
+<td>(PCDATA | Inline - a)*</td>
+</tr>
+</tbody>
+</table>
+
+<p>Ten moduł dodaje element <code>a</code> do zbioru zawartości Inline z modułu Text.</p>
+
+<p>Implementacja: <a href="dtd_module_defs#a_module_Hypertext">DTD</a></p>
+
+<h3><a name="s_listmodule" id="s_listmodule">5.2.4.</a> Moduł wykazów &#8212; List</h3>
+
+<p>Jak wskazuje nazwa, moduł List dostarcza elementów związanych z listami (wykazami). Moduł List obsługuje następujące elementy i atrybuty:</p>
+
+<table class="moduledef" summary="Elementy i atrybuty modułu List">
+<thead>
+<tr>
+<th>Element</th>
+<th>Atrybuty</th>
+<th>Minimalny model zawartości</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>dl</td>
+<td><span class="collection"><a href="#s_common_collection">Common</a></span></td>
+<td>(dt | dd)+</td>
+</tr>
+
+<tr>
+<td>dt</td>
+<td><span class="collection"><a href="#s_common_collection">Common</a></span></td>
+<td>(PCDATA | Inline)*</td>
+</tr>
+
+<tr>
+<td>dd</td>
+<td><span class="collection"><a href="#s_common_collection">Common</a></span></td>
+<td>(PCDATA | Flow)*</td>
+</tr>
+
+<tr>
+<td>ol</td>
+<td><span class="collection"><a href="#s_common_collection">Common</a></span></td>
+<td>li+</td>
+</tr>
+
+<tr>
+<td>ul</td>
+<td><span class="collection"><a href="#s_common_collection">Common</a></span></td>
+<td>li+</td>
+</tr>
+
+<tr>
+<td>li</td>
+<td><span class="collection"><a href="#s_common_collection">Common</a></span></td>
+<td>(PCDATA | Flow)*</td>
+</tr>
+</tbody>
+</table>
+
+<p>Ten moduł definiuje także zbiór zawartości List z minimalnym modelem zawartości <span class="content">(dl | ol | ul)+</span> i dodaje ten zbiór do zbioru zawartości Flow z modułu Text.</p>
+
+<p>Implementacja: <a href="dtd_module_defs#a_module_Lists">DTD</a></p>
+
+<h2><a name="s_appletmodule" id="s_appletmodule">5.3.</a> Moduł apletu &#8212; Applet</h2>
+
+<p><em>Ten moduł jest uznany za przestarzały. Podobną funkcjonalność posiada <a href="#s_objectmodule">moduł Object</a>.</em></p>
+
+<p>Moduł Applet dostarcza elementów służących do odsyłania do zewnętrznych aplikacji. Moduł Applet obsługuje następujące elementy i atrybuty:</p>
+
+<table class="moduledef" summary="Elementy i atrybuty w module Applet">
+<thead>
+<tr>
+<th>Element</th>
+<th>Atrybuty</th>
+<th>Minimalny model zawartości</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>applet</td>
+<td>Core, alt* (<span class="datatype"><a href="abstraction#dt_Text">Text</a></span>), archive (<span class="datatype"><a href="abstraction#dt_CDATA">CDATA</a></span>), code (<span class= 
+"datatype"><a href="abstraction#dt_CDATA">CDATA</a></span>), codebase (<span class="datatype"><a href="abstraction#dt_URI">URI</a></span>), height* (<span class="datatype"><a href= 
+"abstraction#dt_Length">Length</a></span>), object (<span class="datatype"><a href="abstraction#dt_CDATA">CDATA</a></span>), width* (<span class="datatype"><a href= 
+"abstraction#dt_Length">Length</a></span>)</td>
+<td>(PCDATA | Flow | param)*</td>
+</tr>
+
+<tr>
+<td>param</td>
+<td>id (<span class="datatype"><a href="abstraction#dt_ID">ID</a></span>), name* (<span class="datatype"><a href="abstraction#dt_CDATA">CDATA</a></span>), type (<span class="datatype"><a
+href="abstraction#dt_ContentType">ContentType</a></span>), value (<span class="datatype"><a href="abstraction#dt_CDATA">CDATA</a></span>), valuetype ("data"* | "ref" | "object")</td>
+<td>EMPTY</td>
+</tr>
+</tbody>
+</table>
+
+<p>Gdy używany jest moduł Applet, dodaje on element <code>applet</code> do zbioru zawartości Inline z modułu Text.</p>
+
+<p>Implementacja: <a href="dtd_module_defs#a_module_Applet">DTD</a></p>
+
+<h2><a name="s_text" id="s_text">5.4.</a> Moduły rozszerzeń tekstu</h2>
+
+<p>W tym podrozdziale zdefiniowano rozmaite dodatkowe moduły oznakowania tekstowego.</p>
+
+<h3><a name="s_presentationmodule" id="s_presentationmodule">5.4.1.</a> Moduł prezentacji &#8212; Presentation</h3>
+
+<p>Ten moduł definiuje elementy, atrybuty i minimalny model zawartości dla prostego oznakowania związanego z prezentacją:</p>
+
+<table class="moduledef" summary="Elementy i atrybuty w module Presentation">
+<thead>
+<tr>
+<th>Element</th>
+<th>Atrybuty</th>
+<th>Minimalny model zawartości</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>b</td>
+<td><span class="collection"><a href="#s_common_collection">Common</a></span></td>
+<td>(PCDATA | Inline)*</td>
+</tr>
+
+<tr>
+<td>big</td>
+<td><span class="collection"><a href="#s_common_collection">Common</a></span></td>
+<td>(PCDATA | Inline)*</td>
+</tr>
+
+<tr>
+<td>hr</td>
+<td><span class="collection"><a href="#s_common_collection">Common</a></span></td>
+<td>EMPTY</td>
+</tr>
+
+<tr>
+<td>i</td>
+<td><span class="collection"><a href="#s_common_collection">Common</a></span></td>
+<td>(PCDATA | Inline)*</td>
+</tr>
+
+<tr>
+<td>small</td>
+<td><span class="collection"><a href="#s_common_collection">Common</a></span></td>
+<td>(PCDATA | Inline)*</td>
+</tr>
+
+<tr>
+<td>sub</td>
+<td><span class="collection"><a href="#s_common_collection">Common</a></span></td>
+<td>(PCDATA | Inline)*</td>
+</tr>
+
+<tr>
+<td>sup</td>
+<td><span class="collection"><a href="#s_common_collection">Common</a></span></td>
+<td>(PCDATA | Inline)*</td>
+</tr>
+
+<tr>
+<td>tt</td>
+<td><span class="collection"><a href="#s_common_collection">Common</a></span></td>
+<td>(PCDATA | Inline)*</td>
+</tr>
+</tbody>
+</table>
+
+<p>Gdy moduł ten jest używany, element <code>hr</code> jest dodawany do zbioru zawartości <span class="content">Block</span> z modułu Text. Ponadto elementy <code>b</code>, <code>big</code>, <code>i</code>, <code>small</code>, <code>sub</code>, <code>sup</code>,
+i <code>tt</code> są dodawane do zbioru zawartości <span class="content">Inline</span> z modułu Text.</p>
+
+<p>Implementacja: <a href="dtd_module_defs#a_module_Presentation">DTD</a></p>
+
+<h3><a name="s_editmodule" id="s_editmodule">5.4.2.</a> Moduł edycji &#8212; Edit</h3>
+
+<p>Ten moduł definiuje elementy i atrybuty przeznaczone do używania w oznakowaniu związanym z edycją tekstu:</p>
+
+<table class="moduledef" summary="Elementy i atrybuty w module Edit">
+<thead>
+<tr>
+<th>Element</th>
+<th>Atrybuty</th>
+<th>Minimalny model zawartości</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>del</td>
+<td><span class="collection"><a href="#s_common_collection">Common</a></span>, cite (<span class="datatype"><a href="abstraction#dt_URI">URI</a></span>), datetime (<span class="datatype"><a
+href="abstraction#dt_Datetime">Datetime</a></span>)</td>
+<td>(PCDATA | Flow)*</td>
+</tr>
+
+<tr>
+<td>ins</td>
+<td><span class="collection"><a href="#s_common_collection">Common</a></span>, cite (<span class="datatype"><a href="abstraction#dt_URI">URI</a></span>), datetime (<span class="datatype"><a
+href="abstraction#dt_Datetime">Datetime</a></span>)</td>
+<td>(PCDATA | Flow)*</td>
+</tr>
+</tbody>
+</table>
+
+<p>Gdy moduł ten jest używany, elementy <code>del</code> i <code>ins</code> są dodawane do zbioru zawartości <span class="content">Inline</span> z modułu Text.</p>
+
+<p>Implementacja: <a href="dtd_module_defs#a_module_Edit">DTD</a></p>
+
+<h3><a name="s_bdomodule" id="s_bdomodule">5.4.3.</a> Moduł tekstu dwukierunkowego &#8212; Bi-directional Text</h3>
+
+<p>W module Bi-directional Text zdefiniowano element, który może być używany do deklarowania reguł dwukierunkowości dla zawartości tego elementu.</p>
+
+<table class="moduledef" summary="Element i atrybuty w module Bi-directional Text">
+<thead>
+<tr>
+<th>Element</th>
+<th>Atrybuty</th>
+<th>Minimalny model zawartości</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>bdo</td>
+<td><span class="collection"><a href="#s_common_collection">Core</a></span>, dir* ("ltr" | "rtl")</td>
+<td>(PCDATA | Inline)*</td>
+</tr>
+</tbody>
+</table>
+
+<p>Gdy moduł ten jest używany, element <code>bdo</code> jest dodawany do zbioru zawartości <span class="content">Inline</span> z modułu Text. Wybranie tego modułu skutkuje także dodaniem atrybutu <code>dir*
+("ltr" | "rtl")</code> do zestawu atrybutów I18N.</p>
+
+<p>Implementacja: <a href="dtd_module_defs#a_module_Bi-directional_Text">DTD</a></p>
+
+<h2><a name="s_forms" id="s_forms">5.5.</a> Moduły formularzy</h2>
+
+<h3><a name="s_sformsmodule" id="s_sformsmodule">5.5.1.</a> Moduł prostych formularzy &#8212; Basic Forms</h3>
+
+<p>Moduł Basic Forms dostarcza elementów związanych z formularzami, ale tylko w ograniczonej formie. Moduł Basic Forms obsługuje następujące elementy, atrybuty i minimalne modele zawartości:</p>
+
+<table class="moduledef" summary="Elementy i atrybuty w module Basic Forms">
+<thead>
+<tr>
+<th>Element</th>
+<th>Atrybuty</th>
+<th>Minimalny model zawartości</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>form</td>
+<td><span class="collection"><a href="#s_common_collection">Common</a></span>, action* (<span class="datatype"><a href="abstraction#dt_URI">URI</a></span>), method ("get"* | "post"), enctype
+(<span class="datatype"><a href="abstraction#dt_ContentType">ContentType</a></span>)</td>
+<td>(Heading | List | Block - form)+</td>
+</tr>
+
+<tr>
+<td>input</td>
+<td><span class="collection"><a href="#s_common_collection">Common</a></span>, accesskey (<span class="datatype"><a href="abstraction#dt_Character">Character</a></span>), checked ("checked"),
+maxlength (<span class="datatype"><a href="abstraction#dt_Number">Number</a></span>), name (<span class="datatype"><a href="abstraction#dt_CDATA">CDATA</a></span>), size (<span class= 
+"datatype"><a href="abstraction#dt_Number">Number</a></span>), src (<span class="datatype"><a href="abstraction#dt_URI">URI</a></span>), tabindex (<span class="datatype"><a href= 
+"abstraction#dt_Number">Number</a></span>), type ("text"* | "password" | "checkbox" | "radio" | "submit" | "reset" | "hidden" ), value (<span class="datatype"><a href=
+"abstraction#dt_CDATA">CDATA</a></span>)</td>
+<td>EMPTY</td>
+</tr>
+
+<tr>
+<td>label</td>
+<td><span class="collection"><a href="#s_common_collection">Common</a></span>, accesskey (<span class="datatype"><a href="abstraction#dt_Character">Character</a></span>), for (<span class= 
+"datatype"><a href="abstraction#dt_IDREF">IDREF</a></span>)</td>
+<td>(PCDATA | Inline - label)*</td>
+</tr>
+
+<tr>
+<td>select</td>
+<td><span class="collection"><a href="#s_common_collection">Common</a></span>, multiple ("multiple"), name (<span class="datatype"><a href="abstraction#dt_CDATA">CDATA</a></span>), size (<span
+class="datatype"><a href="abstraction#dt_Number">Number</a></span>), tabindex (<span class="datatype"><a href="abstraction#dt_Number">Number</a></span>)</td>
+<td>option+</td>
+</tr>
+
+<tr>
+<td>option</td>
+<td><span class="collection"><a href="#s_common_collection">Common</a></span>, selected ("selected"), value (<span class="datatype"><a href="abstraction#dt_CDATA">CDATA</a></span>)</td>
+<td>PCDATA</td>
+</tr>
+
+<tr>
+<td>textarea</td>
+<td><span class="collection"><a href="#s_common_collection">Common</a></span>, accesskey (<span class="datatype"><a href="abstraction#dt_Character">Character</a></span>), cols* (<span class= 
+"datatype"><a href="abstraction#dt_Number">Number</a></span>), name (<span class="datatype"><a href="abstraction#dt_CDATA">CDATA</a></span>), rows* (<span class="datatype"><a href= 
+"abstraction#dt_Number">Number</a></span>), tabindex (<span class="datatype"><a href="abstraction#dt_Number">Number</a></span>)</td>
+<td>PCDATA</td>
+</tr>
+</tbody>
+</table>
+
+<p>W tym module zdefiniowano dwa zbiory zawartości:</p>
+
+<dl>
+<dt>Form</dt>
+
+<dd><span class="content">form</span></dd>
+
+<dt>Formctrl</dt>
+
+<dd><span class="content">input | label | select | textarea</span></dd>
+</dl>
+
+<p>Gdy moduł ten jest używany, dodaje zbiór zawartości Form do zbioru zawartości Block oraz dodaje zbiór zawartości Formctrl do zbioru zawartości Inline, które to zbiory są zdefiniowane w module Text.</p>
+
+<p>Implementacja: <a href="dtd_module_defs#a_module_Basic_Forms">DTD</a></p>
+
+<h3><a name="s_extformsmodule" id="s_extformsmodule">5.5.2.</a> Moduł formularzy &#8212; Forms</h3>
+
+<p>Moduł Forms dostarcza wszystkich cech formularzy, które można znaleźć w HTML 4.0. Moduł Forms obsługuje:</p>
+
+<table class="moduledef" summary="Elementy i atrybuty w module Forms">
+<thead>
+<tr>
+<th>Element</th>
+<th>Atrybuty</th>
+<th>Minimalny model zawartości</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>form</td>
+<td><span class="collection"><a href="#s_common_collection">Common</a></span>, accept (<span class="datatype"><a href="abstraction#dt_ContentTypes">ContentTypes</a></span>), accept-charset
+(<span class="datatype"><a href="abstraction#dt_Charsets">Charsets</a></span>), action* (<span class="datatype"><a href="abstraction#dt_URI">URI</a></span>), method ("get"* | "post"),
+enctype (<span class="datatype"><a href="abstraction#dt_ContentType">ContentType</a></span>)</td>
+<td>(Heading | List | Block - form | fieldset)+</td>
+</tr>
+
+<tr>
+<td>input</td>
+<td><span class="collection"><a href="#s_common_collection">Common</a></span>, accept (<span class="datatype"><a href="abstraction#dt_ContentTypes">ContentTypes</a></span>), accesskey (<span
+class="datatype"><a href="abstraction#dt_Character">Character</a></span>), alt (<span class="datatype"><a href="abstraction#dt_Text">Text</a></span>), checked ("checked"), disabled
+("disabled"), maxlength (<span class="datatype"><a href="abstraction#dt_Number">Number</a></span>), name (<span class="datatype"><a href="abstraction#dt_CDATA">CDATA</a></span>), readonly
+("readonly"), size (<span class="datatype"><a href="abstraction#dt_Number">Number</a></span>), src (<span class="datatype"><a href="abstraction#dt_URI">URI</a></span>), tabindex (<span
+class="datatype"><a href="abstraction#dt_Number">Number</a></span>), type ("text"* | "password" | "checkbox" | "button" | "radio" | "submit" | "reset" | "file" | "hidden" | "image"), value
+(<span class="datatype"><a href="abstraction#dt_CDATA">CDATA</a></span>)</td>
+<td>EMPTY</td>
+</tr>
+
+<tr>
+<td>select</td>
+<td><span class="collection"><a href="#s_common_collection">Common</a></span>, disabled ("disabled"), multiple ("multiple"), name (<span class="datatype"><a href=
+"abstraction#dt_CDATA">CDATA</a></span>), size (<span class="datatype"><a href="abstraction#dt_Number">Number</a></span>), tabindex (<span class="datatype"><a href= 
+"abstraction#dt_Number">Number</a></span>)</td>
+<td>(optgroup | option)+</td>
+</tr>
+
+<tr>
+<td>option</td>
+<td><span class="collection"><a href="#s_common_collection">Common</a></span>, disabled ("disabled"), label (<span class="datatype"><a href="abstraction#dt_Text">Text</a></span>), selected
+("selected"), value (<span class="datatype"><a href="abstraction#dt_CDATA">CDATA</a></span>)</td>
+<td>PCDATA</td>
+</tr>
+
+<tr>
+<td>textarea</td>
+<td><span class="collection"><a href="#s_common_collection">Common</a></span>, accesskey (<span class="datatype"><a href="abstraction#dt_Character">Character</a></span>), cols* (<span class= 
+"datatype"><a href="abstraction#dt_Number">Number</a></span>), disabled ("disabled"), name (<span class="datatype"><a href="abstraction#dt_CDATA">CDATA</a></span>), readonly ("readonly"),
+rows* (<span class="datatype"><a href="abstraction#dt_Number">Number</a></span>), tabindex (<span class="datatype"><a href="abstraction#dt_Number">Number</a></span>)</td>
+<td>PCDATA</td>
+</tr>
+
+<tr>
+<td>button</td>
+<td><span class="collection"><a href="#s_common_collection">Common</a></span>, accesskey (<span class="datatype"><a href="abstraction#dt_Character">Character</a></span>), disabled ("disabled"),
+name (<span class="datatype"><a href="abstraction#dt_CDATA">CDATA</a></span>), tabindex (<span class="datatype"><a href="abstraction#dt_Number">Number</a></span>), type ("button" |
+"submit"* | "reset"), value (<span class="datatype"><a href="abstraction#dt_CDATA">CDATA</a></span>)</td>
+<td>(PCDATA | Heading | List | Block - Form | Inline - Formctrl)*</td>
+</tr>
+
+<tr>
+<td>fieldset</td>
+<td><span class="collection"><a href="#s_common_collection">Common</a></span></td>
+<td>(PCDATA | legend | Flow)*</td>
+</tr>
+
+<tr>
+<td>label</td>
+<td><span class="collection"><a href="#s_common_collection">Common</a></span>, accesskey (<span class="datatype"><a href="abstraction#dt_Character">Character</a></span>), for (<span class= 
+"datatype"><a href="abstraction#dt_IDREF">IDREF</a></span>)</td>
+<td>(PCDATA | Inline - label)*</td>
+</tr>
+
+<tr>
+<td>legend</td>
+<td><span class="collection"><a href="#s_common_collection">Common</a></span>, accesskey (<span class="datatype"><a href="abstraction#dt_Character">Character</a></span>)</td>
+<td>(PCDATA | Inline)+</td>
+</tr>
+
+<tr>
+<td>optgroup</td>
+<td><span class="collection"><a href="#s_common_collection">Common</a></span>, disabled ("disabled"), label* (<span class="datatype"><a href="abstraction#dt_Text">Text</a></span>)</td>
+<td>option+</td>
+</tr>
+</tbody>
+</table>
+
+<p>W tym module zdefiniowano dwa zbiory zawartości:</p>
+
+<dl>
+<dt>Form</dt>
+
+<dd><span class="content">form | fieldset</span></dd>
+
+<dt>Formctrl</dt>
+
+<dd><span class="content">input | select | textarea | label | button</span></dd>
+</dl>
+
+<p>Gdy moduł ten jest używany, dodaje zbiór zawartości Form do zbioru zawartości Block oraz dodaje zbiór zawartości Formctrl do zbioru zawartości Inline, które to zbiory są zdefiniowane w module Text.</p>
+
+<p>Moduł Forms jest nadzbiorem modułu Basic Forms. Moduły te nie mogą być używane razem w pojedynczym typie dokumentu.</p>
+
+<p>Implementacja: <a href="dtd_module_defs#a_module_Forms">DTD</a></p>
+
+<h2><a name="sec_5.6." id="sec_5.6.">5.6.</a> Moduły tabel</h2>
+
+<h3><a name="s_simpletablemodule" id="s_simpletablemodule">5.6.1.</a> Moduł prostych tabel &#8212; Basic Tables</h3>
+
+<p>Moduł Basic Tables dostarcza elementy związane z tabelami, ale tylko w ograniczonej formie. Moduł Basic Tables obsługuje:</p>
+
+<table class="moduledef" summary="Elementy i atrybuty w module Basic Tables">
+<thead>
+<tr>
+<th>Element</th>
+<th>Atrybuty</th>
+<th>Minimalny model zawartości</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>caption</td>
+<td><span class="collection"> <a href="#s_common_collection">Common</a></span></td>
+<td>(PCDATA | Inline)*</td>
+</tr>
+
+<tr>
+<td>table</td>
+<td><span class="collection"> <a href="#s_common_collection">Common</a></span> , summary ( <span class="datatype"> <a href="abstraction#dt_Text">Text</a></span> ), width ( <span class=
+"datatype"> <a href="abstraction#dt_Length">Length</a></span> )</td>
+<td>caption?, tr+</td>
+</tr>
+
+<tr>
+<td>td</td>
+<td><span class="collection"><a href="#s_common_collection">Common</a></span>, abbr (<span class="datatype"><a href="abstraction#dt_Text">Text</a></span>), align ("left" | "center" | "right"),
+axis (<span class="datatype"><a href="abstraction#dt_CDATA">CDATA</a></span>), colspan (<span class="datatype"><a href="abstraction#dt_Number">Number</a></span>), headers (<span class= 
+"datatype"><a href="abstraction#dt_IDREFS">IDREFS</a></span>), rowspan (<span class="datatype"><a href="abstraction#dt_Number">Number</a></span>), scope ("row" | "col"), valign ("top" |
+"middle" | "bottom")</td>
+<td>(PCDATA | Flow - table)*</td>
+</tr>
+
+<tr>
+<td>th</td>
+<td><span class="collection"><a href="#s_common_collection">Common</a></span>, abbr (<span class="datatype"><a href="abstraction#dt_Text">Text</a></span>), align ("left" | "center" | "right"),
+axis (<span class="datatype"><a href="abstraction#dt_CDATA">CDATA</a></span>), colspan (<span class="datatype"><a href="abstraction#dt_Number">Number</a></span>), headers (<span class= 
+"datatype"><a href="abstraction#dt_IDREFS">IDREFS</a></span>), rowspan (<span class="datatype"><a href="abstraction#dt_Number">Number</a></span>), scope ("row" | "col" ), valign ("top" |
+"middle" | "bottom")</td>
+<td>(PCDATA | Flow - table)*</td>
+</tr>
+
+<tr>
+<td>tr</td>
+<td><span class="collection"><a href="#s_common_collection">Common</a></span>, align ("left" | "center" | "right"), valign ("top" | "middle" | "bottom")</td>
+<td>(td | th)+</td>
+</tr>
+</tbody>
+</table>
+
+<p>Gdy moduł ten jest używany, dodaje on element <code>table</code> do zbioru zawartości Block zdefiniowanego w module Text.</p>
+
+<p>Implementacja: <a href="dtd_module_defs#a_module_Basic_Tables">DTD</a></p>
+
+<h3><a name="s_tablemodule" id="s_tablemodule">5.6.2.</a> Moduł tabel &#8212; Tables</h3>
+
+<p>Jak wskazuje nazwa, moduł Tables dostarcza elementów związanych z tabelami, będących lepiej dostępnymi dla niewizualnych programów użytkownika. Moduł Tables obsługuje następujące
+elementy, atrybuty i model zawartości:</p>
+
+<table class="moduledef" summary="Elementy i atrybuty w module Tables">
+<thead>
+<tr>
+<th>Element</th>
+<th>Atrybuty</th>
+<th>Minimalny model zawartości</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>caption</td>
+<td><span class="collection"><a href="#s_common_collection">Common</a></span></td>
+<td>(PCDATA | Inline)*</td>
+</tr>
+
+<tr>
+<td>table</td>
+<td><span class="collection"><a href="#s_common_collection">Common</a></span>, border (<span class="datatype"><a href="abstraction#dt_Pixels">Pixels</a></span>), cellpadding (<span class= 
+"datatype"><a href="abstraction#dt_Length">Length</a></span>), cellspacing (<span class="datatype"><a href="abstraction#dt_Length">Length</a></span>), datapagesize (<span class=
+"datatype"><a href="abstraction#dt_CDATA">CDATA</a></span>), frame ("void" | "above" | below" | "hsides" | "lhs" | "rhs" | "vsides" | "box" | "border"), rules ("none" | "groups" | "rows" |
+"cols" | "all"), summary (<span class="datatype"><a href="abstraction#dt_Text">Text</a></span>), width (<span class="datatype"><a href="abstraction#dt_Length">Length</a></span>)</td>
+<td>caption?, ( col* | colgroup* ), (( thead?, tfoot?, tbody+ ) | ( tr+ ))</td>
+</tr>
+
+<tr>
+<td>td</td>
+<td><span class="collection"><a href="#s_common_collection">Common</a></span>, abbr (<span class="datatype"><a href="abstraction#dt_Text">Text</a></span>), align ("left" | "center" | "right" |
+"justify" | "char"), axis (<span class="datatype"><a href="abstraction#dt_CDATA">CDATA</a></span>), char (<span class="datatype"><a href="abstraction#dt_Character">Character</a></span>),
+charoff (<span class="datatype"><a href="abstraction#dt_Length">Length</a></span>), colspan (<span class="datatype"><a href="abstraction#dt_Number">Number</a></span>), headers (<span class= 
+"datatype"><a href="abstraction#dt_IDREFS">IDREFS</a></span>), rowspan (<span class="datatype"><a href="abstraction#dt_Number">Number</a></span>), scope ("row", "col", "rowgroup",
+"colgroup"), valign ("top" | "middle" | "bottom" | "baseline")</td>
+<td>(PCDATA | Flow)*</td>
+</tr>
+
+<tr>
+<td>th</td>
+<td><span class="collection"><a href="#s_common_collection">Common</a></span>, abbr (<span class="datatype"><a href="abstraction#dt_Text">Text</a></span>), align ("left" | "center" | "right" |
+"justify" | "char"), axis (<span class="datatype"><a href="abstraction#dt_CDATA">CDATA</a></span>), char (<span class="datatype"><a href="abstraction#dt_Character">Character</a></span>),
+charoff (<span class="datatype"><a href="abstraction#dt_Length">Length</a></span>), colspan (<span class="datatype"><a href="abstraction#dt_Number">Number</a></span>), headers (<span class= 
+"datatype"><a href="abstraction#dt_IDREFS">IDREFS</a></span>), rowspan (<span class="datatype"><a href="abstraction#dt_Number">Number</a></span>), scope ("row", "col", "rowgroup",
+"colgroup"), valign ("top" | "middle" | "bottom" | "baseline")</td>
+<td>(PCDATA | Flow)*</td>
+</tr>
+
+<tr>
+<td>tr</td>
+<td><span class="collection"><a href="#s_common_collection">Common</a></span>, align ("left" | "center" | "right" | "justify", "char"), char (<span class="datatype"><a href= 
+"abstraction#dt_Character">Character</a></span>), charoff (<span class="datatype"><a href="abstraction#dt_Length">Length</a></span>), valign ("top" | "middle" | "bottom" | "baseline")</td>
+<td>(td | th)+</td>
+</tr>
+
+<tr>
+<td>col</td>
+<td><span class="collection"><a href="#s_common_collection">Common</a></span>, align ("left" | "center" | "right" | "justify", "char"), char (<span class="datatype"><a href= 
+"abstraction#dt_Character">Character</a></span>), charoff (<span class="datatype"><a href="abstraction#dt_Length">Length</a></span>), span (<span class="datatype"><a href= 
+"abstraction#dt_Number">Number</a></span>), valign ("top" | "middle" | "bottom" | "baseline"), width (<span class="datatype"><a href=
+"abstraction#dt_MultiLength">MultiLength</a></span>)</td>
+<td>EMPTY</td>
+</tr>
+
+<tr>
+<td>colgroup</td>
+<td><span class="collection"><a href="#s_common_collection">Common</a></span>, align ("left" | "center" | "right" | "justify", "char"), char (<span class="datatype"><a href= 
+"abstraction#dt_Character">Character</a></span>), charoff (<span class="datatype"><a href="abstraction#dt_Length">Length</a></span>), span (<span class="datatype"><a href= 
+"abstraction#dt_Number">Number</a></span>), valign ("top" | "middle" | "bottom" | "baseline"), width (<span class="datatype"><a href=
+"abstraction#dt_MultiLength">MultiLength</a></span>)</td>
+<td>col*</td>
+</tr>
+
+<tr>
+<td>tbody</td>
+<td><span class="collection"><a href="#s_common_collection">Common</a></span>, align ("left" | "center" | "right" | "justify", "char"), char (<span class="datatype"><a href= 
+"abstraction#dt_Character">Character</a></span>), charoff (<span class="datatype"><a href="abstraction#dt_Length">Length</a></span>), valign ("top" | "middle" | "bottom" | "baseline")</td>
+<td>tr+</td>
+</tr>
+
+<tr>
+<td>thead</td>
+<td><span class="collection"><a href="#s_common_collection">Common</a></span>, align ("left" | "center" | "right" | "justify", "char"), char (<span class="datatype"><a href= 
+"abstraction#dt_Character">Character</a></span>), charoff (<span class="datatype"><a href="abstraction#dt_Length">Length</a></span>), valign ("top" | "middle" | "bottom" | "baseline")</td>
+<td>tr+</td>
+</tr>
+
+<tr>
+<td>tfoot</td>
+<td><span class="collection"><a href="#s_common_collection">Common</a></span>, align ("left" | "center" | "right" | "justify", "char"), char (<span class="datatype"><a href= 
+"abstraction#dt_Character">Character</a></span>), charoff (<span class="datatype"><a href="abstraction#dt_Length">Length</a></span>), valign ("top" | "middle" | "bottom" | "baseline")</td>
+<td>tr+</td>
+</tr>
+</tbody>
+</table>
+
+<p>Gdy moduł ten jest używany, dodaje on element <code>table</code> do zbioru zawartości Block z modułu Text.</p>
+
+<p>Implementacja: <a href="dtd_module_defs#a_module_Tables">DTD</a></p>
+
+<h2><a name="s_imagemodule" id="s_imagemodule">5.7.</a> Moduł obrazów &#8212; Image</h2>
+
+<p>Moduł Image dostarcza prostego mechanizmu zagnieżdżania obrazów i może być używany w niektórych implementacjach niezależnie od map obrazkowych po stronie klienta. Moduł Image obsługuje następujący element i atrybuty:</p>
+
+<table class="moduledef" summary="Elementy i atrybuty w module Image">
+<thead>
+<tr>
+<th>Element</th>
+<th>Atrybuty</th>
+<th>Minimalny model zawartości</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>img</td>
+<td><span class="collection"><a href="#s_common_collection">Common</a></span>, alt* (<span class="datatype"><a href="abstraction#dt_Text">Text</a></span>), height (<span class="datatype"><a
+href="abstraction#dt_Length">Length</a></span>), longdesc (<span class="datatype"><a href="abstraction#dt_URI">URI</a></span>), src* (<span class="datatype"><a href=
+"abstraction#dt_URI">URI</a></span>), width (<span class="datatype"><a href="abstraction#dt_Length">Length</a></span>)</td>
+<td>EMPTY</td>
+</tr>
+</tbody>
+</table>
+
+<p>Gdy moduł ten jest używany, dodaje on element <code>img</code> do zbioru zawartości Inline z modułu Text.</p>
+
+<p>Implementacja: <a href="dtd_module_defs#a_module_Image">DTD</a></p>
+
+<h2><a name="s_imapmodule" id="s_imapmodule">5.8.</a> Moduł map obrazkowych po stronie klienta &#8212; Client-side Image Map</h2>
+
+<p>Moduł Client-side Image Map dostarcza elementów dla map obrazkowych po stronie klienta. Wymaga on załączenia modułu Image (lub innego modułu obsługującego element <code>img</code>).
+Moduł Client-side Image Map obsługuje następujące elementy:</p>
+
+<table class="moduledef" summary="Elementy i atrybuty w module Client-side Image Map">
+<thead>
+<tr>
+<th>Element</th>
+<th>Atrybuty</th>
+<th>Minimalny model zawartości</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>a&amp;</td>
+<td>coords (<span class="datatype"><a href="abstraction#dt_CDATA">CDATA</a></span>), shape ("rect" | "circle" | "poly" | "default")</td>
+<td>nie dot.</td>
+</tr>
+
+<tr>
+<td>area</td>
+<td><span class="collection"><a href="#s_common_collection">Common</a></span>, accesskey (<span class="datatype"><a href="abstraction#dt_Character">Character</a></span>), alt* (<span class= 
+"datatype"><a href="abstraction#dt_Text">Text</a></span>), coords (<span class="datatype"><a href="abstraction#dt_CDATA">CDATA</a></span>), href (<span class="datatype"><a href= 
+"abstraction#dt_URI">URI</a></span>), nohref ("nohref"), shape ("rect"* | "circle" | "poly" | "default"), tabindex (<span class="datatype"><a href=
+"abstraction#dt_Number">Number</a></span>)</td>
+<td>EMPTY</td>
+</tr>
+
+<tr>
+<td>img&amp;</td>
+<td>usemap (<span class="datatype"><a href="abstraction#dt_IDREF">IDREF</a></span>)</td>
+<td>nie dot.</td>
+</tr>
+
+<tr>
+<td>input&amp;</td>
+<td>usemap (<span class="datatype"><a href="abstraction#dt_IDREF">IDREF</a></span>)</td>
+<td>nie dot.</td>
+</tr>
+
+<tr>
+<td>map</td>
+<td><span class="collection"><a href="#s_i18n_collection">I18N</a></span>, <span class="collection"><a href="#s_events_collection">Events</a></span>, class (<span class="datatype"><a href= 
+"abstraction#dt_NMTOKEN">NMTOKEN</a></span>), id* (<span class="datatype"><a href="abstraction#dt_ID">ID</a></span>), title (<span class="datatype"><a href=
+"abstraction#dt_CDATA">CDATA</a></span>)</td>
+<td>((Heading | Block) | area)+</td>
+</tr>
+
+<tr>
+<td>object&amp;</td>
+<td>usemap (<span class="datatype"><a href="abstraction#dt_IDREF">IDREF</a></span>)</td>
+<td>Uwaga: tylko gdy załączony jest moduł Object</td>
+</tr>
+</tbody>
+</table>
+
+<p>Gdy moduł ten jest używany, element <code>map</code> jest dodawany do zbioru zawartości Inline modułu Text.</p>
+
+<p>Implementacja: <a href="dtd_module_defs#a_module_Client-side_Image_Map">DTD</a></p>
+
+<h2><a name="s_servermapmodule" id="s_servermapmodule">5.9.</a> Moduł map obrazkowych po stronie serwera &#8212; Server-side Image Map</h2>
+
+<p>Moduł Server-side Image Map dostarcza wsparcia dla wyboru i przekazywania wybranych współrzędnych obrazu. Wymaga on załączenia modułu Image (lub innego modułu obsługującego element
+<code>img</code>). Moduł Server-side Image Map obsługuje następujące atrybuty:</p>
+
+<table class="moduledef" summary="Elementy i atrybuty w module Server-side Image Map">
+<thead>
+<tr>
+<th>Element</th>
+<th>Atrybuty</th>
+<th>Minimalny model zawartości</th>
+<th>Uwagi</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>img&amp;</td>
+<td>ismap ("ismap")</td>
+<td>nie dot.</td>
+<td>&#160;</td>
+</tr>
+
+<tr>
+<td>input&amp;</td>
+<td>ismap ("ismap")</td>
+<td>nie dot.</td>
+<td>Gdy wybrano moduł Forms albo Basic Forms.</td>
+</tr>
+</tbody>
+</table>
+
+<p>Implementacja: <a href="dtd_module_defs#a_module_Server-side_Image_Map">DTD</a></p>
+
+<h2><a name="s_objectmodule" id="s_objectmodule">5.10.</a> Moduł obiektu &#8212; Object</h2>
+
+<p>Moduł Object dostarcza elementów służących do włączania obiektów ogólnego przeznaczenia. Moduł Object obsługuje:</p>
+
+<table class="moduledef" summary="Elementy i atrybuty w module Object">
+<thead>
+<tr>
+<th>Element</th>
+<th>Atrybuty</th>
+<th>Minimalny model zawartości</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>object</td>
+<td>Common, archive (<span class="datatype"><a href="abstraction#dt_URIs">URIs</a></span>), classid (<span class="datatype"><a href="abstraction#dt_URI">URI</a></span>), codebase (<span
+class="datatype"><a href="abstraction#dt_URI">URI</a></span>), codetype (<span class="datatype"><a href="abstraction#dt_ContentType">ContentType</a></span>), data (<span class="datatype"><a
+href="abstraction#dt_URI">URI</a></span>), declare ("declare"), height (<span class="datatype"><a href="abstraction#dt_Length">Length</a></span>), name (<span class="datatype"><a href= 
+"abstraction#dt_CDATA">CDATA</a></span>), standby (<span class="datatype"><a href="abstraction#dt_Text">Text</a></span>), tabindex (<span class="datatype"><a href=
+"abstraction#dt_Number">Number</a></span>), type (<span class="datatype"><a href="abstraction#dt_ContentType">ContentType</a></span>), width (<span class="datatype"><a href= 
+"abstraction#dt_Length">Length</a></span>)</td>
+<td>(PCDATA | Flow | param)*</td>
+</tr>
+
+<tr>
+<td>param</td>
+<td>id (<span class="datatype"><a href="abstraction#dt_ID">ID</a></span>), name* (<span class="datatype"><a href="abstraction#dt_CDATA">CDATA</a></span>), type (<span class="datatype"><a
+href="abstraction#dt_ContentType">ContentType</a></span>), value (<span class="datatype"><a href="abstraction#dt_CDATA">CDATA</a></span>), valuetype ("data"* | "ref" | "object")</td>
+<td>EMPTY</td>
+</tr>
+</tbody>
+</table>
+
+<p>Gdy moduł ten jest używany, dodaje on element <code>object</code> do zbioru zawartości Inline z modułu Text.</p>
+
+<p>Implementacja: <a href="dtd_module_defs#a_module_Object">DTD</a></p>
+
+<h2><a name="s_framesmodule" id="s_framesmodule">5.11.</a> Moduł ramek &#8212; Frames</h2>
+
+<p>Jak sugeruje nazwa, moduł Frames dostarcza elementów związanych z ramkami. Moduł Frames obsługuje:</p>
+
+<table class="moduledef" summary="Elementy i atrybuty w module Frames">
+<thead>
+<tr>
+<th>Element</th>
+<th>Atrybuty</th>
+<th>Minimalny model zawartości</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>frameset</td>
+<td><span class="collection"> <a href="#s_core_collection">Core</a></span> , cols ( <span class="datatype"> <a href="abstraction#dt_MultiLength"> MultiLength</a></span> ), rows ( <span class= 
+"datatype"> <a href="abstraction#dt_MultiLength"> MultiLength</a></span> )</td>
+<td>(frameset | frame)+, noframes?</td>
+</tr>
+
+<tr>
+<td>frame</td>
+<td><span class="collection"> <a href="#s_core_collection">Core</a></span> , frameborder ("1" | "0"), longdesc ( <span class="datatype"> <a href="abstraction#dt_URI">URI</a></span> ),
+marginheight ( <span class="datatype"> <a href="abstraction#dt_Pixels"> Pixels</a></span> ), marginwidth ( <span class="datatype"> <a href="abstraction#dt_Pixels">Pixels</a></span> ),
+noresize ("noresize"), scrolling ("yes" | "no" | "auto"*), src ( <span class="datatype"> <a href="abstraction#dt_URI">URI</a></span> )</td>
+<td>EMPTY</td>
+</tr>
+
+<tr>
+<td>noframes</td>
+<td><span class="collection"> <a href="#s_common_collection">Common</a></span></td>
+<td>body</td>
+</tr>
+</tbody>
+</table>
+
+<p>Gdy moduł ten jest używany, minimalny model zawartości elementu <code>html</code> z modułu Structure jest zmieniany na <code>(head, frameset)</code>.</p>
+
+<p>Implementacja: <a href="dtd_module_defs#a_module_Frames">DTD</a></p>
+
+<h2><a name="s_targetmodule" id="s_targetmodule">5.12.</a> Moduł celu &#8212; Target</h2>
+
+<p>Zawartość ramki może określić cele przeznaczenia dla danego wyboru. Ten moduł dodaje element <span class="trans" title="Przypis tłumacza">[powinno być: atrybut]</span> <code>target</code> do elementów definiujących powierzchnie i łącza. Zdefiniowano to jako osobny moduł,
+może być on więc włączony w dokumentach zawartych w ramkach oraz w dokumentach używających właściwości <code>target</code> do otwierania nowego okna.</p>
+
+<table class="moduledef" summary="Atrybuty Target dla modułu Frames">
+<thead>
+<tr>
+<th>Element</th>
+<th>Atrybuty</th>
+<th>Uwagi</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>a&amp;</td>
+<td>target ( <span class="datatype"> <a href="abstraction#dt_FrameTarget">CDATA</a></span> )</td>
+<td>&#160;</td>
+</tr>
+
+<tr>
+<td>area&amp;</td>
+<td>target ( <span class="datatype"> <a href="abstraction#dt_FrameTarget">CDATA</a></span> )</td>
+<td>Gdy wybrany jest moduł Client-side Image Map.</td>
+</tr>
+
+<tr>
+<td>base&amp;</td>
+<td>target ( <span class="datatype"> <a href="abstraction#dt_FrameTarget">CDATA</a></span> )</td>
+<td>Gdy wybrany jest moduł Legacy.</td>
+</tr>
+
+<tr>
+<td>link&amp;</td>
+<td>target ( <span class="datatype"> <a href="abstraction#dt_FrameTarget">CDATA</a></span> )</td>
+<td>Gdy wybrany jest moduł Link.</td>
+</tr>
+
+<tr>
+<td>form&amp;</td>
+<td>target ( <span class="datatype"> <a href="abstraction#dt_FrameTarget">CDATA</a></span> )</td>
+<td>Gdy wybrany jest moduł Basic Forms albo Forms.</td>
+</tr>
+</tbody>
+</table>
+
+<p>Implementacja: <a href="dtd_module_defs#a_module_Target">DTD</a></p>
+
+<h2><a name="s_iframemodule" id="s_iframemodule">5.13.</a> Moduł ramek pływających &#8212; Iframe</h2>
+
+<p>Moduł Iframe definiuje element służący do definiowania ramek pływających (wewnątrzwierszowych). Element i atrybuty zawarte w tym module to:</p>
+
+<table class="moduledef" summary="Element i atrybuty w module Iframe">
+<thead>
+<tr>
+<th>Element</th>
+<th>Atrybuty</th>
+<th>Minimalny model zawartości</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>iframe</td>
+<td><span class="collection"><a href="#s_core_collection">Core</a></span>, frameborder ("1" | "0"), height (<span class="datatype"><a href="abstraction#dt_Length">Length</a></span>), longdesc
+(<span class="datatype"><a href="abstraction#dt_URI">URI</a></span>), marginheight (<span class="datatype"><a href="abstraction#dt_Pixels">Pixels</a></span>), marginwidth (<span class= 
+"datatype"><a href="abstraction#dt_Pixels">Pixels</a></span>), scrolling ("yes" | "no" | "auto"*), src (<span class="datatype"><a href="abstraction#dt_URI">URI</a></span>), width (<span
+class="datatype"><a href="abstraction#dt_Length">Length</a></span>)</td>
+<td>(PCDATA | Flow)*</td>
+</tr>
+</tbody>
+</table>
+
+<p>Gdy moduł ten jest używany, element <code>iframe</code> jest dodawany do zbioru zawartości Inline zdefioniowanego przez moduł Text.</p>
+
+<p>Implementacja: <a href="dtd_module_defs#a_module_Iframe">DTD</a></p>
+
+<h2><a name="s_intrinsiceventsmodule" id="s_intrinsiceventsmodule">5.14.</a> Moduł zdarzeń wewnętrznych &#8212; Intrinsic Events</h2>
+
+<p>Zdarzenia wewnętrzne to atrybuty używane w połączeniu z elementami dla których mogą zachodzić określone zdarzenia gdy użytkownik wykona pewne działanie. Atrybuty te, wskazane w poniższej tabeli,
+są dodawane do zestawu atrybutów dla odpowiednich elementów<em> tylko </em>gdy moduły definiujące te elementy są wybrane. Weź też pod uwagę, że wybór tego modułu definiuje opisany wyżej zestaw atrybutów
+<a href="#s_events_collection">Events</a>. Atrybuty zdefiniowane przez ten moduł to:</p>
+
+<table class="moduledef" summary="Elementy i atrybuty w module Intrinsic Events">
+<thead>
+<tr>
+<th>Element</th>
+<th>Atrybuty</th>
+<th>Uwagi</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>a&amp;</td>
+<td>onblur (<span class="datatype"><a href="abstraction#dt_Script">Script</a></span>), onfocus (<span class="datatype"><a href="abstraction#dt_Script">Script</a></span>)</td>
+<td>&#160;</td>
+</tr>
+
+<tr>
+<td>area&amp;</td>
+<td>onblur (<span class="datatype"><a href="abstraction#dt_Script">Script</a></span>), onfocus (<span class="datatype"><a href="abstraction#dt_Script">Script</a></span>)</td>
+<td>Gdy używany jest też moduł Client-side Image Map.</td>
+</tr>
+
+<tr>
+<td>frameset&amp;</td>
+<td>onload (<span class="datatype"><a href="abstraction#dt_Script">Script</a></span>), onunload (<span class="datatype"><a href="abstraction#dt_Script">Script</a></span>)</td>
+<td>Gdy używany jest też moduł Frames.</td>
+</tr>
+
+<tr>
+<td>form&amp;</td>
+<td>onreset (<span class="datatype"><a href="abstraction#dt_Script">Script</a></span>), onsubmit (<span class="datatype"><a href="abstraction#dt_Script">Script</a></span>)</td>
+<td>Gdy używany jest moduł Basic Forms lub Forms.</td>
+</tr>
+
+<tr>
+<td>body&amp;</td>
+<td>onload (<span class="datatype"><a href="abstraction#dt_Script">Script</a></span>), onunload (<span class="datatype"><a href="abstraction#dt_Script">Script</a></span>)</td>
+<td>&#160;</td>
+</tr>
+
+<tr>
+<td>label&amp;</td>
+<td>onblur (<span class="datatype"><a href="abstraction#dt_Script">Script</a></span>), onfocus (<span class="datatype"><a href="abstraction#dt_Script">Script</a></span>)</td>
+<td>Gdy używany jest moduł Forms.</td>
+</tr>
+
+<tr>
+<td>input&amp;</td>
+<td>onblur (<span class="datatype"><a href="abstraction#dt_Script">Script</a></span>), onchange (<span class="datatype"><a href="abstraction#dt_Script">Script</a></span>), onfocus (<span
+class="datatype"><a href="abstraction#dt_Script">Script</a></span>), onselect (<span class="datatype"><a href="abstraction#dt_Script">Script</a></span>)</td>
+<td>Gdy używany jest moduł Basic Forms lub Forms.</td>
+</tr>
+
+<tr>
+<td>select&amp;</td>
+<td>onblur (<span class="datatype"><a href="abstraction#dt_Script">Script</a></span>), onchange (<span class="datatype"><a href="abstraction#dt_Script">Script</a></span>), onfocus (<span
+class="datatype"><a href="abstraction#dt_Script">Script</a></span>)</td>
+<td>Gdy używany jest moduł Basic Forms lub Forms.</td>
+</tr>
+
+<tr>
+<td>textarea&amp;</td>
+<td>onblur (<span class="datatype"><a href="abstraction#dt_Script">Script</a></span>), onchange (<span class="datatype"><a href="abstraction#dt_Script">Script</a></span>), onfocus (<span
+class="datatype"><a href="abstraction#dt_Script">Script</a></span>), onselect (<span class="datatype"><a href="abstraction#dt_Script">Script</a></span>)</td>
+<td>Gdy używany jest moduł Basic Forms lub Forms.</td>
+</tr>
+
+<tr>
+<td>button&amp;</td>
+<td>onblur (<span class="datatype"><a href="abstraction#dt_Script">Script</a></span>), onfocus (<span class="datatype"><a href="abstraction#dt_Script">Script</a></span>)</td>
+<td>Gdy używany jest moduł Forms.</td>
+</tr>
+</tbody>
+</table>
+
+<p>Implementacja: <a href="dtd_module_defs#a_module_Intrinsic_Events">DTD</a></p>
+
+<h2><a name="s_metamodule" id="s_metamodule">5.15.</a> Moduł metainformacji &#8212; Metainformation</h2>
+
+<p>Moduł Metainformation definiuje element opisujący informacje wewnątrz części dokumentu zawierającej deklaracje (w XHTML wewnątrz elementu <code>head</code>). Moduł ten zawiera następujący
+element:</p>
+
+<table class="moduledef" summary="Element i atrybuty w module Metainformation">
+<thead>
+<tr>
+<th>Element</th>
+<th>Atrybuty</th>
+<th>Minimalny model zawartości</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>meta</td>
+<td><span class="collection"><a href="#s_i18n_collection">I18N</a></span>, content* (<span class="datatype"><a href="abstraction#dt_CDATA">CDATA</a></span>), http-equiv (<span class=
+"datatype"><a href="abstraction#dt_NMTOKEN">NMTOKEN</a></span>), name (<span class="datatype"><a href="abstraction#dt_NMTOKEN">NMTOKEN</a></span>), scheme (<span class="datatype"><a href= 
+"abstraction#dt_CDATA">CDATA</a></span>)</td>
+<td>EMPTY</td>
+</tr>
+</tbody>
+</table>
+
+<p>Gdy moduł ten jest wybrany, element <code>meta</code> jest dodawany do modelu zawartości elementu <code>head</code> zdefiniowanego w module Structure.</p>
+
+<p>Implementacja: <a href="dtd_module_defs#a_module_Metainformation">DTD</a></p>
+
+<h2><a name="s_scriptmodule" id="s_scriptmodule">5.16.</a> Moduł skryptów &#8212; Scripting</h2>
+
+<p>Moduł Scripting definiuje elementy używane w celu zawierania informacji odnoszące się do wykonywalnych skryptów lub braku wsparcia dla wykonywalnych skryptów. Elementy i atrybuty zawarte w tym
+module to:</p>
+
+<table class="moduledef" summary="Elementy i atrybuty w module Scripting">
+<thead>
+<tr>
+<th>Element</th>
+<th>Atrybuty</th>
+<th>Minimalny model zawartości</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>noscript</td>
+<td><span class="collection"><a href="#s_common_collection">Common</a></span></td>
+<td>(Heading | List | Block)+</td>
+</tr>
+
+<tr>
+<td>script</td>
+<td>charset (<span class="datatype"><a href="abstraction#dt_Charset">Charset</a></span>), defer ("defer"), src (<span class="datatype"><a href="abstraction#dt_URI">URI</a></span>), type*
+(<span class="datatype"><a href="abstraction#dt_ContentType">ContentType</a></span>), xml:space="preserve"</td>
+<td>PCDATA</td>
+</tr>
+</tbody>
+</table>
+
+<p>Gdy moduł ten jest używany, elementy <code>script</code> i <code>noscript</code> są dodawane do zbiorów zawartości Block i Inline z modułu Text. Ponadto element <code>script</code>
+jest dodawany do modelu zawartości elementu <code>head</code> zdefiniowanego w module Structure.</p>
+
+<p>Implementacja: <a href="dtd_module_defs#a_module_Scripting">DTD</a></p>
+
+<h2><a name="s_stylemodule" id="s_stylemodule">5.17.</a> Moduł arkuszy stylów &#8212; Style Sheet</h2>
+
+<p>Moduł Style Sheet definiuje element używany do deklarowania wewnętrznych arkuszy stylów. Element i atrybuty zdefiniowane przez ten moduł to:</p>
+
+<table class="moduledef" summary="Elementy i atrybuty w module Style Sheet">
+<thead>
+<tr>
+<th>Element</th>
+<th>Atrybuty</th>
+<th>Minimalny model zawartości</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>style</td>
+<td><span class="collection"><a href="#s_i18n_collection">I18N</a></span>, media (<span class="datatype"><a href="abstraction#dt_MediaDesc">MediaDesc</a></span>), title (<span class=
+"datatype"><a href="abstraction#dt_Text">Text</a></span>), type* (<span class="datatype"><a href="abstraction#dt_ContentType">ContentType</a></span>), xml:space="preserve"</td>
+<td>PCDATA</td>
+</tr>
+</tbody>
+</table>
+
+<p>Gdy moduł ten jest używany, dodaje on element <code>style</code> do modelu zawartości elementu <code>head</code> z modułu Structure.</p>
+
+<p>Implementacja: <a href="dtd_module_defs#a_module_Style_Sheet">DTD</a></p>
+
+<h2><a name="s_styleattributemodule" id="s_styleattributemodule">5.18.</a> Moduł atrybutu stylów &#8212; Style Attribute</h2>
+
+<p>Moduł Style Attribute definiuje atrybut <code>style</code>. Fdy moduł ten jest wybrany, uruchamia <a href="#s_style_collection">zestaw atrybutów Style</a>.</p>
+
+<p>Implementacja: <a href="dtd_module_defs#a_module_Style_Attribute">DTD</a></p>
+
+<h2><a name="s_linkmodule" id="s_linkmodule">5.19.</a> Moduł łączy &#8212; Link</h2>
+
+<p>Moduł Link definiuje element, który może być użyty do zdefiniowania łączy do zasobów zewnętrznych. Zasoby te są często są wykorzystywane w celu zwiększenia zdolności programu użytkownika do przetwarzania skojarzonych dokumentów XHTML. Element i atrybuty zawarte w tym module to:</p>
+
+<table class="moduledef" summary="Element i atrybuty w module Link">
+<thead>
+<tr>
+<th>Element</th>
+<th>Atrybuty</th>
+<th>Minimalny model zawartości</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>link</td>
+<td><span class="collection"><a href="#s_common_collection">Common</a></span>, charset (<span class="datatype"><a href="abstraction#dt_Charset">Charset</a></span>), href (<span class=
+"datatype"><a href="abstraction#dt_URI">URI</a></span>), hreflang (<span class="datatype"><a href="abstraction#dt_LanguageCode">LanguageCode</a></span>), media (<span class="datatype"><a
+href="abstraction#dt_MediaDesc">MediaDesc</a></span>), rel (<span class="datatype"><a href="abstraction#dt_LinkTypes">LinkTypes</a></span>), rev (<span class="datatype"><a href= 
+"abstraction#dt_LinkTypes">LinkTypes</a></span>), type (<span class="datatype"><a href="abstraction#dt_ContentType">ContentType</a></span>)</td>
+<td>EMPTY</td>
+</tr>
+</tbody>
+</table>
+
+<p>Gdy moduł ten jest używany, dodaje on element <code>link</code> do modelu zawartości elementu <code>head</code> zdefiniowanego w module Structure.</p>
+
+<p>Implementacja: <a href="dtd_module_defs#a_module_Link">DTD</a></p>
+
+<h2><a name="s_basemodule" id="s_basemodule">5.20.</a> Moduł bazy &#8212; Base</h2>
+
+<p>Moduł Base definiuje element, który może być użyty do zdefiniowania bazowego URI zgodnie z którym będą rozwiązywane relatywne identyfikatory URI znajdujące się w dokumencie. Element i atrybuty zawarte w tym module to:</p>
+
+<table class="moduledef" summary="Element i atrybuty w module Base">
+<thead>
+<tr>
+<th>Element</th>
+<th>Atrybuty</th>
+<th>Minimalny model zawartości</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>base</td>
+<td>href* (<span class="datatype"><a href="abstraction#dt_URI">URI</a></span>)</td>
+<td>EMPTY</td>
+</tr>
+</tbody>
+</table>
+
+<p>Gdy moduł ten jest używany, dodaje on element <code>base</code> modelu zawartości elementu <code>head</code> z modułu Structure.</p>
+
+<p>Implementacja: <a href="dtd_module_defs#a_module_Base">DTD</a></p>
+
+<h2><a name="s_nameidentmodule" id="s_nameidentmodule">5.21.</a> Moduł identyfikacji nazw &#8212; Name Identification</h2>
+
+<p><em>Ten moduł jest uznany za przestarzały.</em></p>
+
+<p>Moduł Name Identification definiuje atrybut <code>name</code> dla zestawu elementów. Atrybut <code>name</code> był dawniej używany do identyfikowania pewnych elementów w dokumentach HTML. Choć atrybut <code>name</code> został zastąpiony przez atrybut <code>id</code> we wszystkich tych elementach, mogą istnieć przypadki, kiedy języki znaczników będą chciały obsługiwać oba te atrybuty.
+Takie języki znaczników powinny wtedy włączyć ten moduł.</p>
+
+<p>Zauważ, że jeśli moduł ten jest włączony, dla wskazanych elementów zdefiniowane są atrybuty <code>name</code>, jak i <code>id</code>. W tej sytuacji, jeśli dla elementu zdefiniowano atrybut <code>name</code>,
+atrybut <code>id</code> musi być także zdefiniowany. Mało tego, atrybuty te muszą mieć taką samą wartość. Poza tym, gdy dokumenty używające tego atrybutu posiadają internetowy typ mediów określony jako
+ "text/xml" lub "application/xml", wartość atrybutu <code>name</code> w tych elementach nie będzie używana jako identyfikator cząstkowy.</p>
+
+<table class="moduledef" summary="Atrybuty zdefiniowane przez moduł Name Identification">
+<thead>
+<tr>
+<th>Element</th>
+<th>Atrybuty</th>
+<th>Uwagi</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>a&amp;</td>
+<td>name (<span class="datatype"><a href="abstraction#dt_CDATA">CDATA</a></span>)</td>
+<td>&#160;</td>
+</tr>
+
+<tr>
+<td>applet&amp;</td>
+<td>name (<span class="datatype"><a href="abstraction#dt_CDATA">CDATA</a></span>)</td>
+<td>Gdy wybrany jest moduł Applet.</td>
+</tr>
+
+<tr>
+<td>form&amp;</td>
+<td>name (<span class="datatype"><a href="abstraction#dt_CDATA">CDATA</a></span>)</td>
+<td>Gdy wybrany jest moduł Forms albo Basic Forms.</td>
+</tr>
+
+<tr>
+<td>frame&amp;</td>
+<td>name (<span class="datatype"><a href="abstraction#dt_CDATA">CDATA</a></span>)</td>
+<td>Gdy wybrany jest moduł Frames.</td>
+</tr>
+
+<tr>
+<td>iframe&amp;</td>
+<td>name (<span class="datatype"><a href="abstraction#dt_CDATA">CDATA</a></span>)</td>
+<td>Gdy wybrany jest moduł Iframe.</td>
+</tr>
+
+<tr>
+<td>img&amp;</td>
+<td>name (<span class="datatype"><a href="abstraction#dt_CDATA">CDATA</a></span>)</td>
+<td>Gdy wybrany jest moduł Image.</td>
+</tr>
+
+<tr>
+<td>map&amp;</td>
+<td>name (<span class="datatype"><a href="abstraction#dt_CDATA">CDATA</a></span>)</td>
+<td>Gdy wybrany jest moduł Client-side Image Map.</td>
+</tr>
+</tbody>
+</table>
+
+<p>Implementacja: <a href="dtd_module_defs#a_module_Name_Identification">DTD</a></p>
+
+<h2><a name="s_legacymodule" id="s_legacymodule">5.22.</a> Moduł staroci &#8212; Legacy</h2>
+
+<p>Moduł Legacy definiuje elementy i atrybuty które zostały uznane za przestarzałe w poprzednich wersjach HTML i XHTML i pozostają przestarzałe w specyfikacji Modularyzacja XHTML. Autorzy języków znaczników
+nie powinni dłużej używać tych elementów i atrybutów.</p>
+
+<p>Poniższa tabela definiuje elementy i atrybuty, które są zdefiniowane, gdy wybrany jest moduł Legacy.</p>
+
+<table class="moduledef" summary="Elementy i atrybuty w module Legacy">
+<thead>
+<tr>
+<th>Element</th>
+<th>Atrybuty</th>
+<th>Minimalny model zawartości</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>basefont</td>
+<td>color (<span class="datatype"><a href="abstraction#dt_Color">Color</a></span>), face (<span class="datatype"><a href="abstraction#dt_CDATA">CDATA</a></span>), id (<span class=
+"datatype"><a href="abstraction#dt_ID">ID</a></span>), size (<span class="datatype"><a href="abstraction#dt_CDATA">CDATA</a></span>)</td>
+<td>EMPTY</td>
+</tr>
+
+<tr>
+<td>center</td>
+<td><span class="collection"><a href="#s_common_collection">Common</a></span></td>
+<td>(PCDATA | Flow)*</td>
+</tr>
+
+<tr>
+<td>dir</td>
+<td><span class="collection"><a href="#s_common_collection">Common</a></span>, compact ("compact")</td>
+<td>(li)+</td>
+</tr>
+
+<tr>
+<td>font</td>
+<td><span class="collection"><a href="#s_core_collection">Core</a></span>, <span class="collection"><a href="#s_i18n_collection">I18N</a></span>, color (<span class="datatype"><a href= 
+"abstraction#dt_Color">Color</a></span>), face (<span class="datatype"><a href="abstraction#dt_CDATA">CDATA</a></span>), size (<span class="datatype"><a href=
+"abstraction#dt_CDATA">CDATA</a></span>)</td>
+<td>(PCDATA | Inline)*</td>
+</tr>
+
+<tr>
+<td>isindex</td>
+<td><span class="collection"><a href="#s_core_collection">Core</a></span>, <span class="collection"><a href="#s_i18n_collection">I18N</a></span>, prompt (<span class="datatype"><a href= 
+"abstraction#dt_Text">Text</a></span>)</td>
+<td>EMPTY</td>
+</tr>
+
+<tr>
+<td>menu</td>
+<td><span class="collection"><a href="#s_common_collection">Common</a></span>, compact ("compact")</td>
+<td>(li)+</td>
+</tr>
+
+<tr>
+<td>s</td>
+<td><span class="collection"><a href="#s_common_collection">Common</a></span></td>
+<td>(PCDATA | Inline)*</td>
+</tr>
+
+<tr>
+<td>strike</td>
+<td><span class="collection"><a href="#s_common_collection">Common</a></span></td>
+<td>(PCDATA | Inline)*</td>
+</tr>
+
+<tr>
+<td>u</td>
+<td><span class="collection"><a href="#s_common_collection">Common</a></span></td>
+<td>(PCDATA | Inline)*</td>
+</tr>
+</tbody>
+</table>
+
+<p>Poniższa tabela zawiera dodatkowe atrybuty dla elementów definiowanych gdziekolwiek, gdy wybrany jest moduł Legacy.</p>
+
+<table class="moduledef" summary="Dodatkowe atrybuty dla modułu Legacy">
+<thead>
+<tr>
+<th>Element</th>
+<th>Atrybuty</th>
+<th>Uwagi</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>body&amp;</td>
+<td>alink (<span class="datatype"><a href="abstraction#dt_Color">Color</a></span>), background (<span class="datatype"><a href="abstraction#dt_URI">URI</a></span>), bgcolor (<span class= 
+"datatype"><a href="abstraction#dt_Color">Color</a></span>), link (<span class="datatype"><a href="abstraction#dt_Color">Color</a></span>), text (<span class="datatype"><a href= 
+"abstraction#dt_Color">Color</a></span>), vlink (<span class="datatype"><a href="abstraction#dt_Color">Color</a></span>)</td>
+<td>&#160;</td>
+</tr>
+
+<tr>
+<td>br&amp;</td>
+<td>clear ("left" | "all" | "right" | "none"*)</td>
+<td>&#160;</td>
+</tr>
+
+<tr>
+<td>caption&amp;</td>
+<td>align ("top" | "bottom" | "left" | "right")</td>
+<td>&#160;</td>
+</tr>
+
+<tr>
+<td>div&amp;</td>
+<td>align ("left" | "center" | "right" | "justify")</td>
+<td>&#160;</td>
+</tr>
+
+<tr>
+<td>dl&amp;</td>
+<td>compact ("compact"), type (<span class="datatype"><a href="abstraction#dt_CDATA">CDATA</a></span>)</td>
+<td>&#160;</td>
+</tr>
+
+<tr>
+<td>h1-h6&amp;</td>
+<td>align ("left" | "center" | "right" | "justify")</td>
+<td>&#160;</td>
+</tr>
+
+<tr>
+<td>hr&amp;</td>
+<td>align ("left" | "center" | "right" | "justify"), noshade ("noshade"), size (<span class="datatype"><a href="abstraction#dt_Pixels">Pixels</a></span>), width (<span class="datatype"><a href= 
+"abstraction#dt_Length">Length</a></span>),</td>
+<td>&#160;</td>
+</tr>
+
+<tr>
+<td>img&amp;</td>
+<td>align ("left" | "center" | "right" | "justify"), border (<span class="datatype"><a href="abstraction#dt_Pixels">Pixels</a></span>), hspace (<span class="datatype"><a href= 
+"abstraction#dt_Pixels">Pixels</a></span>), vspace (<span class="datatype"><a href="abstraction#dt_Pixels">Pixels</a></span>)</td>
+<td>&#160;</td>
+</tr>
+
+<tr>
+<td>input&amp;</td>
+<td>align ("top" | "middle" | "bottom" | "left" | "right")</td>
+<td>Gdy wybrany jest moduł Basic Forms albo Forms.</td>
+</tr>
+
+<tr>
+<td>legend&amp;</td>
+<td>align ("left" | "center" | "right" | "justify")</td>
+<td>Gdy wybrany jest moduł Forms.</td>
+</tr>
+
+<tr>
+<td>li&amp;</td>
+<td>type (<span class="datatype"><a href="abstraction#dt_CDATA">CDATA</a></span>), value (<span class="datatype"><a href="abstraction#dt_Number">Number</a></span>)</td>
+<td>&#160;</td>
+</tr>
+
+<tr>
+<td>ol&amp;</td>
+<td>compact ("compact"), start (<span class="datatype"><a href="abstraction#dt_Number">Number</a></span>), type (<span class="datatype"><a href="abstraction#dt_CDATA">CDATA</a></span>)</td>
+<td>&#160;</td>
+</tr>
+
+<tr>
+<td>p&amp;</td>
+<td>align ("left" | "center" | "right", "justify")</td>
+<td>&#160;</td>
+</tr>
+
+<tr>
+<td>pre&amp;</td>
+<td>width (<span class="datatype"><a href="abstraction#dt_Number">Number</a></span>)</td>
+<td>&#160;</td>
+</tr>
+
+<tr>
+<td>script&amp;</td>
+<td>language (<span class="datatype"><a href="abstraction#dt_CDATA">CDATA</a></span>)</td>
+<td>Gdy wybrany jest moduł Scripting.</td>
+</tr>
+
+<tr>
+<td>table&amp;</td>
+<td>align ("left" | "center" | "right"), bgcolor (<span class="datatype"><a href="abstraction#dt_Color">Color</a></span>)</td>
+<td>Gdy wybrany jest moduł Tables.</td>
+</tr>
+
+<tr>
+<td>tr&amp;</td>
+<td>bgcolor (<span class="datatype"><a href="abstraction#dt_Color">Color</a></span>)</td>
+<td>Gdy wybrany jest moduł Tables.</td>
+</tr>
+
+<tr>
+<td>th&amp;</td>
+<td>bgcolor (<span class="datatype"><a href="abstraction#dt_Color">Color</a></span>), height (<span class="datatype"><a href="abstraction#dt_Pixels">Pixels</a></span>) nowrap ("nowrap"),
+width (<span class="datatype"><a href="abstraction#dt_Length">Length</a></span>)</td>
+<td>Gdy wybrany jest moduł Tables.</td>
+</tr>
+
+<tr>
+<td>td&amp;</td>
+<td>bgcolor (<span class="datatype"><a href="abstraction#dt_Color">Color</a></span>), height (<span class="datatype"><a href="abstraction#dt_Length">Length</a></span>) nowrap ("nowrap"),
+width (<span class="datatype"><a href="abstraction#dt_Pixels">Pixels</a></span>)</td>
+<td>Gdy wybrany jest moduł Tables.</td>
+</tr>
+
+<tr>
+<td>ul&amp;</td>
+<td>compact ("compact"), type (<span class="datatype"><a href="abstraction#dt_CDATA">CDATA</a></span>)</td>
+<td>&#160;</td>
+</tr>
+</tbody>
+</table>
+
+<p>Implementacja: <a href="dtd_module_defs#a_module_Legacy">DTD</a></p>
+
+<hr />
+
+<div class="navbar">[<a href="abstraction">poprzedni</a>] [<a href="schema_module_rules">następny</a>] [<a href="overview#toc">spis treści</a>] 
+</div>
+
+
+<table class="stopka"><tr>
+<td class="sle"><a href="../">Strona główna</a></td>
+<td class="spr">Ostatnia modyfikacja: 17 sierpnia 2005</td>
+</tr></table>
+
+</body>
+</html>

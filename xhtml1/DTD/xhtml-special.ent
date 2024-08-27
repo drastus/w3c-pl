@@ -1,0 +1,83 @@
+<!-- Znaki specjalne dla HTML -->
+
+<!-- Zestaw encji znakowych. Typowe wywo³anie:
+     <!ENTITY % HTMLspecial PUBLIC
+        "-//W3C//ENTITIES Special for XHTML//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml-special.ent">
+     %HTMLspecial;
+-->
+
+<!-- Portions (C) International Organization for Standardization 1986
+     Zezwala siê na kopiowanie w jakiejkolwiek formie w celu
+     u¿ywania w systemach i aplikacjach SGML zgodnych z definicj±
+     ISO 8879, pod warunkiem za³±czenia tej noty we wszystkich kopiach.
+-->
+
+<!-- Podano nazwy opowiednich zestawów encji ISO, chyba ¿e nazwa jest nowo
+     wprowadzona. Nowe nazwy (tj. niebêd±ce na li¶cie ISO 8879) nie koliduj±
+     z ¿adn± istniej±c± nazw± encji ISO 8879. Dla ka¿dego znaku podano
+     szesnastkowo numery znaków ISO 10646. Warto¶ci s± dziesiêtnymi
+     odpowiednikami warto¶ci ISO 10646 i odsy³aj± do zestawu znaków
+     dokumentu. Nazwy s± nazwami Unicode.
+-->
+
+<!-- Znaki steruj±ce C0 i postawowy alfabet ³aciñski -->
+<!ENTITY quot     "&#34;"> <!--  cudzys³ów, U+0022 ISOnum -->
+<!ENTITY amp  "&#38;#38;"> <!--  znak et, U+0026 ISOnum -->
+<!ENTITY lt   "&#38;#60;"> <!--  znak mniejszo¶ci, U+003C ISOnum -->
+<!ENTITY gt       "&#62;"> <!--  znak wiêkszo¶ci, U+003E ISOnum -->
+<!ENTITY apos     "&#39;"> <!--  apostrof, U+0027 ISOnum -->
+
+<!-- £aciñski rozszerzony A -->
+<!ENTITY OElig   "&#338;"> <!--  ³aciñska wielka ligatura OE,
+                                    U+0152 ISOlat2 -->
+<!ENTITY oelig   "&#339;"> <!--  ³aciñska ma³a ligatura oe, U+0153 ISOlat2 -->
+<!-- ligatura to myl±ca nazwa, jest to osobna litera w niektórych jêzykach -->
+<!ENTITY Scaron  "&#352;"> <!--  ³aciñska wielka litera S z ptaszkiem,
+                                    U+0160 ISOlat2 -->
+<!ENTITY scaron  "&#353;"> <!--  ³aciñska ma³a litera s z ptaszkiem,
+                                    U+0161 ISOlat2 -->
+<!ENTITY Yuml    "&#376;"> <!--  ³aciñska wielka litera Y z dwiema kropkami,
+                                    U+0178 ISOlat2 -->
+
+<!-- Litery modyfikuj±ce -->
+<!ENTITY circ    "&#710;"> <!--  daszek - litera modyfikuj±ca,
+                                    U+02C6 ISOpub -->
+<!ENTITY tilde   "&#732;"> <!--  ma³a tylda, U+02DC ISOdia -->
+
+<!-- Interpunkcja ogólnego u¿ytku -->
+<!ENTITY ensp    "&#8194;"> <!-- spacja en, U+2002 ISOpub -->
+<!ENTITY emsp    "&#8195;"> <!-- spacja em, U+2003 ISOpub -->
+<!ENTITY thinsp  "&#8201;"> <!-- cienka spacja, U+2009 ISOpub -->
+<!ENTITY zwnj    "&#8204;"> <!-- znak roz³±czaj±cy zerowej szeroko¶ci,
+                                    U+200C NOWA RFC 2070 -->
+<!ENTITY zwj     "&#8205;"> <!-- znak ³±cz±cy zerowej szeroko¶ci,
+                                    U+200D NOWA RFC 2070 -->
+<!ENTITY lrm     "&#8206;"> <!-- znacznik kierunku od lewej
+                                    do prawej, U+200E NOWA RFC 2070 -->
+<!ENTITY rlm     "&#8207;"> <!-- znacznik kierunku od prawej
+                                    do lewej, U+200F NOWA RFC 2070 -->
+<!ENTITY ndash   "&#8211;"> <!-- pó³pauza, U+2013 ISOpub -->
+<!ENTITY mdash   "&#8212;"> <!-- pauza (my¶lnik), U+2014 ISOpub -->
+<!ENTITY lsquo   "&#8216;"> <!-- lewy pojedynczy cudzys³ów,
+                                    U+2018 ISOnum -->
+<!ENTITY rsquo   "&#8217;"> <!-- prawy pojedynczy cudzys³ów,
+                                    U+2019 ISOnum -->
+<!ENTITY sbquo   "&#8218;"> <!-- pojedynczy dolny cudzys³ów dziewi±tkopodobny,
+                                    U+201A NOWA -->
+<!ENTITY ldquo   "&#8220;"> <!-- lewy podwójny cudzys³ów,
+                                    U+201C ISOnum -->
+<!ENTITY rdquo   "&#8221;"> <!-- prawy podwójny cudzys³ów,
+                                    U+201D ISOnum -->
+<!ENTITY bdquo   "&#8222;"> <!-- podwójny dolny cudzys³ów dziewi±tkopodobny,
+                                    U+201E NOWA -->
+<!ENTITY dagger  "&#8224;"> <!-- krzy¿, U+2020 ISOpub -->
+<!ENTITY Dagger  "&#8225;"> <!-- podwójny krzy¿, U+2021 ISOpub -->
+<!ENTITY permil  "&#8240;"> <!-- znak promila, U+2030 ISOtech -->
+<!ENTITY lsaquo  "&#8249;"> <!-- pojedynczy cudzys³ów k±towy skierowany
+                                    w lewo, U+2039 propozycja ISO -->
+<!-- lsaquo to propozycja, nie jest jeszcze czê¶ci± standardu ISO -->
+<!ENTITY rsaquo  "&#8250;"> <!-- pojedynczy cudzys³ów k±towy skierowany
+                                    w prawo, U+203A propozycja ISO -->
+<!-- rsaquo to propozycja, nie jest jeszcze czê¶ci± standardu ISO -->
+<!ENTITY euro   "&#8364;"> <!--  znak euro, U+20AC NOWA -->

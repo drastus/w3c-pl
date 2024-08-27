@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="pl" lang="pl">
+
+<head>
+<title>Modularyzacja XHTML – Definicja zgodności ze standardem</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="stylesheet" type="text/css" href="../W3C-REC.css" />
+<link rel="stylesheet" type="text/css" href="xhtml.css" />
+<link rel="stylesheet" type="text/css" href="../trans.css" /><script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-35090831-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+</head>
+
+<body>
+
+
+<div class="navbar">[<a href="terms">poprzedni</a>] [<a href="abstraction">następny</a>] [<a href="overview#toc">spis treści</a>]
+<hr />
+</div>
+
+<h1><a name="s_conform" id="s_conform">3.</a> Definicja zgodności ze standardem</h1>
+
+<div class='subtoc'>
+<p><strong>Zawartość</strong></p>
+<ul class="toc">
+<li class='tocline'>3.1. <a href="#s_conform_document_type" class="tocxref">Zgodność typów dokumentu ze standardem XHTML Host Language</a></li>
+<li class='tocline'>3.2. <a href="#s_integration_document_type" class="tocxref">Zgodność typów dokumentu ze standardem XHTML Integration Set</a></li>
+<li class='tocline'>3.3. <a href="#s_conform_module" class="tocxref">Zgodność ze standardem modułów rodziny XHTML</a></li>
+<li class='tocline'>3.4. <a href="#s_conform_document" class="tocxref">Zgodność ze standardem dokumentów rodziny XHTML</a></li>
+<li class='tocline'>3.5. <a href="#s_conform_user_agent" class="tocxref">Zgodność ze standardem programów użytkownika rodziny XHTML</a></li>
+<li class='tocline'>3.6. <a href="#s_conform_naming_rules" class="tocxref">Reguły nazewnictwa</a></li>
+<li class='tocline'>3.7. <a href="#s_conform_commitment" class="tocxref">Rozwijanie modułów XHTML</a></li>
+</ul>
+</div>
+
+<p>Ten rozdział ma charakter<em> normatywny</em>.</p>
+
+<p>By upewnić się, że dokumenty rodziny XHTML są w największym stopniu przenośne między programami użytkownika rodziny XHTML, niniejsza specyfikacja sztywno definiuje warunki zgodności ze standardem dla dokumentów, programów użytkownika oraz typów dokumentów rodziny
+XHTML. Definicje zgodności ze standardem znajdujące się w tym rozdziale z konieczności odwołują się do normatywnego tekstu zawartego w tym dokumencie, w bazowej specyfikacji 
+XHTML <a href="references#ref_xhtml1">[XHTML1]</a> i w innych powiązanych specyfikacjach. Pełne zrozumienie wymagań zgodności ze standardem XHTML jest możliwe jedynie poprzez przeczytanie 
+wszystkich normatywnych odnośników.</p>
+
+<p>Słowa kluczowe &#8222;MUSI&#8221; (ang. &#8222;<i xml:lang="en" lang="en">MUST</i>&#8221;), &#8222;NIE MOŻE&#8221; (ang.
+&#8222;<i xml:lang="en" lang="en">MUST NOT</i>&#8221;), &#8222;WYMAGANY&#8221; (ang. &#8222;<i xml:lang="en" lang="en">REQUIRED</i>&#8221;), &#8222;BĘDZIE / MA&#8221; w znaczeniu powinności
+(ang. &#8222;<i xml:lang="en" lang="en">SHALL</i>&#8221;), &#8222;NIE BĘDZIE / NIE MA&#8221; w znaczeniu powinności (ang. &#8222;<i xml:lang="en" lang="en">SHALL
+NOT</i>&#8221;), &#8222;POWINIEN&#8221; (ang. &#8222;<i xml:lang="en" lang="en">SHOULD</i>&#8221;),
+&#8222;ZALECANY&#8221; (ang. &#8222;<i xml:lang="en" lang="en">RECOMMENDED</i>&#8221;), &#8222;MOŻE&#8221; (ang. &#8222;<i xml:lang="en" lang="en">MAY</i>&#8221;) i
+&#8222;OPCJONALNY&#8221; (ang. &#8222;<i xml:lang="en" lang="en">OPTIONAL</i>&#8221;) w tym dokumencie są interpretowane w sposób opisany w <a href="references#ref_RFC2119">[RFC2119]</a>.</p>
+
+<h2><a name="s_conform_document_type" id="s_conform_document_type">3.1.</a> Zgodność typów dokumentu ze standardem XHTML Host Language</h2>
+
+<p>Jest możliwe modyfikowanie istniejących typów dokumentu oraz definiowania całkowicie nowych typów dokumentu przy użyciu modułów zdefiniowanych w tej specyfikacji, jak i innych modułów. Taki typ dokumentu jest &#8222;zgodny ze standardem XHTML Host
+Language&#8221;, gdy spełnia następujące kryteria:</p>
+
+<ol>
+<li>Typ dokumentu musi być zdefiniowany przy użyciu jednej z metod implementacji zdefiniowanych przez W3C. Obecnie ogranicza się to do DTD XML, lecz wkrótce będzie dostępne także XML Schema. Pozostała część tego
+rozdziału odnosi się do &#8222;DTD&#8221;, choć inne implementacje są także możliwe.</li>
+
+<li>DTD, które definiuje typ dokumentu musi posiadać unikatowy identyfikator stosujący się do definicji zawartych w rozdziale <a href="#s_conform_naming_rules">Reguły nazewnictwa</a>, który w pierwszym leksemie opisu
+tekstu publicznego używa łańcucha &#8222;XHTML&#8221;.</li>
+
+<li>DTD, które definiuje typ dokumentu, musi zawierać przynajmniej moduły Structure, Hypertext, Text i List zdefiniowane w tej specyfikacji.</li>
+
+<li>Dla każdego ze zdefiniowanych przez W3C modułów, które są załączone, wszystkie elementy, atrybuty, typy atrybutów (łącznie z wszystkimi obowiązkowymi wykazami wyliczonych wartości) i wszystkie wymagane modele minimalnej zawartości
+muszą być zawarte (i opcjonalnie rozszerzone) w modelu zawartości typu dokumentu. Gdy modele zawartości są rozszerzone, wszystkie elementy i atrybuty (razem z ich typami lub jakimikolwiek obowiązkowymi wykazami wyliczonych wartości)
+wymagane w oryginalnym modelu zawartości muszą pozostać wymaganymi.</li>
+
+<li>DTD, które definiuje typ dokumentu może definiować dodatkowe elementy i atrybuty, jednak muszą one znajdować się we własnej przestrzeni nazw XML <a href="references#ref_xmlns">[XMLNAMES]</a>.</li>
+</ol>
+
+<h2><a name="s_integration_document_type" id="s_integration_document_type">3.2.</a> Zgodność typów dokumentu ze standardem XHTML Integration Set</h2>
+
+<p>Jest także możliwe zdefiniowanie typów dokumentu, które bazują na XHTML, ale nie stosują się do jego struktury. Taki typ dokumentu jest &#8222;zgodny ze standardem XHTML Integration Set&#8221;, gdy spełnia następujące kryteria:</p>
+
+<ol>
+<li>Typ dokumentu musi być zdefiniowany przy użyciu jednej z metod implementacji zdefiniowanych przez W3C. Obecnie ogranicza się to do DTD XML, lecz wkrótce będzie dostępne także XML Schema. Pozostała część tego
+rozdziału odnosi się do &#8222;DTD&#8221;, choć inne implementacje są także możliwe.</li>
+
+<li>DTD, które definiuje typ dokumentu musi posiadać unikatowy identyfikator stosujący się do definicji zawartych w rozdziale <a href="#s_conform_naming_rules">Reguły nazewnictwa</a>, który używa łańcucha &#8222;XHTML&#8221; NIE w
+pierwszym leksemie opisu tekstu publicznego.</li>
+
+<li>DTD, które definiuje typ dokumentu, musi zawierać przynajmniej moduły Hypertext, Text i List zdefiniowane w tej specyfikacji.</li>
+
+<li>Dla każdego ze zdefiniowanych przez W3C modułów, które są załączone,  wszystkie elementy, atrybuty, typy atrybutów (łącznie z wszystkimi obowiązkowymi wykazami wyliczeniowymi) i wszystkie wymagane modele minimalnej zawartości
+muszą być zawarte (i opcjonalnie rozszerzone) w modelu zawartości typu dokumentu. Gdy modele zawartości są rozszerzone, wszystkie elementy i atrybuty (razem z ich typami lub jakimikolwiek obowiązkowymi wykazami wyliczonych wartości)
+wymagane w oryginalnym modelu zawartości muszą pozostać wymaganymi.</li>
+
+<li>DTD, które definiuje typ dokumentu może definiować dodatkowe elementy i atrybuty, jednak muszą one znajdować się we własnej przestrzeni nazw XML <a href="references#ref_xmlns">[XMLNAMES]</a>.</li>
+</ol>
+
+<h2><a name="s_conform_module" id="s_conform_module">3.3.</a> Zgodność ze standardem modułów rodziny XHTML</h2>
+
+<p>Ta specyfikacja definiuje metodę definiowania modułów zgodnych z XHTML. Moduł jest zgodny z tą specyfikacją, gdy spełnia następujące kryteria:</p>
+
+<ol>
+<li>Typ dokumentu musi być zdefiniowany przy użyciu jednej z metod implementacji zdefiniowanych przez W3C. Obecnie ogranicza się to do DTD XML, lecz wkrótce będzie dostępne także XML Schema. Pozostała część tego
+rozdziału odnosi się do &#8222;DTD&#8221;, choć inne implementacje są także możliwe.</li>
+
+<li>DTD, które definiuje moduł musi posiadać unikatowy identyfikator stosujący się do definicji zawartych w rozdziale <a href="#s_conform_naming_rules">Reguły nazewnictwa</a>.</li>
+
+<li>Kiedy moduł jest zdefiniowany przy użyciu DTD XML, musi on izolować nazwy swoich encji parametrycznych poprzez użycie unikatowych prefiksów lub innych podobnych metod.</li>
+
+<li>Definicja modułu musi zawierać słowne definicje opisujące wymagania znaczeniowe i składniowe elementów, atrybutów i/lub modelów zawartości przez nią deklarowanych.</li>
+
+<li>Definicja modułu nie może ponownie używać żadnych nazw elementów zdefiniowanych w innych zdefiniowanych przez W3C modułach, chyba że model zawartości i semantyka tych
+elementów są albo identyczne z oryginalnymi, albo są ich rozszerzeniem, albo gdy ponownie użyte nazwy elementów znajdują się we własnej przestrzeni nazw (zobacz poniżej).</li>
+
+<li>Elementy i atrybuty definicji modułu muszą być częścią przestrzeni nazw XML <a href="references#ref_xmlns">[XMLNAMES]</a>. Jeśli moduł jest zdefiniowany przez organizację inną niż W3C,
+przestrzeń nazw NIE może być tożsama z przestrzenią nazw, w której zdefiniowane są inne moduły W3C.</li>
+</ol>
+
+<h2><a name="s_conform_document" id="s_conform_document">3.4.</a> Zgodność ze standardem dokumentów rodziny XHTML</h2>
+
+<p>Dokument rodziny XHTML zgodny ze standardem to poprawny strukturalnie egzemplarz typu dokumentu zgodnego z XHTML Host Language.</p>
+
+<h2><a name="s_conform_user_agent" id="s_conform_user_agent">3.5.</a> Zgodność ze standardem programów użytkownika rodziny XHTML</h2>
+
+<p>Program użytkownika zgodny ze standardem musi spełniać wszystkie z następujących kryteriów (jak zdefiniowano w <a href="references#ref_xhtml1">[XHTML1]</a>):</p>
+
+<ol>
+<li>W celu zachowania zgodności z Rekomendacją XML 1.0 <a href="references#ref_xml">[XML]</a>, program użytkownika musi parsować i sprawdzać poprawność składniową dokumentu XHTML.
+Jeśli program użytkownika ma być walidujący, musi także sprawdzać poprawność strukturalną dokumentów biorąc pod uwagę odpowiednie DTD zgodnie z <a href="references#ref_xml">[XML]</a>.</li>
+
+<li>Jeśli program użytkownika ma obsługiwać cechy zdefiniowane w tej specyfikacji lub wymagane przez tę specyfikację poprzez odnośniki normatywne, musi robić to w sposób zgodny z definicjami tych cech.</li>
+
+<li>Gdy program użytkownika przetwarza dokument XHTML jako czysty XML, powinien rozpoznawać jedynie atrybuty typu <code>ID</code> (tj. atrybut <code>id</code> w większości elementów XHTML) jako identyfikatory cząstkowe.</li>
+
+<li>Jeśli program użytkownika napotka na element, którego nie rozpoznaje, musi kontynuować przetwarzanie bezpośrednich potomków tego elementu. Jeśli zawartością elementu jest tekst, musi on być zaprezentowany użytkownikowi.</li>
+
+<li>Jeśli program użytkownika napotka na atrybut, którego nie rozpoznaje, musi zignorować całość specyfikacji atrybutu (tj. atrybut i jego wartość).</li>
+
+<li>Jeśli program użytkownika napotka na wartość atrybutu, której nie rozpoznaje, musi zastosować wartość domyślną atrybutu.</li>
+
+<li>Jeśli napotka na odwołanie do encji (innej niż jedna z predefiniowanych encji), której deklaracji program użytkownika nie przetworzył (co może się zdarzyć, jeśli deklaracja jest zawarta w zewnętrznym podzbiorze, którego program użytkownika nie wczytał),
+odwołanie do encji powinno być renderowane jako znaki (zaczynając na znaku et i kończąc na średniku), które tworzą to odwołanie do encji.</li>
+
+<li>Gdy program użytkownika podczas renderowania zawartości napotka znaki lub odwołania do encji znakowej, które są rozpoznane, lecz nie mogą być renderowane, powinien wyświetlić dokument w sposób dający do zrozumienia użytkownikowi, że nie zostało zastosowane normalne renderowanie.</li>
+
+<li>
+<p>Białe znaki są obsługiwane według poniższych reguł. Następujące znaki są zdefiniowane w [<a class="nref" href="#ref-xml">XML</a>] jako białe znaki:</p>
+
+<ul>
+<li>SPACJA (&amp;#x0020;)</li>
+<li>TABULATOR POZIOMY (&amp;#x0009;)</li>
+<li>POWRÓT KARETKI (&amp;#x000D;)</li>
+<li>WYSUW WIERSZA (&amp;#x000A;)</li>
+</ul>
+
+<p>Procesor XML normalizuje właściwe dla różnych systemów kody końca wiersza w pojedynczy znak WYSUWU WIERSZA, który jest przekazywany do aplikacji.</p>
+
+<p>Program użytkownika musi przetworzyć białe znaki znajdujące się w danych otrzymanych od procesora XML w następujący sposób:</p>
+
+<ul>
+<li>Wszystkie białe znaki otaczające elementy blokowe powinny być usunięte.</li>
+
+<li>Komentarze są usuwane całkowicie i nie wpływają na obsługę białych znaków. Jeden biały znak po każdej stronie komentarza jest traktowany jak dwa białe znaki.</li>
+
+<li>Gdy atrybut <code>xml:space</code> posiada wartość <code>preserve</code>, białe znaki muszą być zachowane, a w rezultacie znaki WYSUWU WIERSZA wewnątrz bloku nie mogą być zamieniane.</li>
+
+<li>Gdy atrybut <code>xml:space</code> posiada wartość inną niż <code>preserve</code>, wtedy: 
+
+<ul>
+<li>Wiodące i końcowe białe znaki wewnątrz elementu blokowego muszą być usunięte.</li>
+
+<li>Znaki WYSUWU WIERSZA muszą być zamienione na jeden z następujących znaków: znak SPACJI, znak SPACJI O ZEROWEJ SZEROKOŚCI (&amp;#x200B;) lub na żaden znak (tj. usunięte). Wybór znaku wynikowego
+jest zależny od programu użytkownika i jest uwarunkowany przez właściwości pisma, do którego należą znaki poprzedzające i następujące po znaku WYSUWU WIERSZA.</li>
+
+<li>Ciąg białych znaków niezawierający żadnych znaków WYSUWU WIERSZA musi być zredukowany do pojedynczego znaku SPACJI.</li>
+
+<li>Ciąg białych znaków zawierający jeden lub więcej znaków WYSUWU WIERSZA musi być zredukowany w ten sam sposób do pojedynczego znaku WYSUWU WIERSZA.</li>
+</ul>
+</li>
+</ul>
+
+<p>Biały znak w wartościach atrybutów jest przetwarzany zgodnie z <a href="references#ref_xml">[XML]</a>.</p>
+
+<p>Uwaga (o charakterze<em> informacyjnym</em>): By ustalić, w jaki sposób zamienić znak WYSUWU WIERSZA, program użytkownika powinien wziąć pod uwagę poniższe przypadki, w których pismo, do którego należą znaki po obu stronach WYSUWU WIERSZA przesądza o sposobie zamiany. OGÓLNE znaki pisarskie (takie jak znaki interpunkcyjne) są traktowane tak, jak znaki pisarskie po drugiej stronie znaku:</p>
+
+<ol>
+<li>Jeśli znaki poprzedzające i następujące po znaku WYSUWU WIERSZA należą do pisma, w którym znak SPACJI jest używany jako separator wyrazów, wtedy znak WYSUWU WIERSZA powinien
+zostać zamieniony na znak SPACJI. Przykłady takich pism to pismo łacińskie, greckie czy cyrylica.</li>
+
+<li>Jeśli znaki poprzedzające i następujące po znaku WYSUWU WIERSZA należą do pisma bazującego na ideogramach lub do systemu piśmienniczego, w którym nie ma separatorów
+wyrazów, znak WYSUWU WIERSZA powinien zostać usunięty. Przykłady takich pism czy systemów piśmienniczych to pismo chińskie i japońskie.</li>
+
+<li>Jeśli znaki poprzedzające i następujące po znaku WYSUWU WIERSZA należą do pisma niebazującego na ideogramach, w którym nie ma separatorów wyrazów, WYSUW WIERSZA powinien zostać zamieniony na znak SPACJI O ZEROWEJ SZEROKOŚCI (&amp;#x200B;) lub powinien zostać usunięty. Przykłady takich pism to pismo tajskie i khmerskie.</li>
+
+<li>Jeśli żaden z warunków od 1. do 3. nie jest prawdziwy, znak WYSUWU WIERSZA powinien zostać zamieniony na znak SPACJI.</li>
+</ol>
+
+<p>Raport techniczny Unicode <a href="references#ref_unicode">[UNICODE]</a> TR#24 (Nazwy pism) przyporządkowuje nazwy pism dla wszystkich znaków.</p>
+</li>
+</ol>
+
+<h2><a name="s_conform_naming_rules" id="s_conform_naming_rules">3.6.</a> Reguły nazewnictwa</h2>
+
+<p>Typy dokumentów XHTML Host Language muszą stosować się do sztywnych konwencji nazewnictwa, by umożliwić oprogramowaniu i użytkownikom łatwe ustalenie relacji danego typu dokumentu do XHTML.
+Nazwy typów dokumentów wprowadzonych przez definicję typu dokumentu XML są definiowane poprzez formalne identyfikatory publiczne (ang. <i>Formal Public Identifier</i>, FPI). Pola
+znajdujące się wewnątrz FPI są rozdzielone przez sekwencje podwójnych ukośników (<code>//</code>). Poszczególne pola muszą mieć następujący skład:</p>
+
+<ol>
+<li>Pierwsze pole musi mieć postać &#8222;-&#8221;, w celu wskazania prywatnie zdefiniowanego zasobu.</li>
+
+<li>Drugie pole musi zawierać nazwę organizacji odpowiedzialnej za zarządzanie nazwanym obiektem. Nie istnieje formalny rejestr nazw tych organizacji. Każda organizacja
+powinna zdefiniować unikatową nazwę. Na przykład nazwą używaną przez W3C jest <code>W3C</code>.</li>
+
+<li>Trzecie pole zawiera dwie konstrukcje: klasę tekstu publicznego oraz następujący po niej opis tekstu publicznego. Pierwszy leksem trzeciego pola to klasa tekstu publicznego; powinna ona stosować się do zasad Klauzuli 10.2.2.1 (Public Text Class) ISO 8879. Tylko
+dokumenty zgodne z XHTML Host Language powinny rozpoczynać opis tekstu publicznego od leksemu XHTML. Opis tekstu publicznego powinien zawierać łańcuch XHTML, jeśli typ dokumentu jest zgodny z XHTML Integration Set. Pole to musi zawierać także zdefiniowany przez
+organizację unikatowy identyfikator (np. MyML 1.0). Identyfikator ten powinien składać się z unikatowej nazwy oraz z wersji identyfikatora, która może być aktualizowana w miarę rozwijania się typu dokumentu.</li>
+
+<li>Czwarte pole definiuje język, w którym obiekt jest opracowywany (np. <code>EN</code>).</li>
+</ol>
+
+<p>Zgodnie z powyższymi regułami, nazwa typu dokumentu zgodnego z XHTML Host Language mogłaby mieć postać <code>-//MyCompany//DTD XHTML MyML 1.0//EN</code>. Nazwa modułu rodziny XHTML mogłaby mieć postać
+<code>-//MyCompany//ELEMENTS XHTML MyElements 1.0//EN</code>. Nazwa typu dokumentu zgodnego z XHTML Integration Set mogłaby mieć postać <code>-//MyCompany//DTD Special Markup with XHTML//EN</code>.</p>
+
+<h2><a name="s_conform_commitment" id="s_conform_commitment">3.7.</a> Rozwijanie modułów XHTML</h2>
+
+<p>Każdy moduł zdefiniowany w tej specyfikacji posiada unikatowy identyfikator stosujący się do reguł nazewnictwa zawartych w poprzednim rozdziale. Z biegiem czasu moduł może się rozwijać. Logiczną konsekwencją takiego rozwoju
+może być to, że niektóre aspekty modułu nie będą kompatybilne z jego poprzednią definicją. By móc upewnić się, że typy dokumentu zdefiniowane na postawie modułów zdefiniowanych w tej specyfikacji
+nadal działają, identyfikatory skojarzone ze zmieniającym się modułem będą aktualizowane. W szczególności, formalny identyfikator publiczny i identyfikator systemowy modułu będą zmieniane poprzez modyfikowanie
+identyfikatora wersji będącego częścią każdego z nich. Typy dokumentów, które chcą mieć włączoną zaktualizowaną funkcjonalność będą musiały być aktualizowane w podobny sposób.</p>
+
+<p>Dodatkowo wcześniejsze wersje modułu będą nadal dostępne poprzez swoje wcześniejsze, unikatowe identyfikatory. W ten sposób typy dokumentu opracowywane przy użyciu modułów
+XHTML będą nadal jednolicie funkcjonowały używając swych oryginalnych definicji, nawet jeśli zestaw rozszerza się i rozwija. Podobnie egzemplarze dokumentów pisane zgodnie z
+takimi typami dokumentów, biorąc pod uwagę wcześniejsze definicje modułów, będą nadal poprawne strukturalnie.</p>
+
+<p>Zachęca się autorów innych modułów rodziny XHTML i typów dokumentu, by przyjęli podobną strategię w celu zapewnienia ciągłego funkcjonowania typów dokumentu bazujących na tych modułach oraz egzemplarzy dokumentów opierających się na tych typach dokumentu.</p>
+
+<hr />
+
+<div class="navbar">[<a href="terms">poprzedni</a>] [<a href="abstraction">następny</a>] [<a href="overview#toc">spis treści</a>] 
+</div>
+
+
+<table class="stopka"><tr>
+<td class="sle"><a href="../">Strona główna</a></td>
+<td class="spr">Ostatnia modyfikacja: 17 sierpnia 2005</td>
+</tr></table>
+
+</body>
+</html>

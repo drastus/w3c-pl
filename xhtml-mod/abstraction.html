@@ -1,0 +1,618 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="pl" lang="pl">
+
+<head>
+<title>Modularyzacja XHTML – Definiowanie modułów abstrakcyjnych</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="stylesheet" type="text/css" href="../W3C-REC.css" />
+<link rel="stylesheet" type="text/css" href="xhtml.css" />
+<link rel="stylesheet" type="text/css" href="../trans.css" />
+<style type="text/css">
+table {border: 1px ridge}
+th, td {border: 1px groove}
+table.bo {border-width: 0px}
+table.bo tr td {border-width: 0px; padding: 0.2em 0.4}
+</style>
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-35090831-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+</head>
+
+<body>
+
+
+<div class="navbar">[<a href="conformance">poprzedni</a>] [<a href="abstract_modules">następny</a>] [<a href="overview#toc">spis treści</a>] 
+<hr />
+</div>
+
+<h1><a name="s_abstraction" id="s_abstraction">4.</a> Definiowanie modułów abstrakcyjnych</h1>
+
+<div class='subtoc'>
+<p><strong>Zawartość</strong></p>
+<ul class="toc">
+<li class='tocline'>4.1. <a href="#sec_4.1." class="tocxref">Konwencje składniowe</a></li>
+<li class='tocline'>4.2. <a href="#s_common_types" class="tocxref">Typy zawartości</a></li>
+<li class='tocline'>4.3. <a href="#s_common_attrtypes" class="tocxref">Typy atrybutów</a></li>
+<li class='tocline'>4.4. <a href="#sec_4.4." class="tocxref">Przykładowa definicja modułu abstrakcyjnego</a> 
+<ul class="toc">
+<li class='tocline'>4.4.1. <a href="#sec_4.4.1." class="tocxref">Moduł XHTML Narciarstwo</a></li>
+</ul></li>
+</ul>
+</div>
+
+<p>Ten rozdział ma charakter<em> normatywny</em>.</p>
+
+<p>Moduł abstrakcyjny to definicja modułu XHTML przy użyciu słownego opisu i pewnej ilości nieformalnych konwencji oznakowania. Choć taka definicja generalnie nie jest użyteczna dla maszyny przetwarzającej typy dokumentu, może jednak być bardzo pomocna w zrozumieniu zawartości modułu przez ludzi. Ten rozdział definiuje sposób, w jaki są definiowane moduły abstrakcyjne XHTML. Moduły zgodne z XHTML<em> nie
+wymagają </em>podawania definicji w formie modułu abstrakcyjnego. Zachęca się jednak każdego, kto opracowuje moduły XHTML, by dostarczał moduły abstrakcyjne w celu ułatwienia użytkowania modułu.</p>
+
+<h2><a name="sec_4.1." id="sec_4.1.">4.1.</a> Konwencje składniowe</h2>
+
+<p>Moduły abstrakcyjne nie są definiowane za pomocą formalnej gramatyki. Jednakże definicje stosują się do opisanych poniżej konwencji składniowych. Konwencje te są podobne do
+stosowanych w DTD XML i powinny być znajome dla autorów DTD XML. Każdy pojedynczy element składniowy może być łączony z innymi w celu stworzenia bardziej złożonego wyrażenia zgodnego ze zdefiniowaną tu algebrą.</p>
+
+<dl>
+<dt>nazwa elementu</dt>
+
+<dd>Gdy element jest włączony do modelu zawartości, jego dokładna nazwa będzie umieszczona na liście.</dd>
+
+<dt>zbiór zawartości</dt>
+
+<dd>Niektóre moduły definiują wykazy dokładnych nazw elementów zwane<em> zbiorami zawartości</em>. Gdy zbiór zawartości jest włączony do modelu zawartości, jego nazwa będzie umieszczona na liście.</dd>
+
+<dt><code>expr ?</code></dt>
+
+<dd>Dozwolone zero lub jedno wystąpienie <code>expr</code>.</dd>
+
+<dt><code>expr +</code></dt>
+
+<dd>Wymagane jedno lub więcej wystąpień <code>expr</code>.</dd>
+
+<dt><code>expr *</code></dt>
+
+<dd>Dozwolone zero lub więcej wystąpień <code>expr</code>.</dd>
+
+<dt><code>a , b</code></dt>
+
+<dd>Wyrażenie <code>a</code> jest wymagane, z następującym po nim wyrażeniem <code>b</code>.</dd>
+
+<dt><code>a | b</code></dt>
+
+<dd>Wymagane jest wystąpienie albo wyrażenia <code>a</code>, albo wyrażenia <code>b</code>.</dd>
+
+<dt><code>a - b</code></dt>
+
+<dd>Wyrażenie <code>a</code> jest dozwolone, z pominięciem elementów z wyrażenia <code>b</code>.</dd>
+
+<dt>nawiasy</dt>
+
+<dd>Gdy wyrażenie jest umieszczone w nawiasie, analizowanie jakiegokolwiek podwyrażenia wewnątrz nawiasu poprzedza analizowanie wyrażeń spoza nawiasu (rozpoczynając od najgłębszego poziomu zagnieżdżenia).</dd>
+
+<dt>rozszerzanie predefiniowanych elementów</dt>
+
+<dd>W niektórych wypadkach moduł dodaje do elementu atrybuty. Wtedy po nazwie elementu występuje znak et (<code>&amp;</code>).</dd>
+
+<dt>definiowanie wymaganych atrybutów</dt>
+
+<dd>Gdy element wymaga definicji atrybutu, po nazwie tego atrybutu występuje gwiazdka (<code>*</code>).</dd>
+
+<dt>definiowanie typu wartości atrybutu</dt>
+
+<dd>Gdy moduł definiuje typ wartości atrybutu, robi to poprzez umieszczenie typu w nawiasie po nazwie atrybutu.</dd>
+
+<dt>definiowanie dopuszczalnych wartości atrybutów</dt>
+
+<dd>Gdy moduł definiuje dopuszczalne wartości atrybutu, robi to poprzez literalne umieszczenie dopuszczalnych wartości (ujętych w cudzysłów), rozdzielonych pionowymi kreskami (<code>|</code>), wewnątrz
+nawiasu następującego po nazwie atrybutu. Jeśli atrybut posiada wartość domyślną, po wartości występuje gwiazdka (<code>*</code>). Jeśli atrybut posiada wartość stałą, po
+nazwie atrybutu występuje znak równości (<code>=</code>), a stała wartość ujęta jest w cudzysłów.</dd>
+</dl>
+
+<h2><a name="s_common_types" id="s_common_types">4.2.</a> Typy zawartości</h2>
+
+<p>Definicje modułów abstrakcyjnych definiują minimalne, niepodzielne modele zawartości dla każdego modułu. Te minimalne modele zawartości odnoszą się do elementów w samym module.
+Mogą również odnosić się do elementów w innych modułach, od których zależny jest moduł abstrakcyjny. Wreszcie, model zawartości w wielu wypadkach wymaga, by jako zawartość jednego lub więcej elementów dozwolony był tekst. Symbolem używanym na oznaczenie tekstu jest wtedy <span class="content">PCDATA</span>. Jest to termin zdefiniowany w Rekomendacji XML 1.0 odnoszący się do przetwarzanych danych znakowych. Typ zawartości może być też zdefiniowany jako <span class="content">EMPTY</span> (&#8222;pusty&#8221;), co oznacza, że w swym minimalnym modelu zawartości element nie ma żadnej zawartości.</p>
+
+<h2><a name="s_common_attrtypes" id="s_common_attrtypes">4.3.</a> Typy atrybutów</h2>
+
+<p>W niektórych wypadkach konieczne jest zdefiniowanie typów wartości atrybutu lub zbioru dozwolonych wartości atrybutów. Następujące typy atrybutów (zdefiniowane w Rekomendacji XML 1.0) są używane w definicjach modułów abstrakcyjnych:</p>
+
+<table summary="Definicje typów atrybutu">
+<thead>
+<tr>
+<th>Typ atrybutu</th>
+<th>Definicja</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><a id="dt_CDATA" name="dt_CDATA">CDATA</a></td>
+<td>Dane znakowe</td>
+</tr>
+
+<tr>
+<td><a id="dt_ID" name="dt_ID">ID</a></td>
+<td>Identyfikator unikatowy dla dokumentu</td>
+</tr>
+
+<tr>
+<td><a id="dt_IDREF" name="dt_IDREF">IDREF</a></td>
+<td>Odwołanie do unikatowego dla dokumentu identyfikatora</td>
+</tr>
+
+<tr>
+<td><a id="dt_IDREFS" name="dt_IDREFS">IDREFS</a></td>
+<td>Lista rozdzielonych spacją odwołań do unikatowych dla dokumentu identyfikatorów</td>
+</tr>
+
+<tr>
+<td><a id="dt_NAME" name="dt_NAME">NAME</a></td>
+<td>Nazwa z takimi samymi ograniczeniami znakowymi jak powyższe ID</td>
+</tr>
+
+<tr>
+<td><a id="dt_NMTOKEN" name="dt_NMTOKEN">NMTOKEN</a></td>
+<td>Nazwa złożona tylko z leksemów nazwy (zdefiniowanych w XML 1.0 <a href="references#ref_xml">[XML]</a>)</td>
+</tr>
+
+<tr>
+<td><a id="dt_NMTOKENS" name="dt_NMTOKENS">NMTOKENS</a></td>
+<td>Jedna lub więcej wartości NMTOKEN rozdzielonych białymi znakami</td>
+</tr>
+
+<tr>
+<td><a id="dt_PCDATA" name="dt_PCDATA">PCDATA</a></td>
+<td>Przetwarzane dane znakowe</td>
+</tr>
+</tbody>
+</table>
+
+<p>Obok powyższych predefiniowanych typów danych, modularyzacja XHTML definiuje następujące typy danych i ich znaczenia:</p>
+
+<table summary='Custom data types'>
+<tr>
+<th>Typ danych</th>
+<th>Opis</th>
+</tr>
+
+<tr>
+<td><a id="dt_Character" name="dt_Character">Character</a></td>
+<td>Pojedynczy znak z zestawu <a href="references#ref_ISO10646">[ISO10646]</a>.</td>
+</tr>
+
+<tr>
+<td><a id="dt_Charset" name="dt_Charset">Charset</a></td>
+<td>Kodowanie znaków, według <a href="references#ref_RFC2045">[RFC2045]</a>.</td>
+</tr>
+
+<tr>
+<td><a id="dt_Charsets" name="dt_Charsets">Charsets</a></td>
+<td>Lista rozdzielonych spacjami kodowań znaków, według <a href="references#ref_RFC2045">[RFC2045]</a>.</td>
+</tr>
+
+<tr>
+<td><a id="dt_Color" name="dt_Color">Color</a></td>
+<td>
+<p>Typ wartości atrybutu &#8222;Color&#8221; odnosi się do definicji koloru opisanych w specyfikacji <a rel="biblioentry" href="#ref_SRGB" class="normref">[SRGB]</a>. Wartość koloru może być albo
+liczbą szesnastkową (poprzedzoną znakiem kratki), albo jedną z następujących szesnastu nazw kolorów. W nazwach koloru nie uwzględnia się wielkości liter.</p>
+
+<table summary="Tabela nazw kolorów i ich wartości sRGB" class="bo">
+<caption><b><span class="index-inst" title="color::names of"><a name="idx-color">Nazwy kolorów</a></span> i wartości sRGB</b><br />
+</caption>
+
+<tr>
+<td><img alt="czarny" title="czarny" src="images/black.gif" /></td>
+<td>Black = "#000000"</td>
+<td><img alt="zielony" title="zielony" src="images/green.gif" /></td>
+<td>Green = "#008000"<br />
+</td>
+</tr>
+
+<tr>
+<td><img alt="srebrny" title="srebrny" src="images/silver.gif" /></td>
+<td>Silver = "#C0C0C0"</td>
+<td><img alt="limetkowy" title="limetkowy" src="images/lime.gif" /></td>
+<td>Lime = "#00FF00"<br />
+</td>
+</tr>
+
+<tr>
+<td><img alt="szary" title="szary" src="images/gray.gif" /></td>
+<td>Gray = "#808080"</td>
+<td><img alt="oliwkowy" title="oliwkowy" src="images/olive.gif" /></td>
+<td>Olive = "#808000"<br />
+</td>
+</tr>
+
+<tr>
+<td><img alt="biały" title="biały" src="images/white.gif" /></td>
+<td>White = "#FFFFFF"</td>
+<td><img alt="żółty" title="żółty" src="images/yellow.gif" /></td>
+<td>Yellow = "#FFFF00"<br />
+</td>
+</tr>
+
+<tr>
+<td><img alt="bordowy" title="bordowy" src="images/maroon.gif" /></td>
+<td>Maroon = "#800000"</td>
+<td><img alt="granatowy" title="granatowy" src="images/navy.gif" /></td>
+<td>Navy = "#000080"<br />
+</td>
+</tr>
+
+<tr>
+<td><img alt="czerwony" title="czerwony" src="images/red.gif" /></td>
+<td>Red = "#FF0000"</td>
+<td><img alt="niebieski" title="niebieski" src="images/blue.gif" /></td>
+<td>Blue = "#0000FF"<br />
+</td>
+</tr>
+
+<tr>
+<td><img alt="purpurowy" title="purpurowy" src="images/purple.gif" /></td>
+<td>Purple = "#800080"</td>
+<td><img alt="zielononiebieski" title="zielononiebieski" src="images/teal.gif" /></td>
+<td>Teal = "#008080"<br />
+</td>
+</tr>
+
+<tr>
+<td><img alt="fuksja" title="fuksja" src="images/fuchsia.gif" /></td>
+<td>Fuchsia = "#FF00FF"</td>
+<td><img alt="wodny" title="wodny" src="images/aqua.gif" /></td>
+<td>Aqua = "#00FFFF"<br />
+</td>
+</tr>
+</table>
+
+<p>Zatem zarówno wartość koloru "#800080", jak i "Purple" odnoszą się do koloru purpurowego.</p>
+</td>
+</tr>
+
+<tr>
+<td><a id="dt_ContentType" name="dt_ContentType">ContentType</a></td>
+<td>Typ mediów, według <a href="references#ref_RFC2045">[RFC2045]</a>.</td>
+</tr>
+
+<tr>
+<td><a id="dt_ContentTypes" name="dt_ContentTypes">ContentTypes</a></td>
+<td>Lista rozdzielonych przecinkami typów mediów, według <a href="references#ref_RFC2045">[RFC2045]</a>.</td>
+</tr>
+
+<tr>
+<td><a id="dt_Coords" name="dt_Coords">Coords</a></td>
+<td>Lista rozdzielonych przecinkami współrzędnych używanych przy definiowaniu powierzchni.</td>
+</tr>
+
+<tr>
+<td><a id="dt_Datetime" name="dt_Datetime">Datetime</a></td>
+<td>Informacje dotyczące daty i czasu.</td>
+</tr>
+
+<tr>
+<td><a id="dt_FPI" name="dt_FPI">FPI</a></td>
+<td>Łańcuch znaków reprezentujący formalny identyfikator publiczny SGML.</td>
+</tr>
+
+<tr>
+<td><a id="dt_FrameTarget" name="dt_FrameTarget">FrameTarget</a></td>
+<td>Nazwa ramki używanej jako cel określonych akcji.</td>
+</tr>
+
+<tr>
+<td><a id="dt_LanguageCode" name="dt_LanguageCode">LanguageCode</a></td>
+<td>Kod języka, według <a href="references#ref_RFC3066">[RFC3066]</a>.</td>
+</tr>
+
+<tr>
+<td><a id="dt_Length" name="dt_Length">Length</a></td>
+<td>Długość. Wartość może być podana w pikselach albo w procentach dostępnej poziomej lub pionowej przestrzeni. Tak więc wartość "50%" oznacza połowę dostępnej przestrzeni.</td>
+</tr>
+
+<tr>
+<td><a id="dt_LinkTypes" name="dt_LinkTypes">LinkTypes</a></td>
+<td>
+<p>Autorzy mogą używać następujących rozpoznawanych typów łączy, spisanych tu razem z ich umownymi interpretacjami. Wartość LinkTypes odnosi się do listy rozdzielonych spacjami typów łączy. Wewnątrz typów łączy nie są dozwolone białe znaki.</p>
+
+<p>W tych typach łączy nie uwzględniana jest wielkość liter, tj. &#8222;Alternate&#8221; ma takie samo znaczenie jak &#8222;alternate&#8221;.</p>
+
+<p>Programy użytkownika, maszyny wyszukujące, itp. mogą interpretować te typy łączy na różne sposoby. Na przykład programy użytkownika mogą udostępniać dokumenty, na które wskazują łącza poprzez pasek nawigacji.</p>
+
+<dl>
+<dt><strong>Alternate</strong></dt>
+
+<dd>Wyznacza zastępcze wersje dla dokumentu, w którym łącze występuje. Używane łącznie z atrybutem <code>hreflang</code> wskazuje przetłumaczoną wersję dokumentu. Używane razem z
+atrybutem <code>media</code> wskazuje wersję zaprojektowaną dla innego typu medium (lub mediów).</dd>
+
+<dt><strong>Stylesheet</strong></dt>
+
+<dd>Odsyła do zewnętrznego arkusza stylów. Szczegóły w module <a href="abstract_modules#s_stylemodule">Style Sheet</a>. Używany razem z typem łączy &#8222;Alternate&#8221; dla arkuszy stylów między którymi użytkownik może wybierać.</dd>
+
+<dt><strong>Start</strong></dt>
+
+<dd>Odsyła do pierwszego dokumentu z zestawu dokumentów. Ten typ łączy wskazuje maszynom wyszukiwawczym na dokument będący według autora punktem początkowym całego zestawu.</dd>
+
+<dt><strong>Next</strong></dt>
+
+<dd>Odsyła do następnego dokumentu w liniowej sekwencji dokumentów. Programy użytkownika mogą decydować się na wcześniejsze załadowanie &#8222;następnego&#8221; dokumentu w celu zredukowania oczekiwanego czasu ładowania.</dd>
+
+<dt><strong>Prev</strong></dt>
+
+<dd>Odsyła do poprzedniego dokumentu w uporządkowanej serii dokumentów. Niektóre programy użytkownika obsługują także synonim &#8222;Previous&#8221;.</dd>
+
+<dt><strong>Contents</strong></dt>
+
+<dd>Odsyła do dokumentu służącego za spis treści. Niektóre programy użytkownika obsługują także synonim <em>ToC</em> (skrót od &#8222;<i>Table of Contents</i>&#8221;).</dd>
+
+<dt><strong>Index</strong></dt>
+
+<dd>Odsyła do dokumentu zawierającego skorowidz (indeks) dla bieżącego dokumentu.</dd>
+
+<dt><strong>Glossary</strong></dt>
+
+<dd>Odsyła do dokumentu zawierającego słownik terminów odnoszący się do bieżącego dokumentu.</dd>
+
+<dt><strong>Copyright</strong></dt>
+
+<dd>Odsyła do zapisu o prawach autorskich dla bieżącego dokumentu.</dd>
+
+<dt><strong>Chapter</strong></dt>
+
+<dd>Odsyła do dokumentu służącego za rozdział w zestawie dokumentów.</dd>
+
+<dt><strong>Section</strong></dt>
+
+<dd>Odsyła do dokumentu służącego za sekcję w zestawie dokumentów.</dd>
+
+<dt><strong>Subsection</strong></dt>
+
+<dd>Odsyła do dokumentu służącego za podsekcję w zestawie dokumentów.</dd>
+
+<dt><strong>Appendix</strong></dt>
+
+<dd>Odsyła do dokumentu służącego za dodatek w zestawie dokumentów.</dd>
+
+<dt><strong>Help</strong></dt>
+
+<dd>Odsyła do dokumentu udzielającego pomocy (więcej informacji, łącza do innych źródeł informacji, itd.)</dd>
+
+<dt><strong>Bookmark</strong></dt>
+
+<dd>Odsyła do zakładki. Zakładka to łącze do miejsca zawierającego hasła kluczowe dla rozbudowanego dokumentu. Atrybut <span class='attributes'>title</span> może być użyty, na przykład, w celu nazwania zakładki.
+Weź pod uwagę, że w każdym dokumencie może być zdefiniowanych kilka zakładek.</dd>
+</dl>
+</td>
+</tr>
+
+<tr>
+<td><a id="dt_MediaDesc" name="dt_MediaDesc">MediaDesc</a></td>
+<td>
+<p>Atrybut typu MediaDesc to lista rozdzielonych przecinkami deskryptorów mediów. Oto lista rozpoznawanych deskryptorów mediów:</p>
+
+<dl>
+<dt><strong>screen</strong></dt>
+
+<dd>Przeznaczony dla niestronicowanych ekranów komputerowych.</dd>
+
+<dt><strong>tty</strong></dt>
+
+<dd>Przeznaczony dla mediów używających siatki ze znakami o stałej szerokości, takich jak telegrafy, terminale lub przenośne urządzenia z ograniczonymi możliwościami wyświetlania.</dd>
+
+<dt><strong>tv</strong></dt>
+
+<dd>Przeznaczony dla telewizorów i podobnych urządzeń (niska rozdzielczość, kolor, ograniczona możliwość przewijania).</dd>
+
+<dt><strong>projection</strong></dt>
+
+<dd>Przeznaczony dla rzutników.</dd>
+
+<dt><strong>handheld</strong></dt>
+
+<dd>Przeznaczony dla urządzeń przenośnych (mały ekran, monochromatyczne, grafika oparta na mapach bitowych, ograniczona przepustowość łączy).</dd>
+
+<dt><strong>print</strong></dt>
+
+<dd>Przeznaczony dla stronicowanych, nieprzezroczystych materiałów oraz dla dokumentów przeglądanych na ekranie w trybie podglądu wydruku.</dd>
+
+<dt><strong>braille</strong></dt>
+
+<dd>Przeznaczony dla urządzeń dotykowych Braille'a.</dd>
+
+<dt><strong>aural</strong></dt>
+
+<dd>Przeznaczony dla syntezatorów głosu.</dd>
+
+<dt><strong>all</strong></dt>
+
+<dd>Odpowiedni dla wszystkich urządzeń.</dd>
+</dl>
+
+<p>Przyszłe wersje XHTML mogą wprowadzić nowe wartości i mogą zezwolić na wartości sparametryzowane. W celu ułatwienia wprowadzenia tych rozszerzeń, programy użytkownika zgodne ze standardem muszą posiadać zdolność parsowania wartości atrybutu <span
+class="attributes">media</span> w następujący sposób:</p>
+
+<ol>
+<li>Wartość jest listą rozdzielonych przecinkami pozycji. Na przykład, 
+
+<pre>
+media="screen, 3d-glasses, print and resolution &gt; 90dpi"
+</pre>
+
+<p>jest przeobrażane w:</p>
+
+<pre>
+"screen"
+"3d-glasses"
+"print and resolution &gt; 90dpi"
+</pre>
+</li>
+
+<li>Każda z pozycji jest ucinana bezpośrednio przed pierwszym znakiem niebędącym literą z zestawu US ASCII [a-zA-Z] (ISO 10646 hex 41-5A, 61-7A), cyfrą [0-9] (hex 30-39) lub łącznikiem/minusem (hex 2D). W tym przykładzie daje to: 
+
+<pre>
+"screen"
+"3d-glasses"
+"print"
+</pre>
+</li>
+
+<li>W dalszej kolejności następuje nieuwzględniające wielkości liter dopasowywanie zdefiniowanych powyżej typów mediów. Programy użytkownika mogą zignorować niedopasowywujące się pozycje. W powyższym przykładzie pozostaną <tt>screen</tt> i <tt>
+print</tt>.</li>
+</ol>
+
+<div class="note">
+<p><em><strong>Uwaga.</strong> Arkusze stylów mogą zawierać zależne od mediów odmiany (np. konstrukcja CSS w rodzaju <strong>@media</strong>). W takich wypadkach może być odpowiednie zastosowanie "<span
+class="attributes">media</span> =all"</em>.</p>
+</div>
+</td>
+</tr>
+
+<tr>
+<td><a id="dt_MultiLength" name="dt_MultiLength">MultiLength</a></td>
+<td>Wartością może być relatywna lub absolutna długość (Length). Długość relatywna ma formę &#8222;i*&#8221;, gdzie &#8222;i&#8221; jest liczbą całkowitą. Podczas przydzielania przestrzeni elementom o nią się ubiegającym, programy użytkownika najpierw przydzielają długości mierzone w pikselach
+i procentowo, potem zaś dzielą pozostałą dostępną przestrzeń pomiędzy długości relatywne. Każda relatywna długość otrzymuję część dostępnej przestrzeni, która jest proporcjonalna do liczby całkowitej
+poprzedzającej znak &#8222;*&#8221;. Wartość &#8222;*&#8221; jest równoznaczna z &#8222;1*&#8221;. Zatem jeśli po przydzieleniu przez program użytkownika przestrzeni pikselowej i procentowej dostępne jest 60 pikseli, a ubiegającymi się o przestrzeń długościami relatywnymi są 1*,
+2* i 3*, wtedy 1* dostanie 10 pikseli, 2* dostanie 20 pikseli, a 3* &#8212; 30 pikseli.</td>
+</tr>
+
+<tr>
+<td><a id="dt_MultiLengths" name="dt_MultiLengths">MultiLengths</a></td>
+<td>Lista rozdzielonych przecinkami pozycji typu <a href="#dt_MultiLength">MultiLength</a>.</td>
+</tr>
+
+<tr>
+<td><a id="dt_Number" name="dt_Number">Number</a></td>
+<td>Liczba. Jedna lub więcej cyfr.</td>
+</tr>
+
+<tr>
+<td><a id="dt_Pixels" name="dt_Pixels">Pixels</a></td>
+<td>Wartość jest liczbą całkowitą reprezentującą liczbę pikseli płótna (ekranu, papieru). Tak więc wartość "50" oznacza pięćdziesiąt pikseli. Normatywne informacje dotyczące definicji piksela można uzyskać w <a href="references#ref_css2">[CSS2]</a>.</td>
+</tr>
+
+<tr>
+<td><a id="dt_Script" name="dt_Script">Script</a></td>
+<td>
+<p>Dane skryptu mogą zawierać się w elemencie <code>script</code> oraz w wartości atrybutów zdarzenia wewnętrznego. Programy użytkownika nie mogą analizować danych skryptu jako oznakowanie HTML, lecz muszą zamiast tego przekazać je jako dane do maszyny skryptowej.</p>
+
+<p><span class="index-inst" title="case::of script data"><a name="idx-case-9">Uwzględnianie wielkości liter</a></span> w danych skryptu zależy od języka skryptu.</p>
+
+<p>Weź proszę pod uwagę, że dane skryptu będące zawartością elementu nie mogą zawierać odwołań znakowych, lecz dane skryptu będące wartością atrybutu &#8212; mogą.</p>
+</td>
+</tr>
+
+<tr>
+<td><a id="dt_Shape" name="dt_Shape">Shape</a></td>
+<td>Kształt obszaru.</td>
+</tr>
+
+<tr>
+<td><a id="dt_Text" name="dt_Text">Text</a></td>
+<td>Dowolne dane tekstowe, najczęściej przeznaczone do odczytania przez ludzi.</td>
+</tr>
+
+<tr>
+<td><a id="dt_URI" name="dt_URI">URI</a></td>
+<td>Jednolity identyfikator zasobów (ang. <i xml:lang="en" lang="en">Uniform Resource Identifier</i>), według <a href="references#ref_uri">[URI]</a>.</td>
+</tr>
+
+<tr>
+<td><a id="dt_URIs" name="dt_URIs">URIs</a></td>
+<td>Lista rozdzielonych spacjami jednolitych identyfikatorów zasobów, według <a href="references#ref_uri">[URI]</a>.</td>
+</tr>
+</table>
+
+<h2><a name="sec_4.4." id="sec_4.4.">4.4.</a> Przykładowa definicja modułu abstrakcyjnego</h2>
+
+<p><em>Ten rozdział ma charakter informacyjny</em></p>
+
+<p>Ten rozdział definiuje modelowy moduł abstrakcyjny jako przykład wykorzystania reguł składniowych zdefiniowanych powyżej. Ponieważ przykład ten stara się wykorzystać wszystkie z rozmaitych zdefiniowanych elementów składniowych,
+jest on dość skomplikowany. Typowe definicje modułów byłyby znacznie prostsze. Na koniec proszę wziąć pod uwagę, że moduł ten odwołuje się do zestawu atrybutów Common. Jest to zestaw zdefiniowany
+w specyfikacji Modularyzacja XHTML, który zawiera wszystkie podstawowe atrybuty, których potrzebuje większość elementów.</p>
+
+<h3><a name="sec_4.4.1." id="sec_4.4.1.">4.4.1.</a> Moduł XHTML Narciarstwo</h3>
+
+<p>Moduł XHTML Narciarstwo definiuje oznakowanie używane dla opisywania aspektów schroniska narciarskiego. Elementy i atrybuty zdefiniowane w tym module to:</p>
+
+<table summary="Elementy i atrybuty modułu Narciarstwo">
+<thead>
+<tr>
+<th>Elementy</th>
+<th>Atrybuty</th>
+<th>Minimalny model zawartości</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>miejscowosc_wypoczynkowa</td>
+<td>Common, href (CDATA)</td>
+<td>opis, Zakopane+</td>
+</tr>
+
+<tr>
+<td>schronisko</td>
+<td>Common</td>
+<td>opis, (Zakopane - wyciag)+</td>
+</tr>
+
+<tr>
+<td>wyciag</td>
+<td>Common, href</td>
+<td>opis?</td>
+</tr>
+
+<tr>
+<td>chata</td>
+<td>Common, href</td>
+<td>opis?</td>
+</tr>
+
+<tr>
+<td>pokoj</td>
+<td>Common, href</td>
+<td>opis?</td>
+</tr>
+
+<tr>
+<td>korytarz</td>
+<td>Common, href</td>
+<td>opis?</td>
+</tr>
+
+<tr>
+<td>kominek</td>
+<td>Common, href</td>
+<td>opis?</td>
+</tr>
+
+<tr>
+<td>opis</td>
+<td>Common</td>
+<td>PCDATA*</td>
+</tr>
+</tbody>
+</table>
+
+<p>Ten moduł definiuje także zbiór zawartości Zakopane z minimalnym modelem zawartości <span class="content">schronisko | wyciag | chata | pokoj | korytarz | kominek</span>.</p>
+
+<hr />
+
+<div class="navbar">[<a href="conformance">poprzedni</a>] [<a href="abstract_modules">następny</a>] [<a href="overview#toc">spis treści</a>] 
+</div>
+
+
+<table class="stopka"><tr>
+<td class="sle"><a href="../">Strona główna</a></td>
+<td class="spr">Ostatnia modyfikacja: 17 sierpnia 2005</td>
+</tr></table>
+
+</body>
+</html>

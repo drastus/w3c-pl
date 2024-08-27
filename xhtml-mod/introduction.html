@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="pl" lang="pl">
+
+<head>
+<title>Modularyzacja XHTML – Wprowadzenie</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="stylesheet" type="text/css" href="../W3C-REC.css" />
+<link rel="stylesheet" type="text/css" href="xhtml.css" />
+<link rel="stylesheet" type="text/css" href="../trans.css" /><script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-35090831-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+</head>
+
+<body>
+
+
+<div class="navbar">[<a href="overview">poprzedni</a>] [<a href="terms">następny</a>] [<a href="overview#toc">spis treści</a>]
+<hr />
+</div>
+
+<h1><a name="s_intro" id="s_intro">1.</a> Wprowadzenie</h1>
+
+<div class='subtoc'>
+<p><strong>Zawartość</strong></p>
+<ul class='toc'>
+<li class='tocline'>1. <a href="#s_intro" class="tocxref">Wprowadzenie</a> 
+<ul class="toc">
+<li class='tocline'>1.1. <a href="#s_intro_whatisxhtml" class="tocxref">Czym jest XHTML?</a></li>
+<li class='tocline'>1.2. <a href="#s_intro_whatismod" class="tocxref">Czym jest modularyzacja XHTML?</a></li>
+<li class='tocline'>1.3. <a href="#s_intro_xhtml_mods" class="tocxref">Po co modularyzować XHTML?</a> 
+<ul class="toc">
+<li class='tocline'>1.3.1. <a href="#s_intro_abstract" class="tocxref">Moduły abstrakcyjne</a></li>
+<li class='tocline'>1.3.2. <a href="#s_intro_module_implementation" class="tocxref">Implementacje modułów</a></li>
+<li class='tocline'>1.3.3. <a href="#s_intro_hybrid" class="tocxref">Hybrydowe typy dokumentów</a></li>
+<li class='tocline'>1.3.4. <a href="#s_intro_validation" class="tocxref">Walidacja</a></li>
+<li class='tocline'>1.3.5. <a href="#s_intro_formatting" class="tocxref">Model formatowania</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+
+<p>Ten rozdział ma charakter<em> informacyjny</em>.</p>
+
+<h2><a name="s_intro_whatisxhtml" id="s_intro_whatisxhtml">1.1.</a> Czym jest XHTML?</h2>
+
+<p>XHTML to przeformułowanie HTML 4 jako aplikacji XML. XHTML 1.0 <a href="references#ref_xhtml1">[XHTML1]</a> definiuje trzy typy dokumentów XML odpowiadające trzem DTD HTML 4:
+Strict, Transitional i Frameset. XHTML 1.0 jest podstawą rodziny typów dokumentów  rozszerzających HTML i dzielących go na podzbiory.</p>
+
+<h2><a name="s_intro_whatismod" id="s_intro_whatismod">1.2.</a> Czym jest modularyzacja XHTML?</h2>
+
+<p>Modularyzacja XHTML oznacza rozdzielenie XHTML 1.0 (a pośrednio także HTML 4) na zestaw modułów abstrakcyjnych, z których każdy dostarcza określony typ funkcjonalności. Owe moduły abstrakcyjne są
+implementowane w tej specyfikacji przy użyciu definicji typu dokumentu XML, ale wkrótce spodziewana jest implementacja korzystająca z XML Schema. W tym dokumencie są również zdefiniowane reguły definiowania modułów abstrakcyjnych i ich implementacji przy użyciu DTD XML.</p>
+
+<p>Moduły te mogą być łączone ze sobą i z innymi modułami w celu tworzenia typów dokumentów rozszerzających XHTML i dzielących go na podzbiory, mogących być uznanymi za część rodziny typów dokumentów XHTML.</p>
+
+<h2><a name="s_intro_xhtml_mods" id="s_intro_xhtml_mods">1.3.</a> Po co modularyzować XHTML?</h2>
+
+<p>Modularyzacja XHTML polega na określaniu dobrze zdefiniowanych elementów XHTML, które mogą być ze sobą łączone i rozszerzane przez autorów dokumentów, projektantów typów dokumentów, innych specyfikacji standardów XML oraz twórców aplikacji i produktów, tak, by  ekonomicznie wykonalne było dostarczanie treści na większą ilość różnorodnych platform.</p>
+
+<p>W ciągu ostatnich kilku lat wiele wyspecjalizowanych rynków zaczęło postrzegać HTML jako język treści. Obecnie zaznacza się silna tendencja do stosowania HTML na coraz bardziej zróżnicowanych platformach informatycznych.
+Aktualnie podejmowane są czynności mające na celu przeniesienie HTML na urządzenia przenośne (podręczne komputery, telefony komórkowe, itp.), urządzenia telewizyjne (telewizja cyfrowa, telewizyjne przeglądarki internetowe, itp.) i
+inne urządzenia pełniące różne funkcje. Każde z tych urządzeń ma inne wymagania i ograniczenia.</p>
+
+<p>Modularyzacja XHTML pozwala określić twórcom produktów, które elementy są obsługiwane przez dane urządzenie. Mogą to robić używając standardowych bloków konstruujących oraz standardowych metod w celu określenia, które bloki konstruujące są używane.
+Te moduły pełnią rolę &#8222;punktów zgodności ze standardem&#8221; dla społeczności treści. Społeczność treści może teraz zwrócić się w stronę zainstalowanej bazy obsługującej pewne zestawy modułów,
+zamiast obsługującej tę, czy inną kombinację elementów XHTML. Korzystanie ze standardów zadecyduje o odniesieniu przez modularyzację XHTML sukcesu na większą skalę. Dostosowywanie treści do każdej kolejnej kombinacji elementów XHTML
+jest niewykonywalne pod względem ekonomicznym. Dzięki określeniu standardu programy mogą autonomicznie dostosować treść
+do urządzenia albo urządzenie może automatycznie załadować oprogramowanie wymagane do przetworzenia modułu.</p>
+
+<p>Dzięki wykorzystaniu rozszerzalności XML modularyzacja pozwala także poszerzyć możliwości rozkładu graficznego i prezentacyjne języka XHTML bez łamania standardu XHTML. Ta ścieżka rozwojowa dostarcza osobom opracowywujšcym i publikującym treść stabilne, użyteczne i możliwe do implementacji ogólne reguły pozwalające dotrzymać kroku technologicznym przemianom Internetu.</p>
+
+<h3><a name="s_intro_abstract" id="s_intro_abstract">1.3.1.</a> Moduły abstrakcyjne</h3>
+
+<p>Typ dokumentu XHTML jest zdefiniowany jako zestaw modułów abstrakcyjnych. Moduł abstrakcyjny definiuje jeden rodzaj danych będący znaczeniowo różny od wszystkich pozostałych. Moduły abstrakcyjne mogą być łączone
+w typy dokumentów bez potrzeby dogłębnego zrozumienia leżących u ich podstaw schematów definiujących te moduły.</p>
+
+<h3><a name="s_intro_module_implementation" id="s_intro_module_implementation">1.3.2.</a> Implementacje modułów</h3>
+
+<p>Implementacja modułu składa się z zestawu typów elementów, zestawu deklaracji wykazu atrybutów oraz zestawu deklaracji modelu zawartości, przy czym każdy z tych trzech zestawów może być pusty.
+Deklaracja wykazu atrybutów w module może zmodyfikować typ elementu nienależącego do typów elementów zdefiniowanych w tym module, jak również deklaracja modelu zawartości może zmodyfikować typ elementu nienależącego do zestawu typów elementów tego modułu.</p>
+
+<p>Jednym z mechanizmów implementacji jest DTD XML. DTD XML to sposób opisu struktury pewnej klasy dokumentów XML, łącznie określanej mianem typu dokumentu XML. DTD XML są opisane w
+Rekomendacji XML 1.0 <a href="references#ref_xml">[XML]</a>. Innym mechanizmem implementacji jest XML Schema <a href="references#ref_xmlschema">[XMLSCHEMA]</a>.</p>
+
+<h3><a name="s_intro_hybrid" id="s_intro_hybrid">1.3.3.</a> Hybrydowe typy dokumentów</h3>
+
+<p>Hybrydowym typem dokumentu nazywamy typ dokumentu złożony z zestawu DTD XML lub modułów DTD. Zasadniczym celem opisanych w tym dokumencie ogólnych reguł modularyzacji jest umożliwienie autorom DTD łączenia elementów pochodzących z różnych modułów abstrakcyjnych w hybrydowy typ dokumentu, opracowywania dokumentów zgodnych z tym hybrydowym typem dokumentu oraz walidacji tych dokumentów pod względem skojarzonej definicji hybrydowego typu dokumentu.</p>
+
+<p>Jedną z największych korzyści wynikających z przewagi XML nad SGML jest to, że XML redukuje przeszkody stojące na drodze do standaryzacji zestawów elementów pozwalającej społecznościom na wymianę danych w formacie o dużej możliwości ich przetwarzania.
+Jednak stosunkowo statyczna natura HTML jako języka treści dla Internetu oznaczała, że każda z tych społeczności po cichu liczyła na to, że ich typy dokumentów XML
+będą mogły zyskać szersze uznanie jako jeden ze standardów internetowych. Ogólne reguły  modularyzacji pozwalają na dynamiczne włączenie tych różnych typów dokumentów do rodziny typów dokumentów XHTML,
+doprowadzając do dalszego zmniejszenia przeszkód do włączenia tych właściwych dla poszczególnych dziedzin słowników w dokumenty XHTML.</p>
+
+<h3><a name="s_intro_validation" id="s_intro_validation">1.3.4.</a> Walidacja</h3>
+
+<p>Możliwość używania poprawnych składniowo, ale niepoprawnych strukturalnie dokumentów, to ważna korzyść płynąca ze stosowania XML. Jednak podczas opracowywania typu dokumentu ważna jest dodatkowa pomoc uzyskiwana dzięki sprawdzającemu istnienie błędów parserowi walidującemu.
+To samo dotyczy typów dokumentów XHTML z elementami pochodzącymi z różnych modułów abstrakcyjnych.</p>
+
+<p>Dokument jest egzemplarzem jednego określonego typu dokumentu zdefiniowanego przez DTD zidentyfikowaną w prologu dokumentu. Walidacja dokumentu to proces sprawdzania, czy dokument stosuje się do reguł zawartych w definicji typu dokumentu.</p>
+
+<p>Jeden dokument może się składać z wielu fragmentów. Walidacja tylko fragmentów dokumentu, gdzie każdy fragment posiada odmienny od pozostałych fragmentów typ dokumentu,
+wykracza poza ramy tego zarysu, wymaga ona bowiem użycia technologii, która jeszcze nie została zdefiniowana.</p>
+
+<p>Mimo to, ogólne reguły modularyzacji zezwalają na połączenie różnych definicji typu dokumentu w nowy typ dokumentu (np. SVG zintegrowany z XHTML). Nowa definicja typu dokumentu może
+być użyta do normalnej walidacji XML 1.0.</p>
+
+<h3><a name="s_intro_formatting" id="s_intro_formatting">1.3.5.</a> Model formatowania</h3>
+
+<p>Wcześniejsze wersje HTML podejmowały próbę zdefiniowania tych części modelu, których programy użytkownika miały używać podczas formatowania dokumentu. Wraz z pojawieniem się HTML 4 organizacja W3C rozpoczęła proces odłączania
+prezentacji od struktury. XHTML 1.0 utrzymał to oddzielenie, a ten dokument kontynuuje proces zawracania HTML i jego następców na tę ścieżkę. W rezultacie niniejszy dokument nie nie stawia żadnych wymagań dotyczących
+modelu formatowania skojarzonego z prezentacją dokumentów oznaczonych jako typy dokumentów rodziny XHTML.</p>
+
+<p>Zamiast tego niniejszy dokument zaleca, by autorzy treści zdali się na mechanizm stylów, taki jak CSS, by zdefiniować model formatowania swojej treści. Gdy programy użytkownika obsługują mechanizmy stylów,
+dokumenty będą formatowane w oczekiwany sposób. Gdy programy użytkownika nie obsługują mechanizmu stylów, dokumenty będą formatowane w sposób właściwy dla danego programu użytkownika. Pozwala to programom użytkownika dla rodziny XHTML na obsługiwanie bogatych modeli formatowania na urządzeniach, na których to jest odpowiednie, a skromnych modeli formatowania na urządzeniach, na których<em> to </em>jest odpowiednie.</p>
+
+<hr />
+
+<div class="navbar">[<a href="overview">poprzedni</a>] [<a href="terms">następny</a>] [<a href="overview#toc">spis treści</a>]
+</div>
+
+
+<table class="stopka"><tr>
+<td class="sle"><a href="../">Strona główna</a></td>
+<td class="spr">Ostatnia modyfikacja: 17 sierpnia 2005</td>
+</tr></table>
+
+</body>
+</html>

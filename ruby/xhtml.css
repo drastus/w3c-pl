@@ -1,0 +1,101 @@
+body {
+    color: black;
+    background-color: white;
+}
+a:link {
+    color: #00F;
+}
+a:visited {
+    color: #808;
+}
+a:active {
+    color: #F00;
+}
+a img {
+    border-style: none;
+    color: white;
+}
+div.toc ul {
+    list-style-type: none;
+}
+p.example {
+    font-weight: bold;
+}
+div.figure {
+    margin-left: 3em; text-align: left;
+}
+div.figure p {
+    /* font-size: small; */
+    margin-right: 6em;
+}
+div.figure img {
+    vertical-align: top;
+}
+div.figure pre {
+    margin-left: 0em;
+}
+pre.xml, pre.style {
+    color: #006000;
+}
+pre.render {
+    color: maroon;
+}
+pre.sgml, pre.dtd-fragment-sgml {
+    color: maroon; margin-left: 3em;
+}
+pre.dtd-fragment-sgml {
+    background-color: #eee; width: 100%;
+    border-left: medium none; border-right: medium none; 
+    border-top: medium none; border-bottom: medium none; 
+    margin-left: 0em; margin-right: 0em;
+}
+h3, h4 {
+    margin-top: 1em;
+}
+.content {
+    font-family: monospace;
+}
+.caution {
+    color: red;
+    background-color: yellow;
+    font-weight: bold;
+}
+.note {
+    margin-left: 1em;
+    font-style: italic;
+}
+.note div.figure p {
+    font-style: normal;
+}
+.ednote {
+    color: green;
+    font-style: italic;
+}
+.issue {
+    color: red;
+    font-style: italic;
+}
+div.ednote, p.ednote, p.issue {
+    margin-left: 1em;
+}
+div.ednote pre {
+    font-style: normal;
+}
+
+.familyname {
+    text-transform: uppercase;
+}
+tr.rb td {
+   text-align: center;
+   font-size: 120%;
+}
+tr.rt td {
+   text-align: center;
+   font-size: 60%;
+}
+table.rendering {
+   text-align: center;
+}
+table.rendering td {
+   text-align: center;
+}

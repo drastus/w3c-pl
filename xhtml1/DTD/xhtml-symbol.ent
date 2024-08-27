@@ -1,0 +1,221 @@
+<!-- Znaki matematyczne, greckie i symbole dla HTML -->
+
+<!-- Zestaw encji znakowych. Typowe wywo³anie:
+     <!ENTITY % HTMLsymbol PUBLIC
+        "-//W3C//ENTITIES Symbols for XHTML//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml-symbol.ent">
+     %HTMLsymbol;
+-->
+
+<!-- Portions (C) International Organization for Standardization 1986
+     Zezwala siê na kopiowanie w jakiejkolwiek formie w celu
+     u¿ywania w systemach i aplikacjach SGML zgodnych z definicj±
+     ISO 8879, pod warunkiem za³±czenia tej noty we wszystkich kopiach.
+-->
+
+<!-- Podano nazwy opowiednich zestawów encji ISO, chyba ¿e nazwa jest nowo
+     wprowadzona. Nowe nazwy (tj. niebêd±ce na li¶cie ISO 8879) nie koliduj±
+     z ¿adn± istniej±c± nazw± encji ISO 8879. Dla ka¿dego znaku podano
+     szesnastkowo numery znaków ISO 10646. Warto¶ci s± dziesiêtnymi
+     odpowiednikami warto¶ci ISO 10646 i odsy³aj± do zestawu znaków
+     dokumentu. Nazwy s± nazwami Unicode.
+-->
+
+<!-- £aciñski rozszerzony B -->
+<!ENTITY fnof     "&#402;"> <!-- ³aciñska ma³a litera f z zawijasem = funkcja
+                                    = floren, U+0192 ISOtech -->
+
+<!-- Alfabet grecki -->
+<!ENTITY Alpha    "&#913;"> <!-- grecka wielka litera alfa, U+0391 -->
+<!ENTITY Beta     "&#914;"> <!-- grecka wielka litera beta, U+0392 -->
+<!ENTITY Gamma    "&#915;"> <!-- grecka wielka litera gamma,
+                                    U+0393 ISOgrk3 -->
+<!ENTITY Delta    "&#916;"> <!-- grecka wielka litera delta,
+                                    U+0394 ISOgrk3 -->
+<!ENTITY Epsilon  "&#917;"> <!-- grecka wielka litera epsilon, U+0395 -->
+<!ENTITY Zeta     "&#918;"> <!-- grecka wielka litera dzeta, U+0396 -->
+<!ENTITY Eta      "&#919;"> <!-- grecka wielka litera eta, U+0397 -->
+<!ENTITY Theta    "&#920;"> <!-- grecka wielka litera theta,
+                                    U+0398 ISOgrk3 -->
+<!ENTITY Iota     "&#921;"> <!-- grecka wielka litera jota, U+0399 -->
+<!ENTITY Kappa    "&#922;"> <!-- grecka wielka litera kappa, U+039A -->
+<!ENTITY Lambda   "&#923;"> <!-- grecka wielka litera lambda,
+                                    U+039B ISOgrk3 -->
+<!ENTITY Mu       "&#924;"> <!-- grecka wielka litera mi, U+039C -->
+<!ENTITY Nu       "&#925;"> <!-- grecka wielka litera ni, U+039D -->
+<!ENTITY Xi       "&#926;"> <!-- grecka wielka litera ksi, U+039E ISOgrk3 -->
+<!ENTITY Omicron  "&#927;"> <!-- grecka wielka litera omikron, U+039F -->
+<!ENTITY Pi       "&#928;"> <!-- grecka wielka litera pi, U+03A0 ISOgrk3 -->
+<!ENTITY Rho      "&#929;"> <!-- grecka wielka litera rho, U+03A1 -->
+<!-- nie ma encji Sigmaf, nie ma w ogóle znaku U+03A2 -->
+<!ENTITY Sigma    "&#931;"> <!-- grecka wielka litera sigma,
+                                    U+03A3 ISOgrk3 -->
+<!ENTITY Tau      "&#932;"> <!-- grecka wielka litera tau, U+03A4 -->
+<!ENTITY Upsilon  "&#933;"> <!-- grecka wielka litera ypsilon,
+                                    U+03A5 ISOgrk3 -->
+<!ENTITY Phi      "&#934;"> <!-- grecka wielka litera fi, U+03A6 ISOgrk3 -->
+<!ENTITY Chi      "&#935;"> <!-- grecka wielka litera chi, U+03A7 -->
+<!ENTITY Psi      "&#936;"> <!-- grecka wielka litera psi, U+03A8 ISOgrk3 -->
+<!ENTITY Omega    "&#937;"> <!-- grecka wielka litera omega,
+                                    U+03A9 ISOgrk3 -->
+
+<!ENTITY alpha    "&#945;"> <!-- grecka ma³a litera alfa, U+03B1 ISOgrk3 -->
+<!ENTITY beta     "&#946;"> <!-- grecka ma³a litera beta, U+03B2 ISOgrk3 -->
+<!ENTITY gamma    "&#947;"> <!-- grecka ma³a litera gamma, U+03B3 ISOgrk3 -->
+<!ENTITY delta    "&#948;"> <!-- grecka ma³a litera delta, U+03B4 ISOgrk3 -->
+<!ENTITY epsilon  "&#949;"> <!-- grecka ma³a litera epsilon,
+                                    U+03B5 ISOgrk3 -->
+<!ENTITY zeta     "&#950;"> <!-- grecka ma³a litera dzeta, U+03B6 ISOgrk3 -->
+<!ENTITY eta      "&#951;"> <!-- grecka ma³a litera eta, U+03B7 ISOgrk3 -->
+<!ENTITY theta    "&#952;"> <!-- grecka ma³a litera theta, U+03B8 ISOgrk3 -->
+<!ENTITY iota     "&#953;"> <!-- grecka ma³a litera jota, U+03B9 ISOgrk3 -->
+<!ENTITY kappa    "&#954;"> <!-- grecka ma³a litera kappa, U+03BA ISOgrk3 -->
+<!ENTITY lambda   "&#955;"> <!-- grecka ma³a litera lambda, U+03BB ISOgrk3 -->
+<!ENTITY mu       "&#956;"> <!-- grecka ma³a litera mi, U+03BC ISOgrk3 -->
+<!ENTITY nu       "&#957;"> <!-- grecka ma³a litera ni, U+03BD ISOgrk3 -->
+<!ENTITY xi       "&#958;"> <!-- grecka ma³a litera ksi, U+03BE ISOgrk3 -->
+<!ENTITY omicron  "&#959;"> <!-- grecka ma³a litera omikron, U+03BF NOWA -->
+<!ENTITY pi       "&#960;"> <!-- grecka ma³a litera pi, U+03C0 ISOgrk3 -->
+<!ENTITY rho      "&#961;"> <!-- grecka ma³a litera rho, U+03C1 ISOgrk3 -->
+<!ENTITY sigmaf   "&#962;"> <!-- grecka ma³a litera sigma koñcowa,
+                                    U+03C2 ISOgrk3 -->
+<!ENTITY sigma    "&#963;"> <!-- grecka ma³a litera sigma, U+03C3 ISOgrk3 -->
+<!ENTITY tau      "&#964;"> <!-- grecka ma³a litera tau, U+03C4 ISOgrk3 -->
+<!ENTITY upsilon  "&#965;"> <!-- grecka ma³a litera ypsilon,
+                                    U+03C5 ISOgrk3 -->
+<!ENTITY phi      "&#966;"> <!-- grecka ma³a litera fi, U+03C6 ISOgrk3 -->
+<!ENTITY chi      "&#967;"> <!-- grecka ma³a litera chi, U+03C7 ISOgrk3 -->
+<!ENTITY psi      "&#968;"> <!-- grecka ma³a litera psi, U+03C8 ISOgrk3 -->
+<!ENTITY omega    "&#969;"> <!-- grecka ma³a litera omega, U+03C9 ISOgrk3 -->
+<!ENTITY thetasym "&#977;"> <!-- symbol grecka ma³a litera theta,
+                                    U+03D1 NOWA -->
+<!ENTITY upsih    "&#978;"> <!-- grecki symbol ypsilon z zawijasem,
+                                    U+03D2 NOWA -->
+<!ENTITY piv      "&#982;"> <!-- grecki symbol pi, U+03D6 ISOgrk3 -->
+
+<!-- Znaki interpunkcyjne ogólnego u¿ytku -->
+<!ENTITY bull     "&#8226;"> <!-- znak wyliczenia = czarne kó³ko,
+                                     U+2022 ISOpub  -->
+<!-- znak wyliczenia NIE jest tym samym, co operator czarne kó³ko, U+2219 -->
+<!ENTITY hellip   "&#8230;"> <!-- wielokropek, U+2026 ISOpub  -->
+<!ENTITY prime    "&#8242;"> <!-- prim = minuty = stopy, U+2032 ISOtech -->
+<!ENTITY Prime    "&#8243;"> <!-- bis = sekundy = cale, U+2033 ISOtech -->
+<!ENTITY oline    "&#8254;"> <!-- znak nadkre¶lenia, U+203E NOWA -->
+<!ENTITY frasl    "&#8260;"> <!-- kreska u³amkowa, U+2044 NOWA -->
+
+<!-- Symbole literopodobne -->
+<!ENTITY weierp   "&#8472;"> <!-- pisane wielkie P = moc zbioru
+                                     = p Weierstrassa, U+2118 ISOamso -->
+<!ENTITY image    "&#8465;"> <!-- pogrubiona wileka litera I = czê¶æ
+                                     urojona, U+2111 ISOamso -->
+<!ENTITY real     "&#8476;"> <!-- pogrubiona wielka litera R = symbol
+                                     czê¶ci rzeczywistej, U+211C ISOamso -->
+<!ENTITY trade    "&#8482;"> <!-- symbol znaku handlowego, U+2122 ISOnum -->
+<!ENTITY alefsym  "&#8501;"> <!-- symbol alef = pierwsza nieskoñczona liczba
+                                     kardynalna, U+2135 NOWA -->
+<!-- symbol alef NIE jest tym samym, co hebrajska litera alef, U+05D0,
+     jednak do zobrazowania obu tych znaków mo¿e byæ u¿yty ten sam glif -->
+
+<!-- Strza³ki -->
+<!ENTITY larr     "&#8592;"> <!-- strza³ka w lewo, U+2190 ISOnum -->
+<!ENTITY uarr     "&#8593;"> <!-- strza³ka w górê, U+2191 ISOnum-->
+<!ENTITY rarr     "&#8594;"> <!-- strza³ka w prawo, U+2192 ISOnum -->
+<!ENTITY darr     "&#8595;"> <!-- strza³ka w dó³, U+2193 ISOnum -->
+<!ENTITY harr     "&#8596;"> <!-- strza³ka w lewo i w prawo,
+                                     U+2194 ISOamsa -->
+<!ENTITY crarr    "&#8629;"> <!-- strza³ka w dó³ ze skrêtem w lewo
+                                     = powrót karetki, U+21B5 NOWA -->
+<!ENTITY lArr     "&#8656;"> <!-- podwójna strza³ka w lewo, U+21D0 ISOtech -->
+<!-- Unicode nie stwierdza, ¿e lArr jest tym samym, co "jest implikowane
+     przez", ale nie ma innego znaku pe³ni±cego tê funkcjê. Wiêc? lArr mo¿e
+     byæ u¿yte jako "jest implikowane przez", jak to sugeruje ISOtech -->
+<!ENTITY uArr     "&#8657;"> <!-- podwójna strza³ka w górê, U+21D1 ISOamsa -->
+<!ENTITY rArr     "&#8658;"> <!-- podwójna strza³ka w prawo,
+                                     U+21D2 ISOtech -->
+<!-- Unicode nie stwierdza, ¿e jest to to samo, co znak implikacji, ale
+     nie ma innego znaku pe³ni±cego tê funkcjê. Wiêc?
+     rArr mo¿e byæ u¿yte jako znak implikacji, jak to sugeruje ISOtech -->
+<!ENTITY dArr     "&#8659;"> <!-- podwójna strza³ka w dó³, U+21D3 ISOamsa -->
+<!ENTITY hArr     "&#8660;"> <!-- podwójna strza³ka w lewo i w prawo,
+                                     U+21D4 ISOamsa -->
+
+<!-- Operatory matematyczne -->
+<!ENTITY forall   "&#8704;"> <!-- kwantyfikator ogólny, U+2200 ISOtech -->
+<!ENTITY part     "&#8706;"> <!-- ró¿niczka cz±stkowa, U+2202 ISOtech  -->
+<!ENTITY exist    "&#8707;"> <!-- kwantyfikator szczegó³owy,
+                                     U+2203 ISOtech -->
+<!ENTITY empty    "&#8709;"> <!-- zbiór pusty = ¶rednica, U+2205 ISOamso -->
+<!ENTITY nabla    "&#8711;"> <!-- nabla = ró¿nica wsteczna, U+2207 ISOtech -->
+<!ENTITY isin     "&#8712;"> <!-- nale¿y do zbioru, U+2208 ISOtech -->
+<!ENTITY notin    "&#8713;"> <!-- nie nale¿y do zbioru, U+2209 ISOtech -->
+<!ENTITY ni       "&#8715;"> <!-- zawiera element, U+220B ISOtech -->
+<!-- czy nie powinno byæ nazwy ³atwiejszej do zapamiêtania ni¿ "ni"? -->
+<!ENTITY prod     "&#8719;"> <!-- iloczyn uogólniony, U+220F ISOamsb -->
+<!-- prod NIE jest tym samym znakiem, co U+03A0 "grecka wielka litera pi",
+     chocia¿ dla obu tych znaków mo¿e byæ u¿yty ten sam glif -->
+<!ENTITY sum      "&#8721;"> <!-- suma uogólniona, U+2211 ISOamsb -->
+<!-- sum NIE jest tym samym znakiem, co U+03A3 "grecka wielka litera sigma",
+     chocia¿ dla obu tych znaków mo¿e byæ u¿yty ten sam glif -->
+<!ENTITY minus    "&#8722;"> <!-- minus, U+2212 ISOtech -->
+<!ENTITY lowast   "&#8727;"> <!-- operator gwiazdka, U+2217 ISOtech -->
+<!ENTITY radic    "&#8730;"> <!-- pierwiastek kwadratowy, U+221A ISOtech -->
+<!ENTITY prop     "&#8733;"> <!-- znak proporcjonalno¶ci, U+221D ISOtech -->
+<!ENTITY infin    "&#8734;"> <!-- nieskoñczono¶æ, U+221E ISOtech -->
+<!ENTITY ang      "&#8736;"> <!-- k±t, U+2220 ISOamso -->
+<!ENTITY and      "&#8743;"> <!-- znak koniunkcji, U+2227 ISOtech -->
+<!ENTITY or       "&#8744;"> <!-- znak alternatywy, U+2228 ISOtech -->
+<!ENTITY cap      "&#8745;"> <!-- czê¶æ wspólna zbiorów, U+2229 ISOtech -->
+<!ENTITY cup      "&#8746;"> <!-- suma zbiorów, U+222A ISOtech -->
+<!ENTITY int      "&#8747;"> <!-- ca³ka, U+222B ISOtech -->
+<!ENTITY there4   "&#8756;"> <!-- st±d, U+2234 ISOtech -->
+<!ENTITY sim      "&#8764;"> <!-- operator tylda = podobne do,
+                                     U+223C ISOtech -->
+<!-- operator tylda NIE jest tym samym znakiem, co tylda, U+007E, jednak
+     ten sam glif mo¿e byæ u¿yty do reprezentowania obu tych znaków  -->
+<!ENTITY cong     "&#8773;"> <!-- w przybli¿eniu równe, U+2245 ISOtech -->
+<!ENTITY asymp    "&#8776;"> <!-- prawie równe = asymptotyczne do,
+                                     U+2248 ISOamsr -->
+<!ENTITY ne       "&#8800;"> <!-- nierówne, U+2260 ISOtech -->
+<!ENTITY equiv    "&#8801;"> <!-- identyczne w stosunku do, U+2261 ISOtech -->
+<!ENTITY le       "&#8804;"> <!-- mniejsze lub równe, U+2264 ISOtech -->
+<!ENTITY ge       "&#8805;"> <!-- wiêksze lub równe, U+2265 ISOtech -->
+<!ENTITY sub      "&#8834;"> <!-- znak inkluzji, U+2282 ISOtech -->
+<!ENTITY sup      "&#8835;"> <!-- jest nadzbiorem, U+2283 ISOtech -->
+<!-- Zauwa¿, ¿e nsup, "nie jest nadzbiorem", U+2283, nie jest czê¶ci± zestawu
+     znaków czcionki Symbol, nie jest wiêc tu za³±czona. Czy dla symetrii
+     powinna byæ? Jest w zestawie ISOamsn  -->
+<!ENTITY nsub     "&#8836;"> <!-- nie jest podzbiorem, U+2284 ISOamsn -->
+<!ENTITY sube     "&#8838;"> <!-- jest podzbiorem lub jest równe,
+                                     U+2286 ISOtech -->
+<!ENTITY supe     "&#8839;"> <!-- jest nadzbiorem lub jest równe,
+                                     U+2287 ISOtech -->
+<!ENTITY oplus    "&#8853;"> <!-- plus w kó³ku = suma bezpo¶rednia,
+                                     U+2295 ISOamsb -->
+<!ENTITY otimes   "&#8855;"> <!-- iloczyn tensorowy, U+2297 ISOamsb -->
+<!ENTITY perp     "&#8869;"> <!-- znak prostopad³o¶ci, U+22A5 ISOtech -->
+<!ENTITY sdot     "&#8901;"> <!-- znak mno¿enia, U+22C5 ISOamsb -->
+<!-- znak mno¿enia NIE jest tym samym znakiem, co U+00B7 kropka po¶rodku -->
+
+<!-- Ró¿norodne znaki techniczne -->
+<!ENTITY lceil    "&#8968;"> <!-- lewe ograniczenie górne, U+2308 ISOamsc  -->
+<!ENTITY rceil    "&#8969;"> <!-- prawe ograniczenie górne,
+                                     U+2309 ISOamsc  -->
+<!ENTITY lfloor   "&#8970;"> <!-- lewe ograniczenie dolne, U+230A ISOamsc  -->
+<!ENTITY rfloor   "&#8971;"> <!-- prawe ograniczenie dolne,
+                                     U+230B ISOamsc  -->
+<!ENTITY lang     "&#9001;"> <!-- lewy nawias k±towy, U+2329 ISOtech -->
+<!-- lang NIE jest tym samym znakiem, co U+003C "znak mniejszo¶ci"
+     czy U+2039 "pojedynczy cudzys³ów k±towy skierowany w lewo" -->
+<!ENTITY rang     "&#9002;"> <!-- prawy nawias k±towy, U+232A ISOtech -->
+<!-- rang NIE jest tym samym znakiem, co U+003E "znak wiêkszo¶ci"
+     czy U+203A "pojedynczy cudzys³ów k±towy skierowany w prawo" -->
+
+<!-- Kszta³ty geometryczne -->
+<!ENTITY loz      "&#9674;"> <!-- romb, U+25CA ISOpub -->
+
+<!-- Ró¿norodne symbole -->
+<!ENTITY spades   "&#9824;"> <!-- czarny pik, U+2660 ISOpub -->
+<!-- czarny zdaje siê tu oznaczaæ wype³niony, w przeciwieñstwie do pustego -->
+<!ENTITY clubs    "&#9827;"> <!-- czarny trefl, U+2663 ISOpub -->
+<!ENTITY hearts   "&#9829;"> <!-- czarny kier, U+2665 ISOpub -->
+<!ENTITY diams    "&#9830;"> <!-- czarne karo, U+2666 ISOpub -->

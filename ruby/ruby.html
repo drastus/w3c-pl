@@ -1,0 +1,917 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="pl" lang="pl">
+
+<head>
+<title>Notacja ruby</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="stylesheet" type="text/css" href="../W3C-REC.css" />
+<link rel="stylesheet" type="text/css" href="xhtml.css" />
+<link rel="stylesheet" type="text/css" href="../trans.css" /><script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-35090831-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+</head>
+
+<body>
+
+
+<div class="trans">
+<h2>Polskie tłumaczenie specyfikacji Ruby</h2>
+<p>Autor przekładu: <a href="mailto:&#109;&#105;&#99;&#104;&#97;&#108;&#45;&#103;&#111;&#114;&#110;&#121;&#64;&#119;&#112;&#46;&#112;&#108;">Michał Górny</a><br />
+Lokalizacja dokumentu: <a href="http://podziemie.net/w3c/ruby/ruby">http://podziemie.net/w3c/ruby/ruby</a></p>
+<p>Dokument ten jest tłumaczeniem rekomendacji W3C <i xml:lang="en" lang="en">Ruby Annotation</i>. Przekład jest nienormatywny i może zawierać błędy powstałe podczas tłumaczenia. Status normatywny posiada jedynie wersja w języku angielskim dostępna pod adresem <a href="http://www.w3.org/TR/2001/REC-ruby-20010531">http://www.w3.org/TR/2001/REC-ruby-20010531</a>.</p>
+<p class="ul">W tłumaczeniu uwzględnione zostały następujące poprawki redakcyjne:</p>
+<ul>
+<li>E1 z 26 czerwca 2001</li>
+<li>E2 z 23 września 2003.</li>
+</ul>
+<p class="copyright">Ten dokument jest chroniony prawem autorskim. Copyright © 1998 – 2001 W3C<sup>®</sup> (MIT, INRIA, Keio). Wszelkie prawa zastrzeżone. Prawa autorskie zależne: Copyright © Michał Górny, 2004 – 2005.</p>
+</div>
+
+<div class="head">
+<p><a href="http://www.w3.org/"><img alt="W3C" src="../w3c_home.gif" /></a></p>
+
+<h1>Notacja ruby</h1>
+
+<h2>Rekomendacja <acronym title="World Wide Web Consortium">W3C</acronym> z 31 maja 2001</h2>
+<dl>
+  <dt>Ta wersja:</dt>
+    <dd><a href="http://www.w3.org/TR/2001/REC-ruby-20010531/">http://www.w3.org/TR/2001/REC-ruby-20010531</a><br />
+      (<a href="http://www.w3.org/TR/ruby/ruby.zip">archiwum ZIP</a>)</dd>
+  <dt>Ostatnia wersja:</dt>
+    <dd><a href="http://www.w3.org/TR/ruby/">http://www.w3.org/TR/ruby</a><br /></dd>
+  <dt>Poprzednia wersja:</dt>
+    <dd><a href="http://www.w3.org/TR/2001/PR-ruby-20010406/">http://www.w3.org/TR/2001/PR-ruby-20010406</a></dd>
+  <dt>Redaktorzy:</dt>
+    <dd>Marcin <span class="familyname">Sawicki</span> (do 10 października 1999)</dd>
+    <dd><a href="mailto:michelsu@microsoft.com">Michel <span class="familyname">Suignard</span></a>, Microsoft</dd>
+    <dd><a href="mailto:mimasa@w3.org">Masayasu <span class="familyname">Ishikawa</span></a> (<span xml:lang="ja" lang="ja">石川 雅康</span>), <acronym title="World Wide Web Consortium">W3C</acronym></dd>
+    <dd><a href="mailto:duerst@w3.org">Martin <span class="familyname">Dürst</span></a>, W3C</dd>
+    <dd><a href="mailto:texin@progress.com">Tex <span class="familyname">Texin</span></a>, Progress Software Corp.</dd>
+    <dd>(Inni współpracownicy są wymienieni w <a href="#ack">Podziękowaniach</a>)</dd>
+</dl>
+
+<p class="copyright"><a href="http://www.w3.org/Consortium/Legal/ipr-notice-20000612#Copyright">Copyright</a> ©1998 - 2001 <a href="http://www.w3.org/">W3C</a><sup>®</sup> (<a href="http://www.lcs.mit.edu/"><acronym title="Massachusetts Institute of Technology">MIT</acronym></a>, <a href="http://www.inria.fr/"><acronym xml:lang="fr" lang="fr" title="Institut National de Recherche en Informatique et Automatique">INRIA</acronym></a>, <a href="http://www.keio.ac.jp/">Keio</a>). Wszelkie prawa zastrzeżone. Zastosowanie mają zasady W3C dotyczące <a href="http://www.w3.org/Consortium/Legal/ipr-notice-20000612#Legal_Disclaimer">odpowiedzialności prawnej</a>, <a href="http://www.w3.org/Consortium/Legal/ipr-notice-20000612#W3C_Trademarks">znaku towarowego</a>, <a href="http://www.w3.org/Consortium/Legal/copyright-documents-19990405">używania dokumentu</a> i <a href="http://www.w3.org/Consortium/Legal/copyright-software-19980720">licencjonowania oprogramowania</a>.</p>
+<hr />
+</div>
+
+<div>
+<h2><a id="Abstract" name="Abstract">Streszczenie</a></h2>
+
+<p>„Ruby” to krótkie sekwencje tekstu położone wzdłuż tekstu bazowego, zazwyczaj używane w dokumentach wschodnioazjatyckich w celu zaznaczenia wymowy lub dostarczenia krótkiej adnotacji. Specyfikacja ta definiuje oznakowanie dla ruby w formie modułu XHTML [<a href="#xhtmlmod">XHTMLMOD</a>].</p>
+</div>
+
+<div>
+<h2><a id="Status" name="Status">Status tego dokumentu</a></h2>
+
+<p><em>Ten rozdział opisuje status tego dokumentu w momencie jego publikacji. Inne dokumenty mogą zastąpić ten dokument. <a href="http://www.w3.org/TR/ruby/#Status">Aktualny status</a> dokumentów z tej serii jest dostępny na stronach W3C.</em></p>
+
+<p>Ten dokument został zaopiniowany przez Członków W3C i inne zainteresowane strony oraz został zatwierdzony przez Dyrektora jako Rekomendacja W3C. Jest to stabilny dokument i może być używany jako materiał odwoławczy lub cytowany jako odnośnik normatywny przez inny dokument. Rolą W3C w tworzeniu tej Rekomendacji jest przyciągnięcie do specyfikacji uwagi osób trzecich i wypromowanie jej w powszechnym użyciu. Rozszerzy to funkcjonalność Internetu i zwiększy możliwości wzajemnego współdziałania w jego ramach.</p>
+
+<p>Ten dokument został stworzony przez <a href="http://www.w3.org/International/Group/">Internationalization Working Group</a> (I18N WG, Grupa Robocza do spraw Internacjonalizacji, <a href="http://cgi.w3.org/MemberAccess/AccessRequest">tylko dla członków</a>) przy pomocy Internationalization Interest Group (I18N IG) jako część działalności <a href="http://www.w3.org/International/Activity">W3C Internationalization Activity</a>. Komentarze powinny być nadsyłane na <a href="http://lists.w3.org/Archives/Public/www-i18n-comments/">publicznie archiwizowaną</a> listę dyskusyjną <a href="mailto:www-i18n-comments@w3.org">www-i18n-comments@w3.org</a>. Mile widziane są również komentarze w językach innych niż angielski, w szczególności w języku japońskim. Publiczna debata na temat tego dokumentu odbywa się na liście dyskusyjnej <a href="mailto:www-international@w3.org">www-international@w3.org</a> (zobacz <a href="http://lists.w3.org/Archives/Public/www-international/">archiwum</a>).</p>
+
+<p>Ze względu na charakter poruszanych tematów, a także w celu uczynienia przykładów bardziej realistycznymi, dokument ten korzysta z szerokiego zakresu znaków. Nie każdy program użytkownika potrafi wyświetlać wszystkie te znaki. Sytuację może poprawić, w zależności od programu użytkownika, zmiana konfiguracji. Dołożono też wiele starań, by dokument ten był dostępny w <a href="http://www.w3.org/TR/ruby/encodings">różnych kodowaniach znaków</a> obejmujących szeroki zakres programów użytkownika i konfiguracji.</p>
+
+<p>Informacje związane z tym dokumentem można znaleźć na <a href="http://www.w3.org/International/O-HTML-ruby">publicznej stronie dotyczącej ruby</a> (http://www.w3.org/International/O-HTML-ruby). Znajdują się tam m.in. <a href="http://www.w3.org/International/O-HTML-ruby#Translations">tłumaczenia</a> tej specyfikacji, jak również ewentualne <a href="http://www.w3.org/2001/05/ruby-errata">poprawki</a>. Listę aktualnych <a href="http://www.w3.org/TR/">Rekomendacji W3C oraz innych dokumentów technicznych</a> można znaleźć pod adresem http://www.w3.org/TR.</p>
+
+<p>Grupie Roboczej do spraw Internacjonalizacji nie przekazano żadnych deklaracji dotyczących patentów odnoszących się do tej specyfikacji.</p>
+<hr />
+</div>
+
+<h2><a id="Contents" name="Contents">Spis treści</a></h2>
+
+<div class="toc">
+<ul>
+  <li class="informative">1. <a href="#intro">Wprowadzenie</a>
+    <ul>
+      <li>1.1. <a href="#what">Czym jest ruby?</a></li>
+      <li>1.2. <a href="#markup-overview">Przegląd oznakowania ruby</a>
+        <ul>
+          <li>1.2.1. <a href="#simple-ruby1">Proste oznakowanie ruby</a></li>
+          <li>1.2.2. <a href="#simple-parenthesis">Proste oznakowanie ruby z nawiasami</a></li>
+          <li>1.2.3. <a href="#complex">Złożone oznakowanie ruby</a></li>
+          <li>1.2.4. <a href="#summary">Podsumowanie</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li class="normative">2. <a href="#definition">Formalna definicja oznakowania ruby</a>
+    <ul>
+      <li>2.1. <a href="#abstract-def">Abstrakcyjna definicja oznakowania ruby</a></li>
+      <li>2.2. <a href="#ruby">Element <code>ruby</code></a></li>
+      <li>2.3. <a href="#rbc">Element <code>rbc</code></a></li>
+      <li>2.4. <a href="#rtc">Element <code>rtc</code></a></li>
+      <li>2.5. <a href="#rb">Element <code>rb</code></a></li>
+      <li>2.6. <a href="#rt">Element <code>rt</code></a></li>
+      <li>2.7. <a href="#rp">Element <code>rp</code></a></li>
+    </ul>
+  </li>
+  <li>3. <a href="#rendering">Rozważania dotyczące renderowania i stosowania stylów</a>
+    <ul>
+      <li>3.1. <a href="#web">Ruby w Sieci wobec tradycyjnego typograficznego zastosowania</a></li>
+      <li>3.2. <a href="#font">Rozmiar czcionki tekstu ruby</a></li>
+      <li>3.3. <a href="#positioning">Pozycjonowanie tekstu ruby</a></li>
+      <li>3.4. <a href="#presentation">Prezentacja oznakowania ruby</a></li>
+      <li>3.5. <a href="#non-visual">Rozważania dotyczące renderowania niewizualnego</a></li>
+      <li>3.6. <a href="#rp-alternatives">Alternatywy dla elementu <code>rp</code></a></li>
+    </ul>
+  </li>
+  <li>4. <a href="#conformance">Kryteria zgodności ze standardem</a></li>
+  <li><a href="#appendix">Dodatki</a>
+    <ul>
+      <li class="normative">A. <a href="#module">Moduł ruby dla <acronym title="Extensible HyperText Markup Language">XHTML</acronym></a></li>
+      <li class="informative">B. <a href="#design">Uwagi dotyczące podjętych decyzji projektowych</a></li>
+      <li class="informative">C. <a href="#compatibility">Uwagi dotyczące wstecznej kompatybilności</a></li>
+      <li class="informative">D. <a href="#glossary">Słowniczek</a></li>
+      <li class="informative">E. <a href="#changes">Zmiany w stosunku do proponowanej rekomendacji</a></li>
+    </ul>
+  </li>
+  <li class="informative"><a href="#ack">Podziękowania</a></li>
+  <li class="informative ref"><a href="#ref">Bibliografia</a></li>
+</ul>
+</div>
+<hr />
+
+<div class="informative">
+<h2><a id="intro" name="intro">1. Wprowadzenie</a></h2>
+
+<p>Ten rozdział ma charakter<em> informacyjny</em>.</p>
+
+<p>Niniejszy dokument prezentuje przegląd notacji ruby i definiuje dla niej oznakowanie. Przytoczono również kilka przykładów. Jednakże dokument ten nie określa żadnych mechanizmów prezentacyjnych czy stylizujących dla notacji ruby; zajmują się tym odpowiednie języki arkuszy stylów.</p>
+
+<p>Dokument ten jest zorganizowany następująco:</p>
+
+<p><a href="#what">Rozdział 1.1</a> stanowi przegląd notacji ruby.</p>
+
+<p><a href="#markup-overview">Rozdział 1.2</a> stanowi przegląd oznakowania dla notacji ruby.</p>
+
+<p><a href="#definition">Rozdział 2</a> zawiera normatywną definicję oznakowania ruby.</p>
+
+<p><a href="#rendering">Rozdział 3</a> omawia typowe sposoby renderowania i stylizowania tekstu ruby.</p>
+
+<p><a href="#conformance">Rozdział 4</a> zawiera kryteria zgodności ze standardem.</p>
+
+<div>
+<h3><a id="what" name="what">1.1. Czym jest ruby?</a></h3>
+
+<p><em>Ruby </em>to termin określający fragment tekstu skojarzony z innym fragmentem tekstu, określanym mianem<em> tekstu bazowego</em>. Tekst ruby jest używany w celu dostarczenia krótkiej adnotacji do skojarzonego tekstu bazowego. Najczęściej określa się w ten sposób<em> czytanie </em>(wskazówki dotyczące wymowy). Notacja ruby jest używana najczęściej w wielu rodzajach publikacji w Japonii, m.in. w książkach i magazynach. Ruby używa się też w Chinach, zwłaszcza w podręcznikach szkolnych.</p>
+
+<p>Tekst ruby jest zazwyczaj prezentowany wzdłuż tekstu bazowego, przy użyciu mniejszej czcionki. Nazwa „ruby” pochodzi od nazwy od nazwy czcionki wielkości 5,5 <abbr title="punkt typograficzny">pt</abbr> używanej w brytyjskim drukarstwie, która jest o około połowę mniejsza od czcionki wielkości 10 <abbr title="punkt typograficzny">pt</abbr> używanej zazwyczaj do normalnego tekstu. <a href="#fig1.1">Rycina 1.1</a> przedstawia przykład z trzema ideogramami (<span xml:lang="ja" lang="ja">kanji</span>) jako tekst bazowy i sześcioma znakami <span xml:lang="ja" lang="ja">hiragana</span> określającymi czytanie (<i xml:lang="ja" lang="ja">shinkansen</i> — japoński szybki pociąg).</p>
+
+<div class="figure">
+<p><a id="fig1.1" name="fig1.1"><img alt="U dołu po lewej trzy japońskie ideogramy od lewej do prawej. Powyżej nich sześć dwukrotnie mniejszych znaków hiragana. Po prawej stronie strzałki i napisy: „tekst bazowy” (u dołu) i „tekst ruby” (u góry)." class="example" src="shinkansen-top.png" /></a></p>
+
+<p><strong>Rycina 1.1</strong>: Tekst ruby określający czytanie każdego znaku z tekstu bazowego.</p>
+</div>
+
+<p>We wschodnioazjatyckiej typografii wykształciło się wiele cech niewystępujących w typografii zachodniej. Wiele z nich można osiągnąć bezpośrednio za pomocą języków arkuszy stylów, takich jak <acronym title="Cascading Style Sheets">CSS</acronym> czy <acronym title="Extensible Style Language">XSL</acronym>. Jednak do zdefiniowania związków pomiędzy tekstem bazowym a tekstem ruby potrzebne jest dodatkowe oznakowanie.</p>
+
+<p>Niniejsza specyfikacja definiuje takie oznakowanie zaprojektowane do używania z XHTML, dzięki czemu tekst ruby jest dostępny w Sieci bez stosowania specjalnych zabiegów czy grafiki. Choć w specyfikacji tej, w celu ułatwienia zrozumienia oznakowania, podane są przykłady rzeczywistego renderowania, wszystkie one mają jedynie charakter informacyjny. Dokument ten nie określa żadnych mechanizmów prezentacji czy stylizowania; jest to pozostawione odpowiednim językom arkuszy stylów.</p>
+
+<p>Bywa, że z tym samym tekstem bazowym jest skojarzony więcej niż jeden tekst ruby. Typowym przykładem jest wskazanie zarówno znaczenia, jak i czytania dla tego samego tekstu bazowego. W takich wypadkach teksty ruby mogą pojawić się po obu stronach tekstu bazowego. Często tekst ruby przed tekstem bazowym wskazuje czytanie, a po tekście bazowym — znaczenie. <a href="#fig1.2">Rycina 1.2</a> przedstawia przykład tekstu bazowego z dwoma tekstami ruby wskazującymi czytanie przy pomocy znaków hiragana i liter alfabetu łacińskiego.</p>
+
+<div class="figure">
+<p><a id="fig1.2" name="fig1.2"><img alt="Po lewej stronie trzy japońskie ideogramy od lewej do prawej. Powyżej nich sześć dwukrotnie mniejszych znaków hiragana. Poniżej ideogramów napis „shinkansen”. Po prawej stronie strzałki i napisy: „tekst bazowy” (pośrodku), „tekst ruby” (u góry) i „tekst ruby 2” (u dołu)." class="example" src="shinkansen-top-bottom.png" /></a></p>
+
+<p><strong>Rycina 1.2</strong>: Dwa teksty ruby zastosowane do tego samego tekstu bazowego.</p>
+</div>
+
+<p>Poza tym każdy z tekstów ruby może być skojarzony z różnymi, lecz zachodzącymi na siebie fragmentami tekstu bazowego, tak jak <a id="fig1.3" name="fig1.3">w następującym przykładzie:</a></p>
+
+<div class="figure">
+
+<table>
+  <tbody>
+    <tr class="rt" style="text-align: center">
+      <td>Dzień</td>
+      <td>Miesiąc</td>
+      <td>Rok</td>
+    </tr>
+    <tr class="rb" style="text-align: center">
+      <td><strong>31</strong></td>
+      <td><strong>10</strong></td>
+      <td><strong>2002</strong></td>
+    </tr>
+    <tr class="rt" style="text-align: center">
+      <td colspan="3">Data upływu ważności</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>Rycina 1.3</strong>: Tekst bazowy z dwoma tekstami ruby używającymi różnych skojarzeń.</p>
+</div>
+
+<p>W tym przykładzie tekst bazowy to data „31 10 2002”. Jeden z tekstów ruby to „Data upływu ważności”. Ten tekst ruby jest skojarzony z całością tekstu bazowego. Drugi tekst ruby składa się z 3 części: „Dzień”, „Miesiąc” i „Rok”. Każda część skojarzona jest z innym fragmentem tekstu bazowego. „Dzień” jest skojarzony z „31”, „Miesiąc” jest skojarzony z „10”, a „Rok” jest skojarzony z „2002”.</p>
+</div>
+
+<div>
+<h3><a id="markup-overview" name="markup-overview">1.2. Przegląd oznakowania ruby</a></h3>
+
+<p>Oznakowanie zdefiniowane w tej specyfikacji zaprojektowano tak, by obejmowało wszystkie powyższe przypadki, to znaczy oznakowanie dla jednego lub dwóch tekstów ruby skojarzonych z tym samym tekstem bazowym oraz oznakowanie służące do skojarzenia fragmentów tekstu (tekstów) ruby z częściami tekstu bazowego.</p>
+
+<p>Są dwa rodzaje oznakowania ruby:<em> proste oznakowanie ruby </em>oraz<em> złożone oznakowanie ruby</em>. Proste oznakowanie ruby dokonuje skojarzenia pojedynczego tekstu ruby z sekwencją tekstu bazowego. W prostym oznakowaniu ruby można też zastosować mechanizm zabezpieczający, który umożliwia wyświetlenie tekstu ruby przez (starsze) przeglądarki nierozpoznające oznakowania ruby. Złożone oznakowanie ruby może skojarzyć dwa teksty ruby z jednym tekstem bazowym, za jego pomocą można też zdefiniować bardziej szczegółowe skojarzenia pomiędzy częściami tekstu ruby i tekstu bazowego. Złożone oznakowanie ruby nie umożliwia jednak zastosowania mechanizmu zabezpieczającego dla przeglądarek nierozpoznających oznakowania ruby.</p>
+
+<p>Ten rozdział zawiera przegląd oznakowania ruby zdefiniowanego w tej specyfikacji. Pełna formalna definicja znajduje się w <a href="#definition">rozdziale 2</a>.</p>
+
+<div>
+<h4><a id="simple-ruby1" name="simple-ruby1">1.2.1. Proste oznakowanie ruby</a></h4>
+
+<p>Dla najprostszego przypadku oznakowanie ruby definiuje element <code>ruby</code> zawierający jeden element <code>rb</code> dla tekstu bazowego i jeden element <code>rt</code> dla tekstu ruby. Zatem element <code>ruby</code> tworzy skojarzenie pomiędzy tekstem bazowym a tekstem ruby — dla większości przypadków jest to wystarczające. <a id="fig1.4" name="fig1.4">Oto przykład prostego oznakowania ruby:</a></p>
+
+<div class="figure">
+<pre class="xml">&lt;ruby&gt;
+  &lt;rb&gt;WWW&lt;/rb&gt;
+  &lt;rt&gt;World Wide Web&lt;/rt&gt;
+&lt;/ruby&gt;</pre>
+
+<p><strong>Rycina 1.4</strong>: Przykład prostego oznakowania ruby.</p>
+</div>
+
+<p><a id="fig1.5" name="fig1.5">Może on być renderowany w następujący sposób:</a></p>
+
+<div class="figure">
+<p><img alt="Po lewej stronie u dołu trzy duże litery: „WWW”. Powyżej nich mniejszymi literami napis „World Wide Web”. Na prawo strzałki i napisy: „tekst bazowy” (u dołu) i „tekst ruby” (u góry)." class="example" src="ruby-en-ex.png" /></p>
+
+<p><strong>Rycina 1.5</strong>: Przykład renderowania prostego oznakowania ruby z <a href="#fig1.4">ryciny 1.4</a>.</p>
+</div>
+
+<p class="note"><strong>Uwaga</strong>: Nazwa elementu otaczającego — „<code>ruby</code>” — powinna być interpretowana jako oznaczająca, że zawierające się w nim elementy<em> kojarzą </em>tekst ruby z tekstem bazowym. Nie można wyciągać z tej nazwy wniosku, że cała zawartość elementu, łącznie z tekstem bazowym, to<em> jest </em>ruby. Nazwę elementu otaczającego wybrano, by w sposób krótki i jasny oznaczyć funkcję całej struktury oznakowania; nazwy innych elementów wybrano, by zachować niewielką całkowitą długość.</p>
+</div>
+
+<div>
+<h4><a id="simple-parenthesis" name="simple-parenthesis">1.2.2. Proste oznakowanie ruby z nawiasami</a></h4>
+
+<p>Niektóre programy użytkownika mogą nie rozpoznawać oznakowania ruby lub nie potrafić renderować tekstu ruby we właściwy sposób. W każdym innym przypadku zasadniczo preferuje się renderowanie tekstu ruby, by nie stracić informacji. Powszechnie akceptowalnym zabezpieczeniem jest umieszczenie tekstu ruby bezpośrednio po tekście bazowym i objęcie tekstu ruby nawiasami. Nawiasy zmniejszają niebezpieczeństwo pomylenia tekstu ruby z innym tekstem. (Należy zaznaczyć, że tekst w nawiasach w japońskiej typografii nigdy nie jest nazywany „ruby”).</p>
+
+<p>W celu zachowania kompatybilności ze starszymi programami użytkownika nierozpoznającymi oznakowania ruby i w zwykły sposób renderującymi zawartość nierozpoznawanych przez siebie elementów, do prostego oznakowania ruby można dodać elementy <code>rp</code>, by odróżnić tekst ruby.</p>
+
+<p>Nazwa elementu <code>rp</code> oznacza „nawiasy ruby” (<i xml:lang="en" lang="en">ruby parenthesis</i>). Elementy <code>rp</code> i nawiasy (lub inne znaki) w nich zawarte służą jedynie za mechanizm zabezpieczający. Programy użytkownika ignorujące nieznane elementy, lecz renderujące ich zawartość, wyświetlą też zawartość każdego z elementów <code>rp</code>. Element <code>rp</code> może być zatem użyty do oznaczenia zarówno początku, jak i końca tekstu ruby.</p>
+
+<p>Programy użytkownika obsługujące oznakowanie ruby rozpoznają element <code>rp</code> i świadomie nie wyświetlą jego zawartości. Zamiast tego będą renderować proste oznakowanie ruby w bardziej stosowny sposób.</p>
+
+<p><a id="fig1.6" name="fig1.6">Następujący przykład demonstruje użycie elementu <code>rp</code>:</a></p>
+
+<div class="figure">
+<pre class="xml">&lt;ruby&gt;
+  &lt;rb&gt;WWW&lt;/rb&gt;
+  &lt;rp&gt;(&lt;/rp&gt;&lt;rt&gt;World Wide Web&lt;/rt&gt;&lt;rp&gt;)&lt;/rp&gt;
+&lt;/ruby&gt;</pre>
+
+<p><strong>Rycina 1.6</strong>: Przykład użycia prostego oznakowania ruby z elementami <code>rp</code> dla zabezpieczenia.</p>
+</div>
+
+<p>Programy użytkownika, które:</p>
+<ul>
+  <li>nie rozpoznają oznakowania ruby, lecz renderują zawartość nieznanych elementów, albo</li>
+  <li>nie potrafią renderować tekstu ruby wzdłuż tekstu bazowego,</li>
+</ul>
+
+<p><a id="fig1.7" name="fig1.7">będą renderować powyższe oznakowanie jako:</a></p>
+
+<div class="figure">
+<p><strong>WWW (World Wide Web)</strong></p>
+
+<p><strong>Rycina 1.7</strong>: Renderowanie prostego oznakowania ruby przy użyciu zabezpieczających nawiasów.</p>
+</div>
+
+<p>Programy użytkownika, które rozpoznają oznakowanie ruby i oferują bardziej złożone style prezentacji tekstu ruby, nie będą jednocześnie renderować nawiasów. Na przykład oznakowanie z <a href="#fig1.6">ryciny 1.6</a> może być renderowane w sposób pokazany na następnej rycinie.</p>
+
+<div class="figure">
+<p><a id="fig1.8" name="fig1.8"><img alt="U dołu po lewej trzy duże litery tworzące skrót „WWW”. Powyżej nich mniejszymi literami tekst „World Wide Web”. Na prawo strzałki i napisy „tekst bazowy” (u dołu) i „tekst ruby” (u góry)." class="example" src="ruby-en-ex.png" /></a></p>
+
+<p><strong>Rycina 1.8</strong>: element <code>rp</code> ignorowany na korzyść bardziej złożonego renderowania.</p>
+</div>
+</div>
+
+<div>
+<h4><a id="complex" name="complex">1.2.3. Złożone oznakowanie ruby</a></h4>
+
+<p>Złożone oznakowanie ruby używane jest do kojarzenia więcej niż jednego tekstu ruby z tekstem bazowym lub do kojarzenia części tekstu ruby z częściami tekstu bazowego.</p>
+
+<p>Złożone oznakowanie ruby obejmuje wielokrotne elementy <code>rb</code> i <code>rt</code>. Ta specyfikacja definiuje elementy-pojemniki zapewniające przejrzystość skojarzeń pomiędzy poszczególnymi elementami. Element-pojemnik dla tekstu bazowego dla ruby, <code>rbc</code>, obejmuje elementy <code>rb</code>. Może istnieć jeden lub dwa elementy-pojemniki dla tekstu ruby, <code>rtc</code>, obejmujące elementy <code>rt</code>. Pozwala to na skojarzenie dwu pojemników tekstu ruby z tym samym tekstem bazowym. Przy pomocy złożonego oznakowania ruby można również skojarzyć części tekstu bazowego z częściami tekstu ruby używając pewnej liczby elementów <code>rb</code> i odpowiadającej im liczby elementów <code>rt</code>. Dodatkowo elementowi <code>rt</code> może zostać przydany atrybut <code>rbspan</code> wskazujący, że pojedynczy element <code>rt</code> rozciąga się na wiele elementów <code>rb</code> (tzn. jest z nimi skojarzony). Przypomina to atrybut <a href="http://www.w3.org/TR/html4/struct/tables.html#adef-colspan"><code>colspan</code></a> dla elementów <code>th</code> i <code>td</code> w tabelach ([<a href="#html4">HTML4</a>], rozdział 11.2.6).</p>
+
+<p>Miejsce i sposób renderowania każdej z części złożonego oznakowania ruby jest definiowane przez odpowiednie języki arkuszy stylów. Więcej informacji na ten temat w rozdziale 3.</p>
+
+<p><a id="fig1.9" name="fig1.9">Poniższy przykład ukazuje wszystkie te cechy.</a></p>
+
+<div class="figure">
+<pre class="xml">&lt;ruby&gt;
+  &lt;rbc&gt;
+    &lt;rb&gt;31&lt;/rb&gt;
+    &lt;rb&gt;10&lt;/rb&gt;
+    &lt;rb&gt;2002&lt;/rb&gt;
+  &lt;/rbc&gt;
+  &lt;rtc&gt;
+    &lt;rt&gt;Dzień&lt;/rt&gt;
+    &lt;rt&gt;Miesiąc&lt;/rt&gt;
+    &lt;rt&gt;Rok&lt;/rt&gt;
+  &lt;/rtc&gt;
+  &lt;rtc&gt;
+    &lt;rt rbspan="3"&gt;Data upływu ważności&lt;/rt&gt;
+  &lt;/rtc&gt;
+&lt;/ruby&gt;</pre>
+
+<p><strong>Rycina 1.9</strong>: Złożone oznakowanie ruby kojarzące dwa teksty ruby z różnymi częściami tego samego tekstu bazowego.</p>
+</div>
+
+<p>W tym przykładzie pierwszy pojemnik dla tekstu ruby obejmuje 3 składniki („Dzień”, „Miesiąc”, „Rok”). Każdy z tych składników skojarzony jest z odpowiednim składnikiem w tekście bazowym („31”, „10”, „2002”). Drugi z pojemników dla tekstu ruby („Data upływu ważności”) składa się z pojedynczego tekstu ruby i jest skojarzony z całością tekstu bazowego („31 10 2002”). <a id="fig1.10" name="fig1.10">Może być to renderowane w sposób pokazany na rycinie 1.10.</a></p>
+
+<div class="figure">
+
+<table>
+  <tbody>
+    <tr class="rt" style="text-align: center">
+      <td>Dzień</td>
+      <td>Miesiąc</td>
+      <td>Rok</td>
+    </tr>
+    <tr class="rb" style="text-align: center">
+      <td><strong>31</strong></td>
+      <td><strong>10</strong></td>
+      <td><strong>2002</strong></td>
+    </tr>
+    <tr class="rt" style="text-align: center">
+      <td colspan="3">Data upływu ważności</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>Rycina 1.10</strong>: Renderowanie złożonego oznakowania ruby z <a href="#fig1.9">ryciny 1.9</a>.</p>
+</div>
+
+<p>Przykład ten pokazuje, że w zależności od potrzeby można skojarzyć ze sobą mniejsze lub większe części tekstu ruby i tekstu bazowego. Na przykład tekst ruby może być skojarzony z całym tekstem bazowym, gdy:</p>
+<ul>
+  <li>bardziej szczegółowe zależności są nieznane, lub</li>
+  <li>gdy czytanie lub adnotacja odnoszą się tylko do całego tekstu bazowego i nie mogą być rozłożone na części.</li>
+</ul>
+
+<p>Gdy znane są odpowiednie powiązania, można utworzyć bardziej szczegółowe skojarzenia. W tych przypadkach można też ulepszyć sposób renderowania. Na przykład zamiast traktować imię i nazwisko osoby jako całość, można utworzyć osobny tekst ruby dla imienia i osobny dla nazwiska; Złożone <span xml:lang="ja" lang="ja">kanji</span> lub cały zwrot mogą być rozłożone na części znaczeniowe lub pojedyncze znaki. W zależności od stopnia szczegółowości skojarzeń, zasięg tekstu ruby można dobrać odpowiednio do odstępów występujących w tekście bazowym, co pozwoli osiągnąć lepszą czytelność i bardziej zrównoważony układ wizualny.</p>
+
+<p>W przypadku złożonego oznakowania ruby element <code>rp</code> jest niedostępny. Jest tak z dwóch powodów. Po pierwsze, element <code>rp</code> służy jedynie za mechanizm zabezpieczający; uważa się, że jest on dużo bardziej istotny dla częstszego przypadku oznakowania prostego. Po drugie, dla bardziej złożonych przypadków trudno wymyślić jakiś sensowny sposób wyświetlania elementów zabezpieczających, a stworzenie oznakowania dla takich przypadków byłoby jeszcze trudniejsze, jeśli nie niemożliwe.</p>
+</div>
+
+<div>
+<h4><a id="summary" name="summary">1.2.4. Podsumowanie</a></h4>
+
+<p>Podsumowując, element <code>ruby</code> może zawierać jedną z następujących kombinacji:</p>
+<ul>
+  <li>elementy <code>rb</code>, <code>rt</code> i być może także <code>rp</code> (<strong>proste oznakowanie ruby</strong>), w celu:
+    <ul>
+      <li>skojarzenia pojedynczego tekstu ruby z pojedynczym tekstem bazowym</li>
+      <li>zabezpieczenia na wypadek braku obsługi oznakowania ruby.</li>
+    </ul>
+  </li>
+  <li>elementy-pojemniki: jeden <code>rbc</code> i jeden lub dwa <code>rtc</code> (<strong>złożone oznakowanie ruby</strong>), w celu:
+    <ul>
+      <li>skojarzenia dwóch tekstów ruby z tym samym tekstem bazowym</li>
+      <li>zdefiniowania bardziej szczegółowych skojarzeń pomiędzy częściami tekstu ruby i częściami tekstu bazowego.</li>
+    </ul>
+  </li>
+</ul>
+</div>
+</div>
+</div>
+
+<div class="normative">
+<h2><a id="definition" name="definition">2. Formalna definicja oznakowania ruby</a></h2>
+
+<p>Ten rozdział ma charakter<em> normatywny</em>.</p>
+
+<p>Ten rozdział zawiera formalną definicję składni i specyfikację funkcjonalności oznakowania ruby. Założono pewną znajomość ogólnych zasad modularyzacji XHTML, zwłaszcza specyfikacji <cite>Modularyzacja XHTML</cite> [<a href="#xhtmlmod">XHTMLMOD</a>].</p>
+
+<div>
+<h3><a id="abstract-def" name="abstract-def">2.1. Abstrakcyjna definicja oznakowania ruby</a></h3>
+
+<p>Poniżej przedstawiono abstrakcyjną definicję elementów oznakowania ruby, która jest zgodna z ogólnymi zasadami modularyzacji XHTML [<a href="#xhtmlmod">XHTMLMOD</a>]. Dalsze definicje modułów abstrakcyjnych XHTML można znaleźć w [<a href="#xhtmlmod">XHTMLMOD</a>].</p>
+
+<table border="1" summary="Elementy i atrybuty w module Ruby">
+  <thead>
+    <tr>
+      <th scope="col">Elementy</th>
+      <th scope="col">Atrybuty</th>
+      <th scope="col">Minimalny model zawartości</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td abbr="element"><a id="ruby-abstract" name="ruby-abstract"
+        href="#ruby">ruby</a></td>
+      <td abbr="attribute">Common</td>
+      <td abbr="content" class="content">(rb, (rt | (rp, rt, rp)))</td>
+    </tr>
+    <tr>
+      <td abbr="element"><a id="rbc-abstract" name="rbc-abstract"
+        href="#rbc">rbc</a></td>
+      <td abbr="attribute">Common</td>
+      <td abbr="content" class="content">rb+</td>
+    </tr>
+    <tr>
+      <td abbr="element"><a id="rtc-abstract" name="rtc-abstract"
+        href="#rtc">rtc</a></td>
+      <td abbr="attribute">Common</td>
+      <td abbr="content" class="content">rt+</td>
+    </tr>
+    <tr>
+      <td abbr="element"><a id="rb-abstract" name="rb-abstract"
+        href="#rb">rb</a></td>
+      <td abbr="attribute">Common</td>
+      <td abbr="content" class="content">(PCDATA | Inline - ruby)*</td>
+    </tr>
+    <tr>
+      <td abbr="element"><a id="rt-abstract" name="rt-abstract"
+        href="#rt">rt</a></td>
+      <td abbr="attribute">Common, rbspan (CDATA)</td>
+      <td abbr="content" class="content">(PCDATA | Inline - ruby)*</td>
+    </tr>
+    <tr>
+      <td abbr="element"><a id="rp-abstract" name="rp-abstract"
+        href="#rp">rp</a></td>
+      <td abbr="attribute">Common</td>
+      <td abbr="content" class="content">PCDATA*</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Maksymalny model zawartości dla elementu <code>ruby</code> jest następujący:</p>
+<pre class="content">((rb, (rt | (rp, rt, rp))) | (rbc, rtc, rtc?))</pre>
+
+<p>Minimalny model zawartości dla elementu <code>ruby</code> jest identyczny z prostym oznakowaniem ruby. Alternatywa <code>(rbc, rtc, rtc?)</code> w maksymalnym modelu zawartości elementu <code>ruby</code> jest identyczna ze złożonym oznakowaniem ruby.</p>
+
+<p>Implementacja tej abstrakcyjnej definicji jako moduł <acronym title="Document Type Definition">DTD</acronym> XHTML znajduje się w <a href="#module">dodatku A</a>. Trwają prace nad implementacją w <abbr title="Extensible Markup Language">XML</abbr> Schema [<a href="#xmlschema">XMLSchema</a>] (zobacz: [<a href="#ModSchema">ModSchema</a>]).</p>
+</div>
+
+<div>
+<h3><a id="ruby" name="ruby">2.2. Element <code>ruby</code></a></h3>
+
+<p>Element <code>ruby</code> jest elementem wewnątrzwierszowym (czyli umieszczanym na poziomie tekstu), służącym za ogólny pojemnik. Zawiera albo elementy <a href="#rb"><code>rb</code></a>, <a href="#rt"><code>rt</code></a> i opcjonalnie <a href="#rp"><code>rp</code></a> (proste oznakowanie ruby), albo elementy <a href="#rbc"><code>rbc</code></a> i <a href="#rtc"><code>rtc</code></a> (złożone oznakowanie ruby).</p>
+
+<p>W przypadku prostego oznakowania ruby, element <code>ruby</code> zawiera albo element <a href="#rb"><code>rb</code></a> i następujący po nim element <a href="#rt"><code>rt</code></a>, albo sekwencję: element <a href="#rb"><code>rb</code></a>, element <a href="#rp"><code>rp</code></a>, element <a href="#rt"><code>rt</code></a> i drugi element <a href="#rp"><code>rp</code></a>. Zawartość elementu <a href="#rt"><code>rt</code></a> jest interpretowana jako tekst ruby i kojarzona z zawartością elementu <code><a href="#rb"><code>rb</code></a></code> jako tekstem bazowym. Zawartość elementów <a href="#rp"><code>rp</code></a>, jeśli istnieje, jest ignorowana.</p>
+
+<p>W przypadku złożonego oznakowania ruby, element <code>ruby</code> zawiera element <a href="#rbc"><code>rbc</code></a> i, następujące po nim, jeden lub dwa elementy <a href="#rtc"><code>rtc</code></a>. Zawartość podelementów każdego z elementów <a href="#rtc"><code>rtc</code></a> jest interpretowana jako tekst ruby i kojarzona z zawartością podelementów elementu <a href="#rbc"><code>rbc</code></a> jako tekstu bazowego.</p>
+
+<p>Element <code>ruby</code> posiada tylko atrybuty wspólne. Przykłady atrybutów wspólnych to: <code>id</code>, <code>class</code> i <code>xml:lang</code>. Atrybuty wspólne zależą od języka znaczników z którym używane jest oznakowanie ruby. W przypadku [<a href="#xhtml11">XHTML 1.1</a>], są one zdefiniowane w specyfikacji <a href="http://www.w3.org/TR/xhtml-modularization/abstract_modules.html#s_commonatts">Modularyzacja XHTML, rozdział 5.1</a> [<a href="#xhtmlmod">XHTMLMOD</a>].</p>
+</div>
+
+<div>
+<h3><a id="rbc" name="rbc">2.3. Element <code>rbc</code></a></h3>
+
+<p>Element <code>rbc</code> (<i xml:lang="en" lang="en">ruby base container</i>) służy za pojemnik na elementy <a href="#rb"><code>rb</code></a> w przypadku złożonego oznakowania ruby. Wewnątrz elementu <a href="#ruby"><code>ruby</code></a> może się pojawić tylko jeden element <code>rbc</code>.</p>
+
+<p>Element <code>rbc</code> posiada tylko atrybuty wspólne.</p>
+</div>
+
+<div>
+<h3><a id="rtc" name="rtc">2.4. Element <code>rtc</code></a></h3>
+
+<p>Element <code>rtc</code> (<i xml:lang="en" lang="en">ruby text container</i>) służy za pojemnik na elementy <a href="#rt"><code>rt</code></a> w przypadku złożonego oznakowania ruby. W celu skojarzenia tekstów ruby z pojedynczym tekstem bazowym (reprezentowanym przez element <a href="#rbc"><code>rbc</code></a>), wewnątrz elementu <a href="#ruby"><code>ruby</code></a> może się pojawić jeden lub dwa elementy <code>rtc</code>. Wewnątrz elementu <a href="#ruby"><code>ruby</code></a> NIE MOGĄ się pojawić więcej niż dwa elementy <code>rtc</code>.</p>
+
+<p>Element <code>rtc</code> posiada tylko atrybuty wspólne.</p>
+</div>
+
+<div>
+<h3><a id="rb" name="rb">2.5. Element <code>rb</code></a></h3>
+
+<p>Element <code>rb</code> (<i xml:lang="en" lang="en">ruby base</i>) służy za oznakowanie dla tekstu bazowego. W prostym oznakowaniu ruby może się pojawić tylko jeden element <code>rb</code>. W złożonym oznakowaniu ruby wewnątrz elementu <a href="#rbc"><code>rbc</code></a> może pojawić się wiele elementów <code>rb</code>. Każdy element <code>rb</code> jest skojarzony z odpowiednim elementem <a href="#rt"><code>rt</code></a>, dla zapewnienia szczegółowej kontroli prezentacji ruby.</p>
+
+<p>Element <code>rb</code> może zawierać elementy wewnątrzwierszowe lub dane znakowe, ale jego elementem potomnym nie może być element <a href="#ruby"><code>ruby</code></a>.</p>
+
+<p>Element <code>rb</code> posiada tylko atrybuty wspólne.</p>
+
+</div>
+
+<div>
+<h3><a id="rt" name="rt">2.6. Element <code>rt</code></a></h3>
+
+<p>Element <code>rt</code> (<i xml:lang="en" lang="en">ruby text</i>) służy za oznakowanie dla tekstu ruby. W prostym oznakowaniu ruby może się pojawić tylko jeden element <code>rt</code>. W złożonym oznakowaniu ruby wewnątrz elementu <a href="#rbc"><code>rtc</code></a> może pojawić się wiele elementów <code>rt</code>, przy czym każdy z elementów <code>rt</code> zawiera tekst ruby dla powiązanego z nim tekstu bazowego reprezentowanego przez odpowiedni element <a href="#rb"><code>rb</code></a>.</p>
+
+<p>Element <code>rt</code> może zawierać elementy wewnątrzwierszowe lub dane znakowe, ale jego elementem potomnym nie może być element <a href="#ruby"><code>ruby</code></a>.</p>
+
+<p>Element <code>rt</code> posiada atrybuty wspólne oraz atrybut <code>rbspan</code>. W złożonym oznakowaniu ruby atrybut <code>rbspan</code> zezwala elementowi <code>rt</code> rozciągać się na wiele elementów <a href="#rb"><code>rb</code></a>. Wartością atrybutu jest liczba całkowita większa od zera („0”). Wartością domyślną jest jeden („1”). Atrybut <code>rbspan</code>  nie powinien być używany w prostym oznakowaniu ruby — jeśli się pojawia w takim oznakowaniu, programy użytkownika powinny go ignorować.</p>
+</div>
+
+<div>
+<h3><a id="rp" name="rp">2.7. Element <code>rp</code></a></h3>
+
+<p>Element <code>rp</code> może być używany w przypadku prostego oznakowania ruby do ustalenia znaków określających początek i koniec tekstu ruby, gdy programy użytkownika nie posiadają innej możliwości przedstawienia tekstu ruby w sposób odróżniający go od tekstu bazowego. Nawiasy (lub podobne znaki) mogą służyć za akceptowalny środek zabezpieczający. W takiej sytuacji tekst ruby zostanie przeniesiony w dół i będzie renderowany wewnątrz linii, otoczony nawiasami zabezpieczającymi. Jest to najmniej niewłaściwe renderowanie w przypadku, gdy dostępne jest tylko renderowanie wewnątrzwierszowe. Element <code>rp</code> nie może być używany ze złożonym oznakowaniem ruby.</p>
+
+<p>Element <code>rp</code> posiada tylko atrybuty wspólne.</p>
+
+<p>Używanie nawiasów jako zabezpieczenia może prowadzić do trudności w odróżnieniu fragmentów tekstu mających być w zamierzeniu tekstem ruby, a innymi fragmentami tekstu zawartymi w nawiasach. Autor dokumentu lub arkuszu stylów powinien być świadomy możliwości wystąpienia takich trudności; zaleca się, by wybrał niewprowadzające dwuznaczności znaki zabezpieczające.</p>
+</div>
+</div>
+
+<div class="informative">
+<h2><a id="rendering" name="rendering">3. Rozważania dotyczące renderowania i stosowania stylów</a></h2>
+
+<p>Ten rozdział ma charakter<em> informacyjny</em>.</p>
+
+<p>W tym rozdziale omówione będą różne aspekty renderowania i stosowania stylów w kontekście oznakowania ruby zdefiniowanego w tym dokumencie. Dokument ten jednak nie określa żadnych mechanizmów prezentacji czy stylizowania; pozostawiono to odpowiednim językom arkuszy stylów. Właściwości formatujące dla stylizowania ruby są rozwijane w ramach CSS i XSL. Więcej szczegółów można znaleźć np. w specyfikacji „Moduł CSS3: Ruby” [<a href="#css3-ruby">CSS3-RUBY</a>] (<em>praca w toku</em>).</p>
+
+<p>Szczegóły formatowania ruby w kontekście japońskiego druku można znaleźć w JIS-X-4051 [<a href="#jis">JIS4051</a>].</p>
+
+<div>
+<h3><a id="web" name="web">3.1. Ruby w Sieci wobec tradycyjnego typograficznego zastosowania</a></h3>
+
+<p>Termin „ruby” w języku japońskim używany jest tylko w odniesieniu do tekstu renderowanego wizualnie wzdłuż tekstu bazowego. Przypadki takie rozważane są w <a href="#font">rozdziale 3.2</a> (rozmiar czcionki), <a href="#positioning">rozdziale 3.3</a> (pozycjonowanie) i <a href="#presentation">rozdziale 3.4</a> (prezentacja oznakowania ruby). Ten rodzaj prezentacji powinien być stosowany, gdzie to tylko możliwe. Wraz z wprowadzeniem ruby do WWW mogą się jednak pojawić pewne zjawiska i problemy niewystępujące w tradycyjnej typografii. Zdefiniowane w tej specyfikacji strukturalne oznakowanie dla ruby nie daje gwarancji, że tekst ruby będzie zawsze renderowany wzdłuż tekstu bazowego. Istniejące obecnie i mogące się pojawić w przyszłości urządzenia do renderowania dokumentów z oznakowaniem XHTML charakteryzują się dużą różnorodnością. Oto możliwe sytuacje, w których uzasadnione jest odmienne renderowanie:</p>
+<ul>
+  <li>W niewizualnych programach użytkownika, takich jak przeglądarki głosowe i programy brajlowskie, możliwe jest tylko renderowanie sekwencyjne. Więcej na temat renderowania niewizualnego w <a href="#non-visual">rozdziale 3.5</a>.</li>
+  <li>Wyświetlanie tekstu ruby o takiej jak zwykle wielkości na ekranach o niskiej rozdzielczości może być niewykonalne. Można wtedy użyć zabezpieczeń. Więcej informacji w <a href="#rp-alternatives">rozdziale 3.6</a>.</li>
+  <li>W niektórych wypadkach dla celów edukacyjnych może być interesujące ukrycie tekstu ruby z jednoczesnym udostępnieniem go jako pop-up. Jest to niemożliwe na papierze, lecz łatwo wykonalne na urządzeniu z wyświetlaniem dynamicznym.</li>
+</ul>
+</div>
+
+<div>
+<h3><a id="font" name="font">3.2. Rozmiar czcionki tekstu ruby</a></h3>
+
+<p>W typowym zastosowaniu rozmiar czcionki tekstu ruby jest równy mniej więcej połowie tekstu bazowego. W istocie nazwa „ruby” pochodzi od nazwy czcionki wielkości 5,5 <abbr title="punkt typograficzny">pt</abbr> używanej w brytyjskim drukarstwie; jest ona około połowę mniejsza od 10-punktowej czcionki zazwyczaj używanej do normalnego tekstu.</p>
+</div>
+
+<div>
+<h3><a id="positioning" name="positioning">3.3. Pozycjonowanie tekstu ruby</a></h3>
+
+<p>Tekst ruby może być usytuowany względem tekstu bazowego na kilka sposobów. Ponieważ teksty wschodnioazjatyckie mogą być renderowane zarówno pionowo, jak i poziomo, używane są tutaj terminy „przed” i „po” zamiast „powyżej” i „poniżej”, czy „na prawo” i „na lewo”. Wyrazy „przed” i „po” powinny być rozumiane jako „przed”/„po” linii zawierającej tekst bazowy. Odpowiedniość między tymi terminami jest ukazana w poniższej tabeli:</p>
+
+<table border="1" cellpadding="8" class="rendering">
+  <tbody>
+    <tr>
+      <th>Terminologia</th>
+      <td><strong>Układ poziomy</strong><br />
+        (od lewej do prawej, z góry na dół)</td>
+      <td><strong>Układ pionowy</strong><br />
+        (z góry na dół, od prawej do lewej)</td>
+    </tr>
+    <tr>
+      <th abbr='position'>przed</th>
+      <td abbr='horizontal'>powyżej</td>
+      <td abbr='vertical'>na prawo</td>
+    </tr>
+    <tr>
+      <th abbr='position'>po</th>
+      <td abbr='horizontal'>poniżej</td>
+      <td abbr='vertical'>na lewo</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Teksty ruby najczęściej umieszczane są przed tekstem bazowym (zobacz: <a href="#fig1.1">rycina 1.1</a> i <a href="#fig3.2">rycina 3.2</a>).
+Czasami, zwłaszcza w dokumentach edukacyjnych o układzie poziomym, tekst może się pojawiać po tekście bazowym, tj. poniżej (zobacz: <a href="#fig3.1">rycina 3.1</a>). W języku chińskim tekst ruby z transkrypcją  <span xml:lang="zh" lang="zh">pinyin</span> zazwyczaj umieszczany jest po tekście bazowym. Tekst ruby może pojawiać się po tekście bazowym także w układzie pionowym (zobacz: <a href="#fig3.3">rycina 3.3</a>). We wszystkich tych przypadkach kierunek pisania tekstu ruby jest taki sam, jak tekstu bazowego — pionowy, jeśli tekst bazowy jest pionowy, poziomy, jeśli tekst bazowy jest poziomy.</p>
+
+<div class="figure">
+<p><a id="fig3.1" name="fig3.1"><img alt="U góry po lewej trzy japońskie ideogramy od lewej do prawej. Poniżej nich tekst „shinkansen”. Na prawo strzałki i teksty: „tekst bazowy” (u góry) i „tekst ruby” (u dołu)." class="example" src="shinkansen-bottom.png" /></a></p>
+
+<p><strong>Rycina 3.1</strong>: Tekst ruby (litery łacińskie) po/poniżej tekstu bazowego (japońskie ideogramy).</p>
+</div>
+
+<div class="figure">
+<p><a id="fig3.2" name="fig3.2"><img alt="U góry po lewej trzy japońskie ideogramy z góry na dół. Na prawo od nich sześć dwa razy mniejszych znaków hiragana. U dołu strzałki i teksty: „tekst bazowy” (po lewej) i „tekst ruby” (po prawej)." class="example" src="shinkansen-right.png" /></a></p>
+
+<p><strong>Rycina 3.2</strong>: Tekst ruby pisany pionowo (przed / na prawo)</p>
+</div>
+
+<div class="figure">
+<p><a id="fig3.3" name="fig3.3"><img alt="Przykład z ruby po lewej stronie od pionowego japońskiego tekstu" class="example" src="shinkansen-left.png" /></a></p>
+
+<p><strong>Rycina 3.3</strong>: Tekst ruby pisany pionowo (po / na lewo).</p>
+</div>
+
+<p>W tradycyjnych chińskich tekstach tekst ruby w alfabecie <span xml:lang="zh" lang="zh">bopomofo</span> może pojawiać się wzdłuż prawej krawędzi tekstu bazowego nawet w układzie poziomym.</p>
+
+<div class="figure">
+<p><a id="fig3.4" name="fig3.4"><img alt="Od prawej: duży chiński ideogram, trzy mniejsze litery bopomofo z góry na dół (na niebiesko), oznaczenie akcentu bopomofo (na czerwono), kolejny duży chiński ideogram, dwie mniejsze litery bopomofo z góry na dół (na niebiesko) i kolejne oznaczenie akcentu bopomofo (na czerwono)." class="example" src="bopomofo.png" /></a></p>
+
+<p><strong>Rycina 3.4</strong>: Tekst ruby w alfabecie <span xml:lang="zh" lang="zh">bopomofo</span> z chińskim tradycyjnym tekstem (tekst ruby dla przejrzystości zaznaczony na niebiesko i czerwono) w układzie poziomym.</p>
+</div>
+
+<p>Zauważ, że oznaczenia tonów <span xml:lang="zh" lang="zh">bopomofo</span> (w powyższym przykładzie w kolorze czerwonym) zdają się znajdować w osobnej kolumnie (wzdłuż prawej krawędzi tekstu ruby w <span xml:lang="zh" lang="zh">bopomofo</span>), mogą być zatem postrzegane jako „ruby na ruby”. Są one jednak zakodowane jako część tekstu ruby. Szczegóły tego kodowania wykraczają poza zakres niniejszego dokumentu.</p>
+</div>
+
+<div>
+<h3><a id="presentation" name="presentation">3.4. Prezentacja oznakowania ruby</a></h3>
+
+<p>Ta specyfikacja nie przesądza o sposobie wyświetlania oznakowania ruby. Do określenia dokładnego zachowania oznakowania ruby na ogół będą używane arkusze stylów.</p>
+
+<div class="note">
+<p><strong>Uwaga.</strong> Chociaż renderowanie tekstów ruby powinno być kontrolowane przez arkusze stylów, w wypadku niedostarczenia informacji o stylach przez autora i użytkownika zalecane jest, by wizualne programy użytkownika umieszczały tekst ruby przed tekstem bazowym, gdy jest tylko jeden tekst ruby. Dotyczy to też prostego oznakowania ruby. Gdy są dwa teksty ruby, pierwszy z nich powinien być umieszczony przed tekstem bazowym, a drugi — po tekście bazowym. Przykładowy domyślny arkusz stylów dla programów użytkownika opisujący to formatowanie będzie zawarty w [<a href="#css3-ruby">CSS3-RUBY</a>] i dokumentach go zastępujących.</p>
+
+<p>W przypadku renderowania niewizualnego pod nieobecność informacji o stylach, zalecane jest renderowanie zarówno tekstu bazowego, jak i tekstu/tekstów ruby, z zaznaczeniem (np. różna barwa czy wysokość głosu) statusu każdego z nich.</p>
+</div>
+
+<p><a id="fig3.5" name="fig3.5">By umożliwić arkuszom zastosowanie stylów, a innym mechanizmom właściwe renderowanie tekstu ruby, ważne jest udostępnienie odpowiedniej ilości informacji o funkcji każdego ze składników. Następujący przykład ilustruje użycie atrybutu <code>class</code> w celu umożliwienia zdefiniowania przez arkusze stylów dokładnego sposobu prezentacji tekstu ruby. Klasa „<samp>czytanie</samp>” jest użyta dla tekstu ruby wskazującego czytanie. Klasa „<samp>adnotacja</samp>” jest użyta do wskazania tekstu ruby używanego do adnotacji. Atrybut <code>xml:lang</code> wskazuje na język tekstu.</a></p>
+
+<div class="figure">
+<pre class="xml">&lt;ruby xml:lang="ja"&gt;
+  &lt;rbc&gt;
+    &lt;rb&gt;斎&lt;/rb&gt;
+    &lt;rb&gt;藤&lt;/rb&gt;
+    &lt;rb&gt;信&lt;/rb&gt;
+    &lt;rb&gt;男&lt;/rb&gt;
+  &lt;/rbc&gt;
+  &lt;rtc class="czytanie"&gt;
+    &lt;rt&gt;さい&lt;/rt&gt;
+    &lt;rt&gt;とう&lt;/rt&gt;
+    &lt;rt&gt;のぶ&lt;/rt&gt;
+    &lt;rt&gt;お&lt;/rt&gt;
+  &lt;/rtc&gt;
+  &lt;rtc class="adnotacja"&gt;
+    &lt;rt rbspan="4" xml:lang="pl"&gt;Wiceprzewodniczący W3C&lt;/rt&gt;
+  &lt;/rtc&gt;
+&lt;/ruby&gt;</pre>
+
+<p><strong>Rycina 3.5</strong>: Oznakowanie ruby z atrybutami <code>class</code> i <code>xml:lang</code>.</p>
+</div>
+
+<p>Przy użyciu arkusza stylów, który określałby pionowy tekst, renderowanie czytania przed tekstem bazowym i renderowanie adnotacji za tekstem bazowym, powyższe oznakowanie mogłoby być renderowane w ten sposób:</p>
+
+<div class="figure">
+<p><a id="fig3.6" name="fig3.6"><img src="chairman.png" alt="Pośrodku cztery japońskie ideogramy od lewej do prawej. Powyżej nich mniejsze litery hiragana (dwie litery na każdy z trzech pierwszych ideogramów, jedna litera na ostatni ideogram). U dołu tekst „Wiceprzewodniczący W3C”." /></a></p>
+
+<p><strong>Rycina 3.6</strong>: Pionowe renderowanie dwóch tekstów ruby skojarzonych z pojedynczym tekstem bazowym.</p>
+</div>
+</div>
+
+<div>
+<h3><a id="non-visual" name="non-visual">3.5. Rozważania dotyczące renderowania niewizualnego</a></h3>
+
+<p>Dokumenty zawierające oznakowanie ruby będą musiały w niektórych przypadkach być renderowane przez niewizualne programy użytkownika, takie, jak przeglądarki głosowe i brajlowskie programy użytkownika. Dla takich scenariuszy renderowania ważne jest zrozumienie, że:</p>
+<ul>
+<li>Właściwe mogą być różne sposoby renderowania, w zależności od użytkownika i od sytuacji.</li>
+<li>Tekst ruby oznaczający czytanie czasem będzie musiał być traktowany inaczej, niż tekst ruby zawierający inne informacje.</li>
+<li>Ważne dla właściwego renderowania niewizualnego jest wskazanie funkcji, jaką pełni każdy z tekstów ruby.</li>
+<li>Czasem występują różnice pomiędzy czytaniem wskazywanym przez tekst ruby a faktyczną wymową.</li>
+<li>Czytelnik może być zainteresowany zasięgnięciem informacji o (ideograficznym) tekście bazowym.</li>
+</ul>
+
+<p>W zależności od potrzeb użytkownika, sposób czytania tekstu może być zróżnicowany: od bardzo szybkiego i pobieżnego do bardzo starannego i szczegółowego. Może to prowadzić różnego traktowania tekstu ruby w renderowaniu niewizualnym, od pomijania tekstu ruby w szybkim czytaniu do szczegółowej analizy struktury ruby i faktycznie użytych znaków w czytaniu starannym.</p>
+
+<p>Gdy, jak się często zdarza, tekst ruby reprezentuje czytanie, renderowanie zarówno tekstu bazowego, jak i tekstu ruby może prowadzić do irytujących powtórzeń. Syntezator mowy może potrafić poprawnie wymawiać tekst bazowy na podstawie rozległego słownika, w innych przypadkach może potrafić wybrać prawidłową wymowę na podstawie czytania określonego przez tekst ruby.</p>
+
+<p>Nie każdy tekst ruby przedstawia wymowę. Autorzy powinni rozróżniać teksty ruby używane do różnych celów przy pomocy atrybutu <code>class</code>. Zademonstrowano to powyżej, używając <samp>class="czytanie"</samp> dla tekstu ruby wskazującego czytanie.</p>
+
+<p>Tekst ruby wskazujący czytanie może nie prowadzić do prawidłowej wymowy nawet wtedy, gdy użyte pismo na pierwszy rzut oka wygląda na idealnie fonetyczne. Na przykład <span xml:lang="zh" lang="zh">bopomofo</span> jest kojarzone niezależnie dla każdego znaku tekstu bazowego; nie są przy tym oddawane dźwięki zależne od kontekstu, czy zmiany tonu. Podobnie, w języku japońskim mogą wystąpić nieregularności ortograficzne, takie jak używanie „<span xml:lang="ja" lang="ja">は</span>” (ha w hiragana) jako przedrostka tematu wymawianego „<span xml:lang="ja" lang="ja">わ</span>” (wa), bądź używanie samogłosek do wskazywania przedłużenia. W takich przypadkach autorzy mogą chcieć opatrzyć właściwą wymowę stworzonym specjalnie do tego celu oznakowaniem, mogą też zdać się na system renderujący dźwięk potrafiący prawidłowo obsłużyć takie przypadki.</p>
+</div>
+
+<div>
+<h3><a id="rp-alternatives" name="rp-alternatives">3.6. Alternatywy dla elementu <code>rp</code></a></h3>
+
+<p>Jeśli autorowi nie zależy na zabezpieczeniach dla programów użytkownika nierozpoznających oznakowania ruby ani nieobsługujących arkuszy stylów <acronym title="Cascading Style Sheets, level 2">CSS2</acronym> [<a href="#css2">CSS2</a>] lub XSL [<a href="#xsl">XSL</a>], elementy <code>rp</code> są niepotrzebne.</p>
+
+<p>Mimo to, możliwe jest zastosowanie zabezpieczenia w postaci objęcia tekstu ruby nawiasami, jeśli na przykład rozdzielczość urządzenia nie jest odpowiednia dla tradycyjnego renderowania ruby. W [<a href="#css2">CSS2</a>] nawiasy mogą być generowane przy użyciu <a href="http://www.w3.org/TR/1998/REC-CSS2-19980512/generate.html#content">właściwości <code>content</code></a> ([<a href="#css2">CSS2</a>], rozdział 12.2) wykorzystując <a href="http://www.w3.org/TR/1998/REC-CSS2-19980512/generate.html#before-after-content">pseudoelementy :before i :after</a> ([<a href="#css2">CSS2</a>], rozdział 12.1), <a id="fig3.8" name="fig3.8">tak jak w następującym fragmencie stylu:</a></p>
+
+<div class="figure">
+<pre class="style">rt:before { content: "(" }
+rt:after { content: ")" }</pre>
+
+<p><strong>Rycina 3.8</strong>: Fragment stylu CSS2 generujący nawiasy wokół elementu <code>rt</code></p>
+</div>
+
+<p>W powyższym przykładzie nawiasy zostaną automatycznie dodane wokół elementu <code>rt</code>. Zakłada się, że powyższe reguły stylów używane są razem z regułami stylów umieszczającymi tekst ruby wewnątrz wiersza. Generacja nawiasów jest prosta również przy użyciu <acronym title="XSL Transformations">XSLT</acronym> [<a href="#xslt">XSLT</a>].</p>
+</div>
+</div>
+
+<div class="normative">
+<h2><a name="conformance">4. Kryteria zgodności ze standardem</a></h2>
+
+<p>Ten rozdział ma charakter<em> normatywny</em>.</p>
+
+<p>W kontekście tej specyfikacji, zgodność ze standardem może dotyczyć: oznakowania, typów dokumentu, implementacji modułów, dokumentów, generatorów oraz interpreterów. W większości z tych przypadków dostępne są dwa poziomy zgodności: zgodność prosta i zgodność pełna. Zgodność prosta oznacza, że obiekt zgodny ze standardem obsługuje minimalny model zawartości elementu ruby z <a href="#abstract-def">rozdziału 2.1</a>, tj. tylko proste oznakowanie ruby. Zgodność pełna oznacza, że obiekt zgodny ze standardem obsługuje maksymalny model zawartości elementu ruby z <a href="#abstract-def">rozdziału 2.1</a>, tj. obsługiwane jest zarówno proste, jak i złożone oznakowanie ruby.</p>
+
+<p>Oznakowanie jest<em> prostym oznakowaniem ruby zgodnym ze standardem</em>, jeśli zawiera jeden lub więcej elementów <code>ruby</code> i zawartość wszystkich tych elementów (włączając w to elementy bezpośrednio potomne) jest zgodna z minimalnym modelem zawartości z <a href="#abstract-def">rozdziału 2.1</a> (tj. dozwolone jest tylko proste oznakowanie ruby). Oznakowanie jest<em> złożonym oznakowaniem ruby zgodnym ze standardem</em>, jeśli zawiera jeden lub więcej elementów <code>ruby</code> i zawartość wszystkich tych elementów (włączając w to elementy bezpośrednio potomne) jest zgodna z maksymalnym modelem zawartości z <a href="#abstract-def">rozdziału 2.1</a> (tj. dozwolone jest zarówno proste, jak i złożone oznakowanie ruby).</p>
+
+<p>Typ dokumentu jest<em> typem dokumentu prostego oznakowania ruby zgodnym ze standardem</em>, jeśli włącza zgodne ze standardem proste oznakowanie ruby poprzez dodanie elementu <code>ruby</code> do odpowiednich elementów (takich, jak elementy wewnątrzwierszowe) oraz poprzez zdefiniowanie niezbędnych elementów i atrybutów. Typ dokumentu jest<em> typem dokumentu pełnego oznakowania ruby zgodnym ze standardem</em>, jeśli włącza zgodne ze standardem pełne oznakowanie ruby poprzez dodanie elementu <code>ruby</code> do odpowiednich elementów (takich, jak elementy wewnątrzwierszowe) oraz poprzez zdefiniowanie niezbędnych elementów i atrybutów.</p>
+
+<p>Implementacja modułu (np. przy pomocy technologii DTD lub XML Schema) jest<em> implementacją modułu prostego ruby zgodną ze standardem</em>, jeśli jest zaprojektowana tak, że łączy proste oznakowanie ruby z innymi modułami w opisane powyżej typy dokumentu. Implementacja modułu jest<em> implementacją modułu złożonego ruby zgodną ze standardem</em>, jeśli jest zaprojektowana tak, że łączy pełne oznakowanie ruby z innymi modułami w opisane powyżej typy dokumentu. Implementacja modułu jest<em> implementacją modułu pełnego ruby zgodną ze standardem</em>, jeśli jest zaprojektowana tak, że łączy proste lub pełne oznakowanie ruby z innymi modułami w opisane powyżej typy dokumentu (np. poprzez udostępnienie przełącznika lub dostarczenie dwu osobnych implementacji modułu).</p>
+
+<p>Dokument jest<em> dokumentem prostego oznakowania ruby zgodnym ze standardem</em>, jeśli zawiera zgodne ze standardem proste oznakowanie ruby, ale nie zawiera złożonego oznakowania ruby, ani oznakowania ruby niezgodnego ze standardem. Dokument jest<em> dokumentem pełnego oznakowania ruby zgodnym ze standardem</em>, jeśli zawiera zgodne ze standardem pełne oznakowanie ruby, ale nie zawiera oznakowania ruby niezgodnego ze standardem.</p>
+
+<p>Generator jest<em> generatorem prostego oznakowania ruby zgodnym ze standardem</em>, jeśli generuje zgodne ze standardem proste oznakowanie ruby, ale nie generuje złożonego oznakowania ruby, ani oznakowania ruby niezgodnego ze standardem. Generator jest<em> generatorem pełnego oznakowania ruby zgodnym ze standardem</em>, jeśli generuje zgodne ze standardem pełne oznakowanie ruby, ale nie generuje oznakowania ruby niezgodnego ze standardem.</p>
+
+<p>Interpreter jest<em> interpreterem prostego oznakowania ruby zgodnym ze standardem</em>, jeśli odrzuca proste oznakowanie ruby niezgodne ze standardem, przyjmuje proste oznakowanie ruby zgodne ze standardem oraz, gdy interpretuje oznakowanie ruby, robi to zgodnie z tą specyfikacją. Interpreter jest<em> interpreterem pełnego oznakowania ruby zgodnym ze standardem</em>, jeśli odrzuca oznakowanie ruby niezgodne ze standardem, przyjmuje pełne oznakowanie ruby zgodne ze standardem oraz, gdy interpretuje oznakowanie ruby, robi to zgodnie z tą specyfikacją. Przykładami interpreterów są narzędzia do analizy lub transformacji po stronie serwera oraz programy renderujące.</p>
+
+<p>Informacje o zgodności ze standardem Modularyzacji XHTML znajdują się w rozdziale 3 [<a href="#xhtmlmod">XHTMLMOD</a>].</p>
+</div>
+<hr />
+
+<div>
+<h2><a id="appendix" name="appendix">Dodatki</a></h2>
+
+<div class="informative">
+<h2><a id="module" name="module">A. Moduł ruby dla XHTML</a></h2>
+
+<p>Ten dodatek ma charakter<em> informacyjny</em>.</p>
+
+<p>Poniżej znajduje się odsyłacz do modułu DTD Ruby używanego przez XHTML 1.1 [<a href="#xhtml11">XHTML11</a>].</p>
+<ul>
+  <li><a href="xhtml-ruby-1.mod">Moduł XHTML Ruby</a></li>
+</ul>
+</div>
+
+<div class="informative">
+<h2><a id="design" name="design">B. Uwagi dotyczące podjętych decyzji projektowych</a></h2>
+
+<p>Ten dodatek ma charakter<em> informacyjny</em>. Ten dodatek zawiera pewne uwagi dotyczące podjętych decyzji projektowych, oparte na pytaniach i komentarzach otrzymanych podczas ostatniej procedury przeglądowej.</p>
+
+<p>Padły propozycje zmian np. &lt;rbc&gt;&lt;rb&gt;...&lt;/rbc&gt; na &lt;rb&gt;&lt;rbc&gt;...&lt;/rb&gt; (i podobnie dla rt/rtc). Wygląda to w pewnym sensie bardziej naturalnie. Jednak w XML zawartość elementu może być albo zawartością mieszaną (zarówno dane tekstowe, jak i elementy, bez ograniczeń co do ilości i kolejności występowania), albo zawartością elementową (tylko elementy, z ograniczeniami). Oznacza to, że nie można nakazać, by &lt;rb&gt; zawierał tylko elementy &lt;rbc&gt;, albo tylko dane tekstowe i elementy wewnątrzwierszowe.</p>
+
+<p>Padły liczne propozycje usunięcia elementu <code><a href="#rp">rp</a></code> z minimalnego modelu zawartości. Były one rozważane, lecz odrzucono je z następujących powodów:</p>
+<ul>
+  <li>Rozpoznanie i usunięcie elementów <code><a href="#rp">rp</a></code> przez odbiorcę rozumiejącego oznakowanie ruby jest niezwykle łatwe do zaimplementowania; koszty implementacji są minimalne. Zarówno CSS, jak i XSL udostępniają proste mechanizmy pozwalające na usunięcie elementów <code><a href="#rp">rp</a></code> lub niewyświetlenie ich.</li>
+  <li>Wyświetlanie tekstu ruby w nawiasach jest niepożądane, ponieważ może być on pomylony ze zwykłym tekstem w nawiasach, jednakże taka niejasność jest i tak lepsza od tej wywołanej przez tekst ruby pojawiający się jako część właściwego tekstu, bez żadnych wyróżniających cech.</li>
+</ul>
+
+<p>Sugerowano również zmianę nazw elementów, w szczególności zmianę &lt;ruby&gt; na &lt;gloss&gt; (ang. <i xml:lang="en" lang="en">gloss</i> – „objaśnienie”). Jednak, mimo że oznakowanie ruby rzeczywiście przypomina oznakowanie, które byłoby potrzebne do objaśnień, nie zostało stworzone do tego celu.</p>
+</div>
+
+<div class="informative">
+<h2><a id="compatibility" name="compatibility">C. Uwagi dotyczące wstecznej kompatybilności</a></h2>
+
+<p>Ten dodatek ma charakter<em> informacyjny</em>.</p>
+
+<p>Ze względów historycznych niektóre narzędzia autorskie mogą generować oznakowanie ruby pozbawione znaczników początkowych i końcowych elementu <code>rb</code>, np.:</p>
+
+<div class="figure">
+<pre class="sgml">&lt;ruby&gt;
+  A
+  &lt;rp&gt;(&lt;/rp&gt;&lt;rt&gt;aaa&lt;/rt&gt;&lt;rp&gt;)&lt;/rp&gt;
+&lt;/ruby&gt;</pre>
+</div>
+
+<p>zamiast:</p>
+
+<div class="figure">
+<pre class="xml">&lt;ruby&gt;
+  &lt;rb&gt;A&lt;/rb&gt;
+  &lt;rp&gt;(&lt;/rp&gt;&lt;rt&gt;aaa&lt;/rt&gt;&lt;rp&gt;)&lt;/rp&gt;
+&lt;/ruby&gt;</pre>
+</div>
+
+<p>Pierwszy przykład oznakowania nie jest zgodny z tą specyfikacją, jednak programy użytkownika dbające o zgodność z dokumentami wygenerowanymi przez takie narzędzia autorskie mogą traktować to oznakowanie tak, jak gdyby było napisane jak to drugie.</p>
+</div>
+
+<div class="informative">
+<h2><a id="glossary" name="glossary">D. Słowniczek</a></h2>
+
+<p>Ten dodatek ma charakter<em> informacyjny</em>.</p>
+<dl>
+  <dt><a id="g-bopomofo" name="g-bopomofo"><strong lang="zh">Bopomofo</strong></a></dt>
+    <dd>37 znaków i 4 oznaczenia tonów używane jako pismo fonetyczne dla języka chińskiego, zwłaszcza standardowego mandaryńskiego.</dd>
+  <dt><a id="g-reading" name="g-reading"><strong>Czytanie</strong></a> (ang. <i xml:lang="en" lang="en">reading</i>)</dt>
+    <dd>Dla ideogramów: termin techniczny oznaczający wskazanie możliwej wymowy. Różni się od wymowy pod kilkoma względami: używane pismo nie musi być w pełni fonetyczne; rzeczywista wymowa jest zależna od mówiącego; wymowa może nie być realizowana podczas cichego czytania tekstu. W językach chińskim i koreańskim niektóre ideogramy mają kilka czytań. W języku japońskim większość ideogramów ma przynajmniej dwa czytania, a niektóre mają znacznie więcej. Czytanie może być też zależne od kontekstu.</dd>
+  <dt><a id="g-hiragana" name="g-hiragana"><strong lang="ja">Hiragana</strong></a></dt>
+    <dd>Japońskie pismo sylabiczne lub znak tego pisma. W kształcie zaokrąglone i pochylone. Część japońskiego systemu piśmienniczego, używane razem z kanji i katakaną. Ostatnimi czasy używane głównie do zapisywania japońskich wyrazów, gdy kanji są niedostępne lub nieodpowiednie, a także do końcówek wyrazowych i partykuł.</dd>
+  <dt><a id="g-ideograph" name="g-ideograph"><strong>Ideogram</strong></a> (ang. <i xml:lang="en" lang="en">ideograph</i>)</dt>
+    <dd>Znak używany do przedstawienia idei, wyrazu lub części wyrazu, w przeciwieństwie do znaku z pisma alfabetycznego lub sylabicznego. Najbardziej znane pismo ideograficzne jest używane (z różnymi odmianami) w Azji Wschodniej (Chiny, Japonia, Korea, ...).</dd>
+  <dt><a id="g-kana" name="g-kana"><strong lang="ja">Kana</strong></a></dt>
+    <dd>Termin zbiorowy obejmujący hiraganę i katakanę.</dd>
+  <dt><a id="g-kanji" name="g-kanji"><strong lang="ja">Kanji</strong></a></dt>
+    <dd>Japoński termin oznaczający ideogramy; ideogramy używane w języku japońskim. Część japońskiego systemu piśmienniczego, używane razem z hiraganą i katakaną.</dd>
+  <dt><a id="g-katakana" name="g-katakana"><strong lang="ja">Katakana</strong></a></dt>
+    <dd>Japońskie pismo sylabiczne lub znak tego pisma. W kształcie kanciaste.  Część japońskiego systemu piśmienniczego, używane razem z kanji i hiraganą. Ostatnimi czasy używane głównie do zapisywania wyrazów obcych.</dd>
+  <dt><a id="g-monoruby" name="g-monoruby"><strong>Monoruby</strong></a></dt>
+    <dd>W japońskiej typografii: ruby skojarzone z pojedynczym znakiem tekstu bazowego.</dd>
+  <dt><a href="#simple-ruby1" id="g-SR" name="g-SR"><strong>Proste oznakowanie ruby</strong></a> (ang. <i xml:lang="en" lang="en">simple ruby markup</i>)</dt>
+    <dd>W tej specyfikacji: oznakowanie ruby kojarzące jeden <a href="#g-RT">tekst ruby</a> z jednym <a href="#g-RB">tekstem bazowym</a>, opcjonalnie dostarczając w celu zabezpieczenia znaki oddzielające, np. nawiasy.</dd>
+  <dt><a id="g-GR" name="g-GR"><strong>Ruby grupowe</strong></a> (ang. <i xml:lang="en" lang="en">group ruby</i>)</dt>
+    <dd>W japońskiej typografii: tekst ruby skojarzony z więcej niż jednym znakiem tekstu bazowego.</dd>
+  <dt><a id="g-RB" name="g-RB"><strong>Tekst bazowy</strong></a> (ang. <i xml:lang="en" lang="en">base text</i>)</dt>
+    <dd>Fragment tekstu posiadający skojarzony z nim <a href="#g-RT">tekst ruby</a>.</dd>
+  <dt><a id="g-RT" name="g-RT"><strong>Tekst ruby</strong></a> (ang. <i xml:lang="en" lang="en">ruby text</i>)</dt>
+    <dd>Fragment tekstu znajdujący się w bezpośrednim sąsiedztwie innego fragmentu tekstu (zwanego <a href="#g-RB">„tekstem bazowym”</a>) i służący za adnotację lub wskazówkę dotyczącą wymowy skojarzoną z tekstem bazowym.</dd>
+  <dt><a href="#complex" id="g-complex" name="g-complex"><strong>Złożone oznakowanie ruby</strong></a> (ang. <i xml:lang="en" lang="en">complex ruby markup</i>)</dt>
+    <dd>W tej specyfikacji: oznakowanie ruby pozwalające na skojarzenie dwu <a href="#g-RT">tekstów ruby</a> z pojedynczym <a href="#g-RB">tekstem bazowym</a>, jak również na bardziej szczegółowe skojarzenia pomiędzy częściami <a href="#g-RT">tekstów ruby</a> a częściami <a href="#g-RB">tekstu bazowego</a>.</dd>
+</dl>
+</div>
+
+<div class="informative">
+<h2><a id="changes" name="changes">E. Zmiany w stosunku do proponowanej rekomendacji</a></h2>
+
+<p>Ten dodatek ma charakter<em> informacyjny</em>.</p>
+
+<p>Zmiany w stosunku do <a href="http://www.w3.org/TR/2001/PR-ruby-20010406/">proponowanej rekomendacji</a> (http://www.w3.org/TR/2001/PR-ruby-20010406):</p>
+<ul>
+  <li>Dodano rozdział dotyczący zgodności ze standardem</li>
+  <li>Dopracowano terminy „tekst ruby” i „tekst bazowy”</li>
+  <li>Zmieniono „będącego częścią” na „używanego przez” w <a href='#module'>Dodatku A</a> ([<a href='#xhtml11'>XHTML11</a>] nie zawiera definicji żadnych modułów)</li>
+  <li>Dodano odsyłacz do [<a href='#ModSchema'>ModSchema</a>]</li>
+  <li>Poprawiono numerację dodatków i spis treści</li>
+  <li>Poprawiono odsyłacz w rozdziale 3.3 (do ryc. 1.1 zamiast 1.3)</li>
+  <li>Dodano japońskie tytuły do [<a href="#jis">JIS4051</a>] i [<a href="#jdcm">JIS4052</a>]</li>
+  <li>Poprawiono różne błędy typograficzne i drobne pomyłki gramatyczne</li>
+</ul>
+</div>
+</div>
+
+<div class="informative">
+<h2><a id="ack" name="ack">Podziękowania</a></h2>
+
+<p>Ten rozdział ma charakter <em>informacyjny</em>.</p>
+
+<p>W opracowywaniu poprzednich projektów jako redaktorzy brali udział Takao <span class="familyname">Suzuki</span> (<span xml:lang="ja" lang="ja">鈴木 孝雄</span>) i Chris <span class="familyname">Wilson</span>.</p>
+
+<p>Powstanie tej specyfikacji nie byłoby możliwe bez pomocy, której udzielili członkowie I18N WG W3C, w szczególności Mark <span class="familyname">Davis</span> i Hideki <span class="familyname">Hiura</span> (<span xml:lang="ja" lang="ja">樋浦 秀樹</span>), a także członkowie I18N IG W3C.</p>
+
+<p>Inni współpracownicy: Murray <span class="familyname">Altheim</span>, Laurie Anna <span class="familyname">Edlund</span>, Arye <span class="familyname">Gittelma</span>, Koji <span class="familyname">Ishii</span>, Rick <span class="familyname">Jelliffe</span>, Eric <span class="familyname">LeVine</span>, Chris <span class="familyname">Lilley</span>, Charles <span class="familyname">McCathieNevile</span>, Shigeki <span class="familyname">Moro</span> (<span xml:lang="ja" lang="ja">師 茂樹</span>), Chris <span class="familyname">Pratley</span>, Nobuo <span class="familyname">Saito</span> (<span xml:lang="ja" lang="ja">斎藤 信男</span>), Rahul <span class="familyname">Sonnad</span>, Chris <span class="familyname">Thrasher</span>.</p>
+
+<p>Oznakowanie zdefiniowane w tej specyfikacji zostało uzgodnione z oznakowaniem ruby w [<a href="#jdcm">JIS4052</a>], opracowanym przez Grupę Roboczą nr 2 (WG 2 – Skład tekstu) Komitetu Dochodzeniowo-Badawczego ds. Standaryzacji Systemów Elektronicznego Przetwarzania Dokumentów będącego częścią Japońskiego Towarzystwa Standaryzacyjnego. Chcielibyśmy również podziękować członkom WG 2, zwłaszcza Kohji <span class="familyname">Shibano</span> (<span xml:lang="ja" lang="ja">芝野 耕司</span>, przewodniczący) i Masafumi <span class="familyname">Yabe</span> (<span xml:lang="ja" lang="ja">家辺 勝文</span>, współpracownik) za współpracę z ich strony. Pod względem technicznym oznakowanie dla ruby w [<a href="#jdcm">JIS4052</a>] różni się od oznakowania w tej specyfikacji w dwóch punktach. Po pierwsze, istnieje tam alternatywna forma oznakowania niezgodna z XML, oparta na specjalnych symbolach, a po drugie, element <a href="#rp"><code>rp</code></a> jest niedozwolony.</p>
+
+<p>Wartościowe komentarze podczas ostatniej procedury przeglądowej otrzymano też od: Grup Roboczych ds. HTML, CSS, XSL, WAI P&amp;F, od Stevena <span class="familyname">Pembertona</span>, Trevora <span class="familyname">Hilla</span>, Susan <span class="familyname">Lesch</span> i Franka Yung-Fong <span class="familyname">Tanga</span>. Akira <span class="familyname">Uchida</span> (内田 明) udzielił komentarzy z punktu widzenia tłumacza.</p>
+
+<p>Wcześniejsza propozycja oznakowania ruby, wykorzystująca atrybuty, jest opisana w [<a href="#dur97">DUR97</a>].</p>
+</div>
+
+<div class="informative ref">
+<h2><a id="ref" name="ref">Bibliografia</a></h2>
+
+<h3>Odnośniki normatywne</h3>
+<dl>
+  <dt>[<a id="xhtml11" name="xhtml11">XHTML11</a>]</dt>
+    <dd><cite><a href="http://www.w3.org/TR/2001/REC-xhtml11-20010531/">XHTML<sup>&trade;</sup> 1.1 - Module-based XHTML</a></cite>, W3C Recommendation</dd>
+    <dd>M. Altheim, S. McCarron, <abbr title="Editors">eds.</abbr>, 31 May 2001<br />
+      Dostępny pod adresem: http://www.w3.org/TR/2001/REC-xhtml11-20010531<br />
+      Ostatnia wersja jest dostępna pod adresem: <a href="http://www.w3.org/TR/xhtml11/">http://www.w3.org/TR/xhtml11</a><br />
+      <span class="trans" title="Przypis tłumacza">Polski przekład dostępny pod adresem <a href="http://podziemie.net/w3c/xhtml11/xhtml11">http://podziemie.net/w3c/xhtml11/xhtml11</a>.</span></dd>
+</dl>
+<dl>
+  <dt>[<a id="xhtmlmod" name="xhtmlmod">XHTMLMOD</a>]</dt>
+    <dd><cite><a href="http://www.w3.org/TR/2001/REC-xhtml-modularization-20010410/">Modularization of XHTML<sup>&trade;</sup></a></cite>, W3C Recommendation</dd>
+    <dd>M. Altheim et al., <abbr title="editors">eds.</abbr>, 10 April 2001 <br />
+      Dostępny pod adresem: http://www.w3.org/TR/2001/REC-xhtml-modularization-20010410<br />
+      Ostatnia wersja jest dostępna pod adresem: <a href="http://www.w3.org/TR/xhtml-modularization/">http://www.w3.org/TR/xhtml-modularization</a><br />
+      <span class="trans" title="Przypis tłumacza">Polski przekład dostępny pod adresem <a href="http://podziemie.net/w3c/xhtml-mod/overview">http://podziemie.net/w3c/xhtml&#8209;mod/overview</a>.</span></dd>
+  <dt>[<a id="xml1" name="xml1">XML</a>]</dt>
+    <dd><cite><a href="http://www.w3.org/TR/2000/REC-xml-20001006">Extensible Markup Language (XML) 1.0 (Second Edition)</a></cite>, W3C Recommendation</dd>
+    <dd>T. Bray, J. Paoli, C. M. Sperberg-McQueen, E. Maler, <abbr title="editors">eds.</abbr>, 6 October 2000<br />
+      Dostępny pod adresem: http://www.w3.org/TR/2000/REC-xml-20001006<br />
+      Ostatnia wersja jest dostępna pod adresem: <a href="http://www.w3.org/TR/REC-xml">http://www.w3.org/TR/REC-xml</a><br />
+      <span class="trans" title="Przypis tłumacza">Polski przekład dostępny pod adresem <a href="http://glenik.webpark.pl/xml/rec-xml.pl.html">http://glenik.webpark.pl/xml/rec-xml.pl.html</a>.</span></dd>
+</dl>
+
+<h3>Odnośniki informacyjne</h3>
+<dl>
+  <dt>[<a id="css2" name="css2">CSS2</a>]</dt>
+    <dd><cite><a href="http://www.w3.org/TR/1998/REC-CSS2-19980512/">Cascading Style Sheets, level 2 (CSS2) Specification</a></cite>, W3C Recommendation</dd>
+    <dd>B. Bos, H. W. Lie, C. Lilley and I. Jacobs, <abbr title="editors">eds.</abbr>, 12 May 1998<br />
+      Dostępny pod adresem: http://www.w3.org/TR/1998/REC-CSS2-19980512<br />
+      Ostatnia wersja jest dostępna pod adresem: <a href="http://www.w3.org/TR/REC-CSS2/">http://www.w3.org/TR/REC-CSS2</a></dd>
+  <dt>[<a id="css3-ruby" name="css3-ruby">CSS3-RUBY</a>]</dt>
+    <dd><cite><a href="http://www.w3.org/TR/2001/WD-css3-ruby-20010216/">CSS3 module: Ruby</a></cite>, W3C Working Draft</dd>
+    <dd>M. Suignard, <abbr title="editor">ed.</abbr>, 16 February 2001<br />
+      Dostępny pod adresem: http://www.w3.org/TR/2001/WD-css3-ruby-20010216/<br />
+      Ostatnia wersja jest dostępna pod adresem: <a href="http://www.w3.org/TR/css3-ruby/">http://www.w3.org/TR/css3-ruby</a></dd>
+  <dt>[<a id="dur97" name="dur97">DUR97</a>]</dt>
+    <dd><cite><a href="http://www.w3.org/International/draft-duerst-ruby-01">Ruby in the Hypertext Markup Language</a></cite>, Internet Draft</dd>
+    <dd>Martin Dürst, 28 February 1997, expired<br />
+      Dostępny pod adresem: http://www.w3.org/International/draft-duerst-ruby-01</dd>
+  <dt>[<a id="html4" name="html4">HTML4</a>]</dt>
+    <dd><cite><a href="http://www.w3.org/TR/1999/REC-html401-19991224/"><acronym title="HyperText Markup Language">HTML</acronym> 4.01 Specification</a></cite>, W3C Recommendation</dd>
+    <dd>D. Raggett, A. Le Hors, I. Jacobs, <abbr title="editors">eds.</abbr>, 24 December 1999<br />
+      Dostępny pod adresem: http://www.w3.org/TR/1999/REC-html401-19991224<br />
+      Ostatnia wersja jest dostępna pod adresem: <a href="http://www.w3.org/TR/html4/">http://www.w3.org/TR/html4</a></dd>
+  <dt>[<a id="jis" name="jis">JIS4051</a>]</dt>
+    <dd><cite>Line composition rules for Japanese documents</cite> (<span xml:lang="ja" lang="ja">日本語文書の行組版方法</span>)</dd>
+    <dd>JIS X 4051-1995, Japanese Standards Association, 1995 (w języku japońskim)</dd>
+  <dt>[<a id="jdcm" name="jdcm">JIS4052</a>]</dt>
+    <dd><cite>Exchange format for Japanese documents with composition markup</cite> (<span xml:lang="ja" lang="ja">日本語文書の組版指定交換形式</span>)</dd>
+    <dd>JIS X 4052:2000, Japanese Standards Association, 2000 (w języku japońskim)</dd>
+<dt>[<a id='ModSchema' name='ModSchema'>ModSchema</a>]</dt>
+    <dd><cite><a href='http://www.w3.org/TR/2001/WD-xhtml-m12n-schema-20010322/'>Modularization of XHTML&#8482; in XML Schema</a></cite>, W3C Working Draft</dd>
+    <dd>Daniel Austin and Shane McCarron, <abbr
+      title="editors">eds.</abbr>, 22 March 2001<br />
+      Dostępny pod adresem: http://www.w3.org/TR/2001/WD-xhtml-m12n-schema-20010322<br />
+      Ostatnia wersja jest dostępna pod adresem: <a
+href="http://www.w3.org/TR/xhtml-m12n-schema/">http://www.w3.org/TR/xhtml-m12n-schema</a></dd>
+<dt>[<a id="xmlschema" name="xmlschema">XMLSchema</a>]</dt>
+    <dd><cite><a href="http://www.w3.org/TR/2001/REC-xmlschema-1-20010502/">XML Schema Part 1: Structures</a></cite>, W3C Recommendation</dd> <dd>H. S. Thompson, D. Beech, M. Maloney, N. Mendelsohn, <abbr title="editors">eds.</abbr>, 2 May 2001<br />
+      Dostępny pod adresem: http://www.w3.org/TR/2001/REC-xmlschema-1-20010502<br />
+      Ostatnia wersja jest dostępna pod adresem: <a
+      href="http://www.w3.org/TR/xmlschema-1/">http://www.w3.org/TR/xmlschema-1</a></dd>
+    <dd>Zobacz też <cite>XML Schema Part 2: Datatypes</cite>, dostępne pod adresem: <a href="http://www.w3.org/TR/xmlschema-2/">http://www.w3.org/TR/xmlschema-2</a></dd>
+  <dt>[<a id="xsl" name="xsl">XSL</a>]</dt>
+    <dd><cite><a href="http://www.w3.org/TR/2000/CR-xsl-20001121/">Extensible Style Language (XSL)</a></cite>, W3C Candidate Recommendation</dd>
+    <dd>S. Adler et al., <abbr title="editors">eds.</abbr>, 21 November 2000<br />
+      Dostępny pod adresem: http://www.w3.org/TR/2000/CR-xsl-20001121<br />
+      Ostatnia wersja jest dostępna pod adresem: <a
+      href="http://www.w3.org/TR/xsl/">http://www.w3.org/TR/xsl</a></dd>
+  <dt>[<a id="xslt" name="xslt">XSLT</a>]</dt>
+    <dd><cite><a href="http://www.w3.org/TR/1999/REC-xslt-19991116">XSL Transformations (XSLT) Version 1.0</a></cite>, W3C Recommendation</dd>
+    <dd>J. Clark, <abbr title="editor">ed.</abbr>, 16 November 1999<br />
+      Dostępny pod adresem: http://www.w3.org/TR/1999/REC-xslt-19991116<br />
+      Ostatnia wersja jest dostępna pod adresem: <a href="http://www.w3.org/TR/xslt">http://www.w3.org/TR/xslt</a></dd>
+</dl>
+</div>
+
+
+<table class="stopka"><tr>
+<td class="sle"><a href="../">Strona główna</a></td>
+<td class="spr">Ostatnia modyfikacja: 29 grudnia 2005</td>
+</tr></table>
+
+</body>
+</html>

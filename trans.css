@@ -1,0 +1,14 @@
+*.trans, table.stopka {background: #EEE; color: #000}
+div.trans {border-right: 2px solid #000; border-top: 1px solid #000; border-bottom: 3px solid #000; border-left: 1px solid #000; padding-right: 0.7em; padding-left: 0.8em; padding-bottom: 0.4em; padding-top: 0.4em; margin-bottom: 20px}
+div.trans h2 {background: #EEE}
+em {font-style: normal; letter-spacing: 0.25em}
+p.note em {font-style: italic}
+span.term {font-style: normal; letter-spacing: 0.25em}
+p.copyright {font-size: 0.83em}
+table.stopka {border-width: 0px; width: 100%; border-right: 2px solid #000; border-top: 1px solid #000; border-bottom: 3px solid #000; border-left: 1px solid #000; margin-top: 15px}
+table.stopka tr td {border-width: 0px}
+td.sle {padding-left: 1ex}
+td.spr {text-align: right; padding-right: 1ex}
+div.trans ul {margin-top: 0ex}
+div.trans p.ul {margin-bottom: 0ex}
+div.trans a:visited {color: #00C}

@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="pl" lang="pl">
+
+<head>
+<title>Modularyzacja XHTML – Cele projektowe</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="stylesheet" type="text/css" href="../W3C-REC.css" />
+<link rel="stylesheet" type="text/css" href="xhtml.css" />
+<link rel="stylesheet" type="text/css" href="../trans.css" /><script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-35090831-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+</head>
+
+<body>
+
+
+<div class="navbar">[<a href="references">poprzedni</a>] [<a href="acknowledgements">następny</a>] [<a href="overview#toc">spis treści</a>]
+<hr />
+</div>
+
+<h1><a name="s_intro_design" id="s_intro_design">H.</a> Cele projektowe</h1>
+
+<div class='subtoc'>
+<p><strong>Zawartość</strong></p>
+<ul class="toc">
+<li class='tocline'>H.1. <a href="#s_intro_requirements" class="tocxref">Wymagania</a> 
+<ul class="toc">
+<li class='tocline'>H.1.1. <a href="#s_req_granularity" class="tocxref">Ziarnistość</a></li>
+<li class='tocline'>H.1.2. <a href="#s_req_composibility" class="tocxref">Złożoność</a></li>
+<li class='tocline'>H.1.3. <a href="#s_req_easeofuse" class="tocxref">Łatwość użycia</a></li>
+<li class='tocline'>H.1.4. <a href="#s_req_compatibility" class="tocxref">Kompatybilność</a></li>
+<li class='tocline'>H.1.5. <a href="#s_req_conformance" class="tocxref">Zgodność ze standardem</a></li>
+</ul></li>
+</ul>
+</div>
+
+<p>Ten dodatek ma charakter<em> informacyjny</em>.</p>
+
+<p>W tym dodatku cele projektowe są oznaczane jako &#8222;Gn&#8221;, a wymagania &#8212; jako &#8222;Rn.n&#8221;. Istnieją cztery główne cele projektowe dla ogólnych zasad modularyzacji XHTML:</p>
+
+<ul>
+<li>[G1] Pogrupować znaczeniowo powiązane części XHTML.</li>
+
+<li>[G2] Używać technologii DTD, by wspierać tworzenie pokrewnych języków (podzbiorów, nadzbiorów) dla określonych celów (małe urządzenia, urządzenia specjalnego przeznaczenia), gwarantując powszechność zachodzących na siebie części.</li>
+
+<li>[G3] Ułatwić przyszły rozwój poprzez umożliwienie zastąpienia części języka przez ulepszone moduły (na przykład formularze) bez naruszania pozostałej części języka.</li>
+
+<li>[G4] Zachęcać i ułatwiać powtórne użycie modułów w innych językach.</li>
+</ul>
+
+<h2><a name="s_intro_requirements" id="s_intro_requirements">H.1.</a> Wymagania</h2>
+
+<p>Cele projektowe wymienione w poprzedniej części prowadzą do znacznej liczby wymagań , które muszą spełniać ogólne zasady modularyzacji. wymagania te, podsumowane w tej części,
+mogą być klasyfikowane na inne sposoby zgodnie z ważniejszymi cechami opisanych zasad.</p>
+
+<h3><a name="s_req_granularity" id="s_req_granularity">H.1.1.</a> Ziarnistość</h3>
+
+<p>Wymagania w tej części łącznie wyrażają pragnienie, by moduły zdefiniowane w ramach ogólnych zasad posiadały odpowiedni poziom ziarnistości:</p>
+
+<ul>
+<li>[R1.1] Moduły abstrakcyjne powinny sprzyjać i utrzymywać przenośność zawartości.</li>
+<li>[R1.2] Moduły abstrakcyjne powinny sprzyjać standaryzacji profili platform.</li>
+<li>[R1.3] Moduły abstrakcyjne powinny być dostatecznie małe, by sprzyjać możliwości wzajemnego współdziałania.</li>
+<li>[R1.4] Moduły abstrakcyjne powinny być dostatecznie małe, by uniknąć potrzeby tworzenia ich podzbiorów.</li>
+<li>[R1.5] Moduły abstrakcyjne powinny zawierać elementy z podobną lub pokrewną semantyką.</li>
+<li>[R1.6] Moduły abstrakcyjne powinny rozdzielać elementy z niepodobną lub niepowiązaną semantyką.</li>
+<li>[R1.7] Moduły powinny być dostatecznie małe, by pozwalały na moduły jednoelementowego typu dokumentu.</li>
+</ul>
+
+<h3><a name="s_req_composibility" id="s_req_composibility">H.1.2.</a> Złożoność</h3>
+
+<p>Wymagania złożoności tutaj wymienione mają na celu zapewnienie zdolności ogólnych zasad modularyzacji do wyrażania właściwego zbioru modułów docelowych wymaganych przez społeczności, które będą obsługiwane przez te ogólne zasady:</p>
+
+<ul>
+<li>[R2.1] Ogólne zasady modułu powinny pozwalać na stworzenie modułów abstrakcyjnych dla XHTML 1.0.</li>
+<li>[R2.2] Ogólne zasady modułu powinny pozwalać na stworzenie modułów abstrakcyjnych przybliżonych do HTML 4.</li>
+<li>[R2.3] Ogólne zasady modułu powinny pozwalać na stworzenie modułów abstrakcyjnych dla innych Rekomendacji W3C.</li>
+<li>[R2.4] Ogólne zasady modułu powinny pozwalać na stworzenie modułów abstrakcyjnych dla innych typów dokumentu XML.</li>
+<li>[R2.5] Ogólne zasady modułu powinny pozwalać na stworzenie modułów abstrakcyjnych dla szerokiego zakresu profili platform.</li>
+</ul>
+
+<h3><a name="s_req_easeofuse" id="s_req_easeofuse">H.1.3.</a> Łatwość użycia</h3>
+
+<p>Ogólne zasady modularyzacji zostaną szeroko zaakceptowane tylko jeśli będą opisywały mechanizmy ułatwiające korzystanie z tych zasad przez docelową grupę odbiorców:</p>
+
+<ul>
+<li>[R3.1] Ogólne zasady modułu powinny ułatwiać projektantom typów dokumentu tworzenie podzbiorów i rozszerzanie modułów abstrakcyjnych XHTML.</li>
+<li>[R3.2] Ogólne zasady modułu powinny ułatwiać projektantom typów dokumentu tworzenie modułów abstrakcyjnych dla innych typów dokumentu XML.</li>
+<li>[R3.3] Ogólne zasady modułu powinny ułatwiać autorom dokumentów walidację elementów pochodzących z różnych modułów abstrakcyjnych.</li>
+</ul>
+
+<h3><a name="s_req_compatibility" id="s_req_compatibility">H.1.4.</a> Kompatybilność</h3>
+
+<p>W zamierzeniu tego dokumentu opisane tutaj ogólne zasady modularyzacji powinny współpracować z XML i innymi standardami rozwijanymi przez Grupy Robocze W3C:</p>
+
+<ul>
+<li>[R4.1] Ogólne zasady modularyzacji powinny być ściśle zgodne z Rekomendacją XML 1.0.</li>
+<li>[R4.2] Ogólne zasady modularyzacji powinny być kompatybilne ze specyfikacją Język łączy XML (XLink) <a href="#ref_xlink">[XLINK]</a>.</li>
+<li>[R4.3] Ogólne zasady modularyzacji powinny być kompatybilne ze specyfikacją Skojarzanie arkuszy stylów z dokumentami XML <a href="#ref_xmlstyle">[XMLSTYLE]</a>.</li>
+<li>[R4.4] Ogólne zasady modularyzacji powinny być zdolne do przyjęcia nowych Rekomendacji W3C, gdzie będzie to właściwe.</li>
+<li>[R4.5] Ogólne zasady modularyzacji nie powinny być zależne od prac W3C będących w toku.</li>
+<li>[R4.6] Ogólne zasady modularyzacji nie powinny być zależne od prac powstałych poza W3C.</li>
+</ul>
+
+<h3><a name="s_req_conformance" id="s_req_conformance">H.1.5.</a> Zgodność ze standardem</h3>
+
+<p>Miarą efektywności ogólnych zasad będzie także łatwość testowania zachowania modułów rozbudowywanych zgodnie z tymi zasadami oraz testowania dokumentów stosujących moduły do walidacji:</p>
+
+<ul>
+<li>[R5.1] Powinna być możliwa walidacja dokumentów stworzonych przy użyciu elementów i atrybutów z modułów abstrakcyjnych.</li>
+<li>[R5.2] Powinno być możliwe dokładne opisanie zachowania elementów i atrybutów z modułów abstrakcyjnych.</li>
+<li>[R5.3] Powinna być możliwa weryfikacja zachowania elementów i atrybutów z modułów abstrakcyjnych.</li>
+<li>[R5.4] Powinna być możliwa weryfikacja hybrydowego typu dokumentu jako typu dokumentu XHTML.</li>
+<li>[R5.5] Moduły zdefiniowane zgodnie z metodami zawartymi w tym dokumencie nie powinny powielać nazw elementów czy encji parametrycznych zdefiniowanych w modułach XHTML.</li>
+</ul>
+
+<hr />
+
+<div class="navbar">[<a href="references">poprzedni</a>] [<a href="acknowledgements">następny</a>] [<a href="overview#toc">spis treści</a>]
+</div>
+
+
+<table class="stopka"><tr>
+<td class="sle"><a href="../">Strona główna</a></td>
+<td class="spr">Ostatnia modyfikacja: 17 sierpnia 2005</td>
+</tr></table>
+
+</body>
+</html>

@@ -1,0 +1,457 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="pl" lang="pl">
+
+<head>
+<title>Modularyzacja XHTML – Konstruowanie modułów DTD</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="stylesheet" type="text/css" href="../W3C-REC.css" />
+<link rel="stylesheet" type="text/css" href="xhtml.css" />
+<link rel="stylesheet" type="text/css" href="../trans.css" /><script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-35090831-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+</head>
+
+<body>
+
+
+<div class="navbar">[<a href="schema_module_defs">poprzedni</a>] [<a href="dtd_developing">następny</a>] [<a href="overview#toc">spis treści</a>]
+<hr />
+</div>
+
+<h1><a name="s_dtd_module_rules" id="s_dtd_module_rules">D.</a> Konstruowanie modułów DTD</h1>
+
+<div class='subtoc'>
+<p><strong>Zawartość</strong></p>
+<ul class="toc">
+<li class='tocline'>D.1. <a href="#s_dtdrules_PEs" class="tocxref">Nazywanie encji parametrycznych</a></li>
+<li class='tocline'>D.2. <a href="#s_module_namespace" class="tocxref">Definiowanie przestrzeni nazw modułu</a> 
+<ul class="toc">
+<li class='tocline'>D.2.1. <a href="#qnames" class="tocxref">Podmoduł nazw kwalifikowanych</a></li>
+<li class='tocline'>D.2.2. <a href="#declaration" class="tocxref">Podmoduł(y) deklaracji</a></li>
+<li class='tocline'>D.2.3. <a href="#stand_alone" class="tocxref">Używanie modułu jako samodzielnego DTD</a></li>
+<li class='tocline'>D.2.4. <a href="#sec_D.2.4." class="tocxref">Specyficzne własności przestrzeni nazw</a></li>
+</ul></li>
+</ul>
+</div>
+
+<p>Ten dodatek ma charakter<em> normatywny</em>.</p>
+
+<p>Moduły XHTML są implementowane jako fragmenty DTD. Gdy fragmenty te są łączone w określony sposób (opisany w dodatku <a href="dtd_developing#s_developingdtds">Opracowywanie DTD ze zdefiniowanymi
+i rozszerzonymi modułami</a>), wynikowe DTD reprezentuje kompletny typ dokumentu. Ta reprezentacja może być wtedy użyta do walidacji poszczególnych egzemplarzy typu dokumentu.</p>
+
+<p>Rolę klucza, według którego następuje łączenie tych fragmentów w zrozumiały DTD, pełnią reguły używane do definiowania tych fragmentów. Reguły te zdefiniowane są w tym rozdziale. Gdy są one spełnione, autorzy DTD mogą być pewni, że ich moduły będą bez
+przeszkód wzajemnie oddziaływać z innymi modułami kompatybilnymi z XHTML.</p>
+
+<p>Moduły stosujące się do tych reguł, by mogły być określane mianem<em> modułów rodziny XHTML</em>, muszą także spełniać wymagania zgodności ze standardem zdefiniowane w
+rozdziale <a href="conformance#s_conform_module">Zgodność ze standardem modułów rodziny XHTML</a>.</p>
+
+<h2><a name="s_dtdrules_PEs" id="s_dtdrules_PEs">D.1.</a> Nazywanie encji parametrycznych</h2>
+
+<p>Niniejsza specyfikacja dokonuje klasyfikacji encji parametrycznych na siedem kategorii i nazywa je w sposób konsekwentny, używając następujących przyrostków:</p>
+
+<dl class="codelist">
+<dt><span class="dfn">.mod</span></dt>
+
+<dd>encje parametryczne posiadają przyrostek <code>.mod</code>, gdy są używane do reprezentowania modułu DTD (zestawu elementów, atrybutów, encji parametrycznych, itd.). W tej specyfikacji każdy
+moduł jest niepodzielną jednostką i może być przedstawiany jako encja w osobnym pliku.</dd>
+
+<dt><span class="dfn">.module</span></dt>
+
+<dd>encje parametryczne posiadają przyrostek <code>.module</code>, gdy są używane do kontroli włączania modułu DTD za pomocą zawartego w nich słowa kluczowego sekcji warunkowej &#8212; <tt>INCLUDE</tt> albo
+<tt>IGNORE</tt>.</dd>
+
+<dt><span class="dfn">.qname</span></dt>
+
+<dd>encje parametryczne posiadają przyrostek <code>.qname</code>, gdy są używane do reprezentowania nazwy kwalifikowanej elementu. Więcej informacji na temat nazw kwalifikowanych znajdziesz w podrozdziale <a href="#s_module_namespace">Definiowanie przestrzeni nazw modułu</a>.</dd>
+
+<dt><span class="dfn">.content</span></dt>
+
+<dd>encje parametryczne posiadają przyrostek <code>.content</code>, gdy są używane do reprezentowania modelu zawartości typu elementu.</dd>
+
+<dt><span class="dfn">.class</span></dt>
+
+<dd>encje parametryczne posiadają przyrostek <code>.class</code>, gdy są używane do reprezentowania elementów tej samej klasy.</dd>
+
+<dt><span class="dfn">.mix</span></dt>
+
+<dd>encje parametryczne posiadają przyrostek <code>.mix</code>, gdy są używane do reprezentowania zbioru typów elementów z różnych klas.</dd>
+
+<dt><span class="dfn">.attrib</span></dt>
+
+<dd>encje parametryczne posiadają przyrostek <code>.attrib</code>, gdy są używane do reprezentowania grupy leksemów, które reprezentują jedną lub więcej kompletnych specyfikacji atrybutu w obrębie deklaracji ATTLIST.</dd>
+</dl>
+
+<p>Na przykład w HTML 4 encja parametryczna <tt>%block;</tt> reprezentuje różnorodne zestawy typów elementów, z których wszystkie są elementami poziomu blokowego. W tej specyfikacji
+odpowiednia encja parametryczna to <tt>%Block.mix;</tt>.</p>
+
+<p>Definiując encje parametryczne w ramach zdefiniowanych tutaj klas, moduły powinny określić zakres nazw encji poprzez użycie unikatowych przedrostków. Na przykład model zawartości dla elementu
+<code>myelement</code> w module mymodule powinien być nazwany <code>MYMODULE.myelement.content</code>. Możliwe są też inne schematy. Bez względu na użyty schemat, autorzy modułów powinni starać się osiągnąć pewność, że nazwy zdefiniowanych przez
+nich encji parametrycznych są unikatowe i w ten sposób nie kolidują z innymi encjami parametrycznymi, a metody interfejsu dla modułu są oczywiste dla użytkownika.</p>
+
+<h2><a name="s_module_namespace" id="s_module_namespace">D.2.</a> Definiowanie przestrzeni nazw modułu</h2>
+
+<p>XHTML wymaga, by elementy i atrybuty zadeklarowane w module istniały wewnątrz zdefiniowanej przestrzeni nazw XML <a href="references#ref_xmlns">[XMLNAMES]</a>. Identyfikatorem takiej przestrzeni nazw jest dowolny
+URI. Gdy moduł jest implementowany przy użyciu DTD XML, XHTML wymaga, by moduł deklarował przestrzeń nazw w specjalny sposób. Służy to umożliwieniu dokonania wyboru podczas parsowania / walidacji dokumentu,
+użycia przedrostków przestrzeni nazw oraz<em> przedrostka </em> stosowanego do identyfikowania elementów i atrybutów z takiego modułu.</p>
+
+<p>Jeśli twórcy treści chcą opracowywać dokumenty w oparciu o hybrydowe typy dokumentów, mogą zdecydować się na używanie przedrostków przestrzeni nazw XML w elementach z przestrzeni nazw XHTML, w elementach z innej przestrzeni nazw lub i w jednych,
+i w drugich. By mieć pewność, że takie dokumenty są zgodne z XHTML i wstecznie kompatybilne z narzędziami nierozpoznającymi przestrzeni nazw, W3C zaleca, by twórcy treści<em> nie </em> używali
+przedrostków przestrzeni nazw XML w elementach z przestrzeni nazw XHTML. Jeśli twórcy treści są zainteresowani tym, by zawartość ich dokumentów była przetwarzana przez
+procesory nierozpoznające przestrzeni nazw, W3C zaleca także, by elementy w przestrzeniach nazw innych niż XHTML były określane przy użyciu przedrostka przestrzeni nazw XML, a nie w oparciu o domyślne mechanizmy przestrzeni nazw XML.</p>
+
+<p>Od każdego modułu zgodnego z XHTML zaimplementowanego jako DTD XML wymaga się, by miał zdefiniowany domyślny przedrostek przestrzeni nazw XML, metodę zamiany tego przedrostka wewnątrz egzemplarza dokumentu oraz wskazaną sekcję włączającą przetwarzanie tego przedrostka.</p>
+
+<p><em>Weź pod uwagę, że jeśli moduły są ze sobą powiązane, jest dopuszczalnym i oczekiwanym, by były częścią tej samej przestrzeni nazw. Na przykład wszystkie moduły XHTML są częścią tej samej przestrzeni nazw.</em></p>
+
+<h3><a name="qnames" id="qnames">D.2.1.</a> Podmoduł nazw kwalifikowanych</h3>
+
+<p>Na początku musisz zdefiniować podmoduł nazw kwalifikowanych (podmoduł to po prostu oddzielna<em> encja plikowa </em>mogąca w odpowiednim punkcie być włączona do ostatecznego DTD).
+Podmoduł nazw kwalifikowanych tworzy się według następujących kroków (w których łańcuch MODULE jest zastępowany odpowiednim dla nowego modułu łańcuchem):</p>
+
+<ol>
+<li>Zdefiniuj encję parametryczną MODULE.przedrostek, która będzie wskazywała czy elementy w module są używane z przedrostkami przestrzeni nazw XML, czy nie. Domyślną wartością tej encji parametrycznej powinno być
+"%NS.prefixed;". Zasady ogólne XHTML definiują domyślną wartość encji parametrycznej NS.prefixed jako IGNORE. Encja ta może być użyta w egzemplarzu dokumentu do dołączania przedrostków dla wszystkich włączonych przestrzeni nazw (łącznie z tymi z modułów XHTML).</li>
+
+<li>Zdefiniuj encję parametryczną MODULE.xmlns zawierającą identyfikator przestrzeni nazw dla tego modułu.</li>
+
+<li>Zdefiniuj encję parametryczną MODULE.prefix zawierającą łańcuch domyślnego przedrostka, używany, gdy uaktywnione jest dołączanie przedrostków.</li>
+
+<li>Zdefiniuj encję parametryczną MODULE.pfx, której wartość jest równa "%MODULE.prefix;:", gdy uaktywnione jest dołączanie przedrostków, a "" w przeciwnym wypadku.</li>
+
+<li>Zdefiniuj encję parametryczną MODULE.xmlns.extra.attrib zawierającą deklarację każdego atrybutu przestrzeni nazw XML dla przestrzeni nazw, do których odwołuje się ten moduł (np. xmlns:xlink).
+Gdy wartość %MODULE.prefixed jest równa INCLUDE, atrybut ten powinien zawierać także deklarację xmlns:%MODULE.prefix;.</li>
+
+<li>Zdefiniuj encję parametryczną XHTML.xmlns.extra.attrib jako MODULE.xmlns.extra.attrib. Jest to zwykle nadpisywane przez plik sterownika typu dokumentu, ale jeśliby się tak nie stało, ta definicja zajmie miejsce jako domyślna.</li>
+
+<li>Dla każdego z elementów zdefiniowanych przez ten moduł utwórz encję parametryczną postaci "MODULE.NAME.qname" przechowującą jego nazwę kwalifikowaną. Encja ta musi mieć wartość
+"%MODULE.pfx;NAME". Wtedy wartością sparsowana będzie "PREFIX:NAME", gdy uaktywnione jest dołączanie przedrostków, a "NAME" w przeciwnym wypadku. 
+
+<p>Jeśli moduł dodaje atrybuty do elementów zdefiniowanych w modułach niepodzielających przestrzeni nazw tego modułu, zadeklaruj te atrybuty, by używały przedrostka %MODULE.pfx. Na przykład:</p>
+
+<pre class="example">
+&lt;ENTITY % MODULE.img.myattr.qname "%MODULE.pfx;myattr" &gt;
+</pre>
+</li>
+</ol>
+
+<p>Poniżej widnieje przykład podmodułu nazw kwalifikowanych dla hipotetycznego modułu Inventory (&#8216;spis towarów&#8217;):</p>
+
+<pre class="dtd">
+&lt;!-- ...................................................................... --&gt;
+&lt;!-- Inventory Qname Module ................................................... --&gt;
+&lt;!-- plik: inventory-qname-1.mod
+
+     PUBLIC "-//MY COMPANY//ELEMENTS XHTML Inventory Qnames 1.0//EN"
+     SYSTEM "http://www.example.com/DTDs/inventory-qname-1.mod"
+
+     xmlns:inventory="http://www.example.com/xmlns/inventory"
+     ...................................................................... --&gt;
+
+&lt;!-- Zadeklaruj domyślną wartość przedrostka dla elementów tego modułu --&gt;
+&lt;!-- Weź pod uwagę, że NS.prefixed zostanie uchylona przez zasady ogólne XHTML
+     lub przez egzemplarz dokumentu. --&gt;
+&lt;!ENTITY % NS.prefixed "IGNORE" &gt;
+&lt;!ENTITY % Inventory.prefixed "%NS.prefixed;" &gt;
+
+&lt;!-- Zadeklaruj rzeczywistą przestrzeń nazw tego modułu --&gt;
+&lt;!ENTITY % Inventory.xmlns "http://www.example.com/xmlns/inventory" &gt;
+
+&lt;!-- Zadeklaruj domyślny przedrostek dla tego modułu --&gt;
+&lt;!ENTITY % Inventory.prefix "inventory" &gt;
+
+&lt;!-- Zadeklaruj przedrostek dla tego modułu --&gt;
+&lt;![%Inventory.prefixed;[
+&lt;!ENTITY % Inventory.pfx "%Inventory.prefix;:" &gt;
+]]&gt;
+&lt;!ENTITY % Inventory.pfx "" &gt;
+
+&lt;!-- Zadeklaruj atrybut xmlns dla tego modułu --&gt;
+&lt;![%Inventory.prefixed;[
+&lt;!ENTITY % Inventory.xmlns.extra.attrib
+    "xmlns:%Inventory.prefix;   %URI.datatype;  #FIXED  '%Inventory.xmlns;'" &gt;
+]]&gt;
+&lt;!ENTITY % Inventory.xmlns.extra.attrib "" &gt;
+
+&lt;!-- Zadeklaruj dodatkową przestrzeń nazw, która powinna być zawarta w
+     elementach XHTML --&gt;
+&lt;!ENTITY % XHTML.xmlns.extra.attrib
+    %Inventory.xmlns.extra.attrib; &gt;
+
+&lt;!-- Teraz zadeklaruj nazwy kwalifikowane dla wszystkich elementów w module --&gt;
+&lt;!ENTITY % Inventory.shelf.qname "%Inventory.pfx;shelf" &gt;
+&lt;!ENTITY % Inventory.item.qname "%Inventory.pfx;item" &gt;
+&lt;!ENTITY % Inventory.desc.qname "%Inventory.pfx;desc" &gt;
+&lt;!ENTITY % Inventory.sku.qname "%Inventory.pfx;sku" &gt;
+&lt;!ENTITY % Inventory.price.qname "%Inventory.pfx;price" &gt;
+
+</pre>
+
+<h3><a name="declaration" id="declaration">D.2.2.</a> Podmoduł(y) deklaracji</h3>
+
+<p>Następnie musisz zdefiniować jeden lub więcej &#8222;podmodułów deklaracji&#8221;. Zadaniem tych<em> encji plikowych </em>jest zadeklarowanie elementów i wykazów atrybutów DTD XML. Moduł deklaracji XHTML
+powinien być skonstruowany przy użyciu następujących kroków:</p>
+
+<ol>
+<li>Zdefiniuj encję parametryczną w celu używania jej wewnątrz ATTLIST każdego zadeklarowanego elementu. Ta encja parametryczna powinna zawierać %NS.decl.attrib;, gdy %MODULE.prefixed; ma wartość INCLUDE, a %NS.decl.attrib;
+plus "xmlns %URI.datatype; #FIXED '%MODULE.xmlns;'", gdy %MODULE.prefixed; ma wartość IGNORE.</li>
+
+<li>Zadeklaruj wszystkie elementy i atrybuty dla tego modułu. Wewnątrz każdej ATTLIST dla elementu zawrzyj encję parametryczną zdefiniowaną powyżej, by wszystkie wymagane atrybuty  xmlns
+były dostępne w każdym elemencie w module.</li>
+
+<li>
+<p>Jeśli moduł dodaje atrybuty do elementów zdefiniowanych w modułach niepodzielających przestrzeni nazw tego modułu, zadeklaruj te atrybuty, by używały przedrostka %MODULE.pfx. Na przykład:</p>
+
+<pre class="example">
+&lt;ENTITY % MODULE.img.myattr.qname "%MODULE.pfx;myattr" &gt;
+&lt;!ATTLIST %img.qname;
+      %MODULE.img.myattr.qname;    CDATA          #IMPLIED
+&gt;
+</pre>
+
+<p>Spowoduje to dodanie atrybutu do elementu <code>img</code> z modułu Image, ale nazwą atrybutu będzie nazwa kwalifikowana, z przedrostkiem, jeśli przedrostki są wybrane dla egzemplarza dokumentu.
+Nastąpi też dodanie atrybutu xmlns:MODULE_PREFIX do wykazu atrybutów elementu img, dzięki czemu parsery nierozpoznające przestrzeni nazw XML będą wiedziały jak rozwiązać przestrzeń nazw opartą na jego przedrostku.</p>
+</li>
+</ol>
+
+<p>Poniższy przykład przedstawia podmoduł deklaracji dla hipotetycznego modułu Inventory (&#8216;spis towarów&#8217;).</p>
+
+<pre class="dtd">
+&lt;!-- ...................................................................... --&gt;
+&lt;!-- Inventory Elements Module ................................................... --&gt;
+&lt;!-- plik: inventory-1.mod
+
+     PUBLIC "-//MY COMPANY//ELEMENTS XHTML Inventory Elements 1.0//EN"
+     SYSTEM "http://www.example.com/DTDs/inventory-1.mod"
+
+     xmlns:inventory="http://www.example.com/xmlns/inventory"
+     ...................................................................... --&gt;
+
+&lt;!-- Moduł Inventory
+
+     shelf      (&#8216;półka&#8217;)
+       item     (&#8216;pozycja&#8217;)
+         sku    (SKU = stock-keeping unit &#8212; &#8216;unikatowy kod towaru&#8217;)
+         desc   (description &#8212; &#8216;opis&#8217;)
+         price  (&#8216;cena&#8217;)
+
+     Ten moduł definiuje podstawową strukturę pozycji spisu towarów
+--&gt;
+
+&lt;!-- Zdefiniuj atrybuty globalnej przestrzeni nazw --&gt;
+&lt;![%Inventory.prefixed;[
+&lt;!ENTITY % Inventory.xmlns.attrib
+    "%NS.decl.attrib;"
+&gt;
+]]&gt;
+&lt;!ENTITY % Inventory.xmlns.attrib
+     "xmlns %URI.datatype;  #FIXED '%Inventory.xmlns;'"
+&gt;
+
+&lt;!-- Zdefiniuj zestaw atrybutów wspólnych dla wszystkich elementów modułu --&gt;
+&lt;!ENTITY % Inventory.Common.attrib
+         "%Inventory.xmlns.attrib;
+      id               ID                   #IMPLIED
+&gt;
+
+&lt;!-- Zdefiniuj elementy i atrybuty modułu --&gt;
+&lt;!ELEMENT %Inventory.shelf.qname;
+     ( %Inventory.item.qname; )* &gt;
+&lt;!ATTLIST %Inventory.shelf.qname;
+     location   CDATA   #IMPLIED
+     %Inventory.Common.attrib;
+&gt;
+&lt;!ELEMENT %Inventory.item.qname;
+     ( %Inventory.desc.qname;, %Inventory.sku.qname;, %Inventory.price.qname;) &gt;
+&lt;!ATTLIST %Inventory.item.qname;
+     location   CDATA   #IMPLIED
+     %Inventory.Common.attrib;
+&gt;
+
+&lt;!ELEMENT %Inventory.desc.qname; ( #PCDATA ) &gt;
+&lt;!ATTLIST %Inventory.desc.qname;
+     %Inventory.Common.attrib;
+&gt;
+
+&lt;!ELEMENT %Inventory.sku.qname; ( #PCDATA ) &gt;
+&lt;!ATTLIST %Inventory.sku.qname;
+     %Inventory.Common.attrib;
+&gt;
+
+&lt;!ELEMENT %Inventory.price.qname; ( #PCDATA ) &gt;
+&lt;!ATTLIST %Inventory.price.qname;
+     %Inventory.Common.attrib;
+&gt;
+
+&lt;!-- koniec pliku inventory-1.mod --&gt;
+
+</pre>
+
+<h3><a name="stand_alone" id="stand_alone">D.2.3.</a> Używanie modułu jako samodzielnego DTD</h3>
+
+<p>Czasem jest pożądane, by móc używać modułu XHTML także jako samodzielne DTD. Dobrym tego przykładem jest nasz powyższy moduł Inventory. Obiekty te muszą móc się zagnieżdżać w dokumencie XHTML
+i muszą być dostępne jako odrębne dokumenty wydzielone z bazy danych (na przykład). Najłatwiejszym sposobem osiągnięcia tego jest zdefiniowanie pliku DTD rozwijającego składniki twojego modułu.
+Takie DTD mogłoby mieć następującą strukturę:</p>
+
+<ol>
+<li>Włącz moduł XHTML Datatypes (twój moduł nazw kwalifikowanych prawdopodobnie używa niektóre z tych typów danych &#8212; na pewno używa typ danych URI dla atrybutu xmlns).</li>
+
+<li>Włącz moduł nazw kwalifikowanych do twojego modułu.</li>
+
+<li>Zdefiniuj encję parametryczną NS.decl.attrib jako %MODULE.xmlns.extra.attrib;.</li>
+
+<li>Włącz moduł(y) deklaracji do twojego modułu.</li>
+</ol>
+
+<p>Przykład obrazujący te działania dla naszego modułu Inventory jest przedstawiony poniżej:</p>
+
+<pre class="dtd">
+&lt;!-- ...................................................................... --&gt;
+&lt;!-- Inventory Elements DTD ............................................... --&gt;
+&lt;!-- plik: inventory-1.dtd
+
+     PUBLIC "-//MY COMPANY//DTD XHTML Inventory 1.0//EN"
+     SYSTEM "http://www.example.com/DTDs/inventory-1.dtd"
+
+     xmlns:inventory="http://www.example.com/xmlns/inventory"
+     ...................................................................... --&gt;
+
+&lt;!-- Moduł Inventory
+
+     shelf
+       item
+         sku
+         desc
+         price
+
+     Ten moduł definiuje podstawową strukturę pozycji spisu towarów
+--&gt;
+
+&lt;!-- Wprowadź typy danych --&gt;
+&lt;!ENTITY % xhtml-datatypes.mod
+         PUBLIC "-//W3C//ENTITIES XHTML Datatypes 1.0//EN"
+         "http://www.w3.org/TR/xhtml-modularization/DTD/xhtml-datatypes-1.mod" &gt;
+%xhtml-datatypes.mod;
+
+&lt;!-- Wprowadź nazwy kwalifikowane --&gt;
+&lt;!ENTITY % Inventory-qname.mod SYSTEM "inventory-qname-1.mod" &gt;
+%Inventory-qname.mod;
+
+&lt;!ENTITY % NS.decl.attrib "%Inventory.xmlns.extra.attrib;"&gt;
+
+&lt;!ENTITY % Inventory.mod SYSTEM "inventory-1.mod" &gt;
+%Inventory.mod;
+
+&lt;!-- koniec pliku inventory-1.dtd --&gt;
+
+</pre>
+
+<p>Do tego DTD mogą się później odwoływać dokumenty, które używają tylko elementów z twojego modułu:</p>
+
+<pre class="dtd">
+&lt;!DOCTYPE shelf SYSTEM "inventory-1.dtd"&gt;
+&lt;shelf xmlns="http://www.example.com/xmlns/inventory"&gt;
+    &lt;item&gt;
+        &lt;desc&gt;
+          to jest opis
+        &lt;/desc&gt;
+        &lt;sku&gt;
+          to jest unikatowy kod towaru
+        &lt;/sku&gt;
+        &lt;price&gt;
+          to jest cena
+        &lt;/price&gt;
+    &lt;/item&gt;
+&lt;/shelf&gt;
+
+</pre>
+
+<p>Ta metoda zezwala na definiowanie elementów i atrybutów zawartych wewnątrz swojej własnej przestrzeni nazw. Pozwala też, by twórcy treści używali domyślnego przedrostka dla tych elementów i atrybutów:</p>
+
+<pre class="dtd">
+&lt;!DOCTYPE inventory:shelf SYSTEM "inventory-1.dtd" [
+    &lt;!ENTITY % Inventory.prefixed "INCLUDE"&gt;
+]&gt;
+&lt;inventory:shelf xmlns:inventory="http://www.example.com/xmlns/inventory"&gt;
+    &lt;inventory:item&gt;
+        &lt;inventory:desc&gt;
+          to jest opis
+        &lt;/inventory:desc&gt;
+        &lt;inventory:sku&gt;
+          to jest unikatowy kod towaru
+        &lt;/inventory:sku&gt;
+        &lt;inventory:price&gt;
+          to jest cena
+        &lt;/inventory:price&gt;
+    &lt;/inventory:item&gt;
+&lt;/inventory:shelf&gt;
+
+</pre>
+
+<p>Egzemplarz dokumentu może używać innego przedrostka przestrzeni nazw XML dzięki powtórnemu zadeklarowaniu go w wewnętrznym podzbiorze nagłówka DOCTYPE:</p>
+
+<pre class="dtd">
+&lt;!DOCTYPE i:shelf SYSTEM "inventory-1.dtd" [
+    &lt;!ENTITY % Inventory.prefixed "INCLUDE"&gt;
+    &lt;!ENTITY % Inventory.prefix "i"&gt;
+]&gt;
+&lt;i:shelf xmlns:i="http://www.example.com/xmlns/inventory"&gt;
+    &lt;i:item&gt;
+        &lt;i:desc&gt;
+          to jest opis
+        &lt;/i:desc&gt;
+        &lt;i:sku&gt;
+          to jest unikatowy kod towaru
+        &lt;/i:sku&gt;
+        &lt;i:price&gt;
+          to jest cena
+        &lt;/i:price&gt;
+    &lt;/i:item&gt;
+&lt;/i:shelf&gt;
+
+</pre>
+
+<h3><a name="sec_D.2.4." id="sec_D.2.4.">D.2.4.</a> Specyficzne własności przestrzeni nazw</h3>
+
+<p>Zaprezentowane tu podejście pozwala na definiowanie języków znaczników zgodnych z XML i przestrzeniami nazw XML, jednak niektóre możliwości zdefiniowane w specyfikacji przestrzeni nazw XML nie są obsługiwane:</p>
+
+<ol>
+<li>
+<p>Przestrzenie nazw XML zezwalają na powtórną deklarację atrybutu xmlns dla przestrzeni nazw w dowolnym punkcie drzewa. Zezwala też, by poprzez redeklarację przełączać pomiędzy użyciem domyślnym przestrzeni nazw (bez przedrostka) a użyciem z przedrostkiem, a także na
+zmianę przedrostka. Metoda zdefiniowana w tym dokumencie nie pozwala na to. W całym egzemplarzu dokumentu dana przestrzeń nazw musi używać tego samego przedrostka albo musi być użyta w domyślnym zakresie.</p>
+</li>
+
+<li>
+<p>Gdy przestrzeń nazw XML używana jest w domyślny sposób (bez przedrostka), dopuszczalne jest informowanie parserów o przestrzeni nazw elementu przy pomocy DTD dokumentu. Jednakże
+dopóki procesory nierozpoznające przestrzeni nazw nie są zobligowane do przyłączania DTD podczas analizowania dokumentu, twórcy treści powinni deklarować przestrzeń nazw XML elementu zawsze, gdy przestrzeń nazw się zmienia:</p>
+
+<pre>
+...
+&lt;p&gt;
+   &lt;myelement xmlns="..." /&gt;
+&lt;/p&gt;
+</pre>
+</li>
+</ol>
+
+<hr />
+
+<div class="navbar">[<a href="schema_module_defs">poprzedni</a>] [<a href="dtd_developing">następny</a>] [<a href="overview#toc">spis treści</a>]
+</div>
+
+
+<table class="stopka"><tr>
+<td class="sle"><a href="../">Strona główna</a></td>
+<td class="spr">Ostatnia modyfikacja: 17 sierpnia 2005</td>
+</tr></table>
+
+</body>
+</html>

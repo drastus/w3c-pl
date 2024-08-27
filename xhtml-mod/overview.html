@@ -1,0 +1,347 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="pl" lang="pl">
+
+<head>
+<title>Modularyzacja XHTML</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="stylesheet" type="text/css" href="../W3C-REC.css" />
+<link rel="stylesheet" type="text/css" href="xhtml.css" />
+<link rel="stylesheet" type="text/css" href="../trans.css" /><script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-35090831-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+</head>
+
+<body>
+
+
+<div class="navbar">[<a href="introduction">następny</a>] [<a href="#toc">spis treści</a>]
+<hr />
+</div>
+
+<div class="trans">
+<h2>Polskie tłumaczenie specyfikacji Modularyzacja XHTML</h2>
+<p>Autor przekładu: <a href="mailto:&#109;&#105;&#99;&#104;&#97;&#108;&#45;&#103;&#111;&#114;&#110;&#121;&#64;&#119;&#112;&#46;&#112;&#108;">Michał Górny</a><br />
+Lokalizacja dokumentu: <a href="http://podziemie.net/w3c/xhtml-mod/overview">http://podziemie.net/w3c/xhtml-mod/overview</a><br />
+Polskie tłumaczenie jest dostępne także jako <a href="xhtml-mod">pojedynczy dokument XHTML</a> (437 kB).</p>
+<p>Dokument ten jest tłumaczeniem rekomendacji W3C <i>Modularization of XHTML™</i>. Przekład jest nienormatywny i może zawierać błędy powstałe podczas tłumaczenia. Status normatywny posiada jedynie wersja w języku angielskim dostępna pod adresem <a href="http://www.w3.org/TR/2001/REC-xhtml-modularization-20010410">http://www.w3.org/TR/2001/REC-xhtml-modularization-20010410</a>.</p>
+<p class="copyright">Ten dokument jest chroniony prawem autorskim. Copyright © 2001 W3C<sup>®</sup> (MIT, INRIA, Keio). Wszelkie prawa zastrzeżone.
+Prawa autorskie zależne: Copyright © Michał Górny, 2003.</p>
+</div>
+
+<div class="head"><a href="http://www.w3.org/"><img src="../w3c_home.gif" alt="W3C" /></a>
+
+<h1><a name="title" id="title"></a> Modularyzacja XHTML™</h1>
+
+<h2><a name="subtitle" id="subtitle"></a> Rekomendacja W3C z 10 kwietnia 2001</h2>
+
+<dl>
+<dt>Ta wersja:</dt>
+
+<dd><a href="http://www.w3.org/TR/2001/REC-xhtml-modularization-20010410">http://www.w3.org/TR/2001/REC-xhtml-modularization-20010410</a><br />
+(<a href="http://www.w3.org/TR/xhtml-modularization/xhtml-modularization.html">pojedynczy plik HTML</a>, <a href="http://www.w3.org/TR/xhtml-modularization/xhtml-modularization.ps">wersja PostScript</a>, <a href="http://www.w3.org/TR/xhtml-modularization/xhtml-modularization.pdf">wersja PDF</a>,
+<a href="http://www.w3.org/TR/xhtml-modularization/xhtml-modularization.zip">archiwum ZIP</a> lub <a href="http://www.w3.org/TR/xhtml-modularization/xhtml-modularization.tgz">zgzipowane archiwum TAR</a>)</dd>
+
+<dt>Ostatnia wersja:</dt>
+
+<dd><a href="http://www.w3.org/TR/xhtml-modularization">http://www.w3.org/TR/xhtml-modularization</a></dd>
+
+<dt>Poprzednia wersja:</dt>
+
+<dd><a href="http://www.w3.org/TR/2001/PR-xhtml-modularization-20010222">http://www.w3.org/TR/2001/PR-xhtml-modularization-20010222</a></dd>
+
+<!--
+<dt>Wersja z zaznaczonymi różnicami:</dt>
+
+<dd><a
+href="http://www.w3.org/TR/xhtml-modularization-diff.html">xhtml-modularization-diff.html</a></dd>
+
+-->
+<dt>Redaktorzy:</dt>
+
+<dd><a href="mailto:altheim@eng.sun.com">Murray Altheim</a>, <a href="http://www.sun.com">Sun Microsystems</a><br />
+<a href="mailto:bckman@ix.netcom.com">Frank Boumphrey</a>, <a href="http://www.hwg.org">HTML Writers Guild</a><br />
+<a href="mailto:dooley@watson.ibm.com">Sam Dooley</a>, <a href="http://www.ibm.com">IBM</a><br />
+<a href="mailto:shane@aptest.com">Shane McCarron</a>, <a href="http://www.aptest.com">Applied Testing and Technology</a><br />
+<a href="mailto:schnitz@mozquito.com">Sebastian Schnitzenbaumer</a>, <a href="http://www.mozquito.com">Mozquito Technologies AG</a><br />
+<a href="mailto:ted.wugofski@openwave.com">Ted Wugofski</a>, <a href="http://www.openwave.com">Openwave</a> (dawniej Gateway)</dd>
+</dl>
+
+<p class="copyright"><a href="http://www.w3.org/Consortium/Legal/ipr-notice-20000612#Copyright">Copyright</a> &#169;2001 <a href="http://www.w3.org/"><abbr title="World Wide Web Consortium">
+W3C</abbr></a><sup>&#174;</sup> (<a href="http://www.lcs.mit.edu/"><abbr title="Massachusetts Institute of Technology">MIT</abbr></a>, <a href="http://www.inria.fr/"><abbr lang="fr" xml:lang="fr"
+title="Institut National de Recherche en Informatique et Automatique">INRIA</abbr></a>, <a href="http://www.keio.ac.jp/">Keio</a>). Wszelkie prawa zastrzeżone. Zastosowanie mają zasady W3C dotyczące <a href="http://www.w3.org/Consortium/Legal/ipr-notice-20000612#Legal_Disclaimer">odpowiedzialności prawnej</a>, <a href="http://www.w3.org/Consortium/Legal/ipr-notice-20000612#W3C_Trademarks">znaku towarowego</a>,
+<a href="http://www.w3.org/Consortium/Legal/copyright-documents-19990405">używania dokumentu</a> i <a href="http://www.w3.org/Consortium/Legal/copyright-software-19980720">licencjonowania oprogramowania</a>.</p>
+
+<hr />
+</div>
+
+<h2><a name="abstract" id="abstract"></a>Streszczenie</h2>
+
+<p>Rekomendacja ta definiuje modularyzację abstrakcyjną XHTML oraz implementację uzyskanej przy jej pomocy abstrakcyjnej informacji przy użyciu definicji typu dokumentu (DTD) XML. Modularyzacja ta dostarcza środków służących
+tworzeniu podzbiorów i rozszerzaniu XHTML, cechy potrzebnej do rozszerzenia bogactwa XHTML na rozwijające się platformy.</p>
+
+<h2><a name="status" id="status"></a>Status tego dokumentu</h2>
+
+<p><em>Ten rozdział opisuje status tego dokumentu w momencie jego publikacji. Inne dokumenty mogą zastąpić ten dokument. Aktualny status dokumentów z tej serii jest dostępny na stronach W3C.</em></p>
+
+<p>Ten dokument został zaopiniowany przez Członków W3C i inne zainteresowane strony oraz został zatwierdzony przez Dyrektora jako Rekomendacja W3C. Jest to stabilny dokument i może być używany jako materiał odwoławczy lub cytowany jako odnośnik normatywny przez inny dokument.
+Rolą W3C w tworzeniu tej Rekomendacji jest przyciągnięcie do specyfikacji uwagi osób trzecich i wypromowanie jej w powszechnym użyciu. Rozszerzy to funkcjonalność Internetu i zwiększy możliwości wzajemnego współdziałania w jego ramach.</p>
+
+<p>Ten dokument został stworzony przez <a href="http://www.w3.org/MarkUp/Group/">W3C HTML Working Group</a> (<em><a href="http://cgi.w3.org/MemberAccess/AccessRequest">tylko dla członków</a></em>) jako
+część działalności <a href="http://www.w3.org/MarkUp/">W3C HTML Activity</a>. Cele HTML Working Group są opisane w <a href="http://www.w3.org/MarkUp/2000/Charter">statucie Grupy Roboczej do spraw HTML</a>.
+W sprawach pracy W3C nad HTML proszę kontaktować się z <a href="mailto:mimasa@w3.org">Masayasu Ishikawą</a>.</p>
+
+<p>Publiczna debata na temat HTML odbywa się na liście dyskusyjnej <a href="mailto:www-html@w3.org">www-html@w3.org</a> (<a href="http://lists.w3.org/Archives/Public/www-html/">archiwum</a>). By ją subskrybować, wyślij e-mail na adres
+<a href="mailto:www-html-request@w3.org">www-html-request@w3.org</a> z wyrazem<em> subscribe </em>w polu Temat.</p>
+
+<p>Błędy w tym dokumencie proszę zgłaszać na adres <a href="mailto:www-html-editor@w3.org">www-html-editor@w3.org</a> (<a href="http://lists.w3.org/Archives/Public/www-html-editor/">archiwum</a>).
+Lista <a href="http://www.w3.org/2001/04/REC-xhtml-modularization-20010410-errata">znanych błędów</a> w tej specyfikacji jest dostępna pod adresem
+http://www.w3.org/2001/04/REC-xhtml-modularization-20010410-errata.</p>
+
+<p>Angielska wersja tej specyfikacji jest jedyną wersją normatywną. Informacja o <a href="http://www.w3.org/MarkUp/translations">tłumaczeniach tego dokumentu</a> jest dostępna
+pod adresem http://www.w3.org/MarkUp/translations.</p>
+
+<p>Listę aktualnych Rekomendacji W3C oraz innych dokumentów technicznych można znaleźć pod adresem <a href="http://www.w3.org/TR">http://www.w3.org/TR</a>.</p>
+
+<h1><a name="toc" id="toc"></a>Krótki spis treści</h1>
+
+<div class="toc">
+<ul class='toc'>
+<li class='tocline'>1. <a href="introduction#s_intro" class="tocxref">Wprowadzenie</a></li>
+<li class='tocline'>2. <a href="terms#a_terms" class="tocxref">Terminy i definicje</a></li>
+<li class='tocline'>3. <a href="conformance#s_conform" class="tocxref">Definicja zgodności ze standardem</a></li>
+<li class='tocline'>4. <a href="abstraction#s_abstraction" class="tocxref">Definiowanie modułów abstrakcyjnych</a></li>
+<li class='tocline'>5. <a href="abstract_modules#s_xhtmlmodules" class="tocxref">Moduły abstrakcyjne XHTML</a></li>
+<li class='tocline'>A. <a href="schema_module_rules#a_schema_module_rules" class="tocxref">Konstruowanie modułów Schema</a></li>
+<li class='tocline'>B. <a href="schema_developing#a_schema_developing" class="tocxref">Opracowywanie Schema ze zdefiniowanymi i rozszerzonymi modułami</a></li>
+<li class='tocline'>C. <a href="schema_module_defs#a_schema_module_defs" class="tocxref">Implementacje modułów XHTML w Schema</a></li>
+<li class='tocline'>D. <a href="dtd_module_rules#s_dtd_module_rules" class="tocxref">Konstruowanie modułów DTD</a></li>
+<li class='tocline'>E. <a href="dtd_developing#s_developingdtds" class="tocxref">Opracowywanie DTD ze zdefiniowanymi i rozszerzonymi modułami</a></li>
+<li class='tocline'>F. <a href="dtd_module_defs#a_dtd_module_defs" class="tocxref">Implementacje modułów XHTML w DTD</a></li>
+<li class='tocline'>G. <a href="references#a_refs" class="tocxref">Bibliografia</a></li>
+<li class='tocline'>H. <a href="goals#s_intro_design" class="tocxref">Cele projektowe</a></li>
+<li class='tocline'>J. <a href="acknowledgements#a_acks" class="tocxref">Podziękowania</a></li>
+</ul>
+</div>
+
+<h1><a name="contents" id="contents"></a>Pełny spis treści</h1>
+
+<div class="toc">
+<ul class='toc'>
+<li class='tocline'>1. <a href="introduction#s_intro" class="tocxref">Wprowadzenie</a>
+<ul class="toc">
+<li class='tocline'>1.1. <a href="introduction#s_intro_whatisxhtml" class="tocxref">Czym jest XHTML?</a></li>
+<li class='tocline'>1.2. <a href="introduction#s_intro_whatismod" class="tocxref">Czym jest modularyzacja XHTML?</a></li>
+<li class='tocline'>1.3. <a href="introduction#s_intro_xhtml_mods" class="tocxref">Po co modularyzować XHTML?</a>
+<ul class="toc">
+<li class='tocline'>1.3.1. <a href="introduction#s_intro_abstract" class="tocxref">Moduły abstrakcyjne</a></li>
+<li class='tocline'>1.3.2. <a href="introduction#s_intro_module_implementation" class="tocxref">Implementacje modułów</a></li>
+<li class='tocline'>1.3.3. <a href="introduction#s_intro_hybrid" class="tocxref">Hybrydowe typy dokumentów</a></li>
+<li class='tocline'>1.3.4. <a href="introduction#s_intro_validation" class="tocxref">Walidacja</a></li>
+<li class='tocline'>1.3.5. <a href="introduction#s_intro_formatting" class="tocxref">Model formatowania</a></li>
+</ul></li>
+</ul></li>
+
+<li class='tocline'>2. <a href="terms#a_terms" class="tocxref">Terminy i definicje</a></li>
+
+<li class='tocline'>3. <a href="conformance#s_conform" class="tocxref">Definicja zgodności ze standardem</a>
+<ul class="toc">
+<li class='tocline'>3.1. <a href="conformance#s_conform_document_type" class="tocxref">Zgodność typów dokumentu ze standardem XHTML Host Language</a></li>
+<li class='tocline'>3.2. <a href="conformance#s_integration_document_type" class="tocxref">Zgodność typów dokumentu ze standardem XHTML Integration Set</a></li>
+<li class='tocline'>3.3. <a href="conformance#s_conform_module" class="tocxref">Zgodność ze standardem modułów rodziny XHTML</a></li>
+<li class='tocline'>3.4. <a href="conformance#s_conform_document" class="tocxref">Zgodność ze standardem dokumentów rodziny XHTML</a></li>
+<li class='tocline'>3.5. <a href="conformance#s_conform_user_agent" class="tocxref">Zgodność ze standardem programów użytkownika rodziny XHTML</a></li>
+<li class='tocline'>3.6. <a href="conformance#s_conform_naming_rules" class="tocxref">Reguły nazewnictwa</a></li>
+<li class='tocline'>3.7. <a href="conformance#s_conform_commitment" class="tocxref">Rozwijanie modułów XHTML</a></li>
+</ul></li>
+
+<li class='tocline'>4. <a href="abstraction#s_abstraction" class="tocxref">Definiowanie modułów abstrakcyjnych</a>
+<ul class="toc">
+<li class='tocline'>4.1. <a href="abstraction#sec_4.1." class="tocxref">Konwencje składniowe</a></li>
+<li class='tocline'>4.2. <a href="abstraction#s_common_types" class="tocxref">Typy zawartości</a></li>
+<li class='tocline'>4.3. <a href="abstraction#s_common_attrtypes" class="tocxref">Typy atrybutów</a></li>
+<li class='tocline'>4.4. <a href="abstraction#sec_4.4." class="tocxref">Przykładowa definicja modułu abstrakcyjnego</a>
+<ul class="toc">
+<li class='tocline'>4.4.1. <a href="abstraction#sec_4.4.1." class="tocxref">Moduł XHTML Narciarstwo</a></li>
+</ul></li>
+</ul></li>
+
+<li class='tocline'>5. <a href="abstract_modules#s_xhtmlmodules" class="tocxref">Moduły abstrakcyjne XHTML</a>
+<ul class="toc">
+<li class='tocline'>5.1. <a href="abstract_modules#s_commonatts" class="tocxref">Zestawy atrybutów</a></li>
+<li class='tocline'>5.2. <a href="abstract_modules#sec_5.2." class="tocxref">Moduły jądra</a>
+<ul class="toc">
+<li class='tocline'>5.2.1. <a href="abstract_modules#s_structuremodule" class="tocxref">Moduł struktury &#8212; Structure</a></li>
+<li class='tocline'>5.2.2. <a href="abstract_modules#s_textmodule" class="tocxref">Moduł tekstu &#8212; Text</a></li>
+<li class='tocline'>5.2.3. <a href="abstract_modules#s_hypertextmodule" class="tocxref">Moduł hipertekstu &#8212; Hypertext</a></li>
+<li class='tocline'>5.2.4. <a href="abstract_modules#s_listmodule" class="tocxref">Moduł wykazów &#8212; List</a></li>
+</ul></li>
+<li class='tocline'>5.3. <a href="abstract_modules#s_appletmodule" class="tocxref">Moduł apletu &#8212; Applet</a></li>
+<li class='tocline'>5.4. <a href="abstract_modules#s_text" class="tocxref">Moduły rozszerzeń tekstu</a>
+<ul class="toc">
+<li class='tocline'>5.4.1. <a href="abstract_modules#s_presentationmodule" class="tocxref">Moduł prezentacji &#8212; Presentation</a></li>
+<li class='tocline'>5.4.2. <a href="abstract_modules#s_editmodule" class="tocxref">Moduł edycji &#8212; Edit</a></li>
+<li class='tocline'>5.4.3. <a href="abstract_modules#s_bdomodule" class="tocxref">Moduł tekstu dwukierunkowego &#8212; Bi-directional Text</a></li>
+</ul></li>
+<li class='tocline'>5.5. <a href="abstract_modules#s_forms" class="tocxref">Moduły formularzy</a>
+<ul class="toc">
+<li class='tocline'>5.5.1. <a href="abstract_modules#s_sformsmodule" class="tocxref">Moduł prostych formularzy &#8212; Basic Forms</a></li>
+<li class='tocline'>5.5.2. <a href="abstract_modules#s_extformsmodule" class="tocxref">Moduł formularzy &#8212; Forms</a></li>
+</ul></li>
+<li class='tocline'>5.6. <a href="abstract_modules#sec_5.6." class="tocxref">Moduły tabel</a>
+<ul class="toc">
+<li class='tocline'>5.6.1. <a href="abstract_modules#s_simpletablemodule" class="tocxref">Moduł prostych tabel &#8212; Basic Tables</a></li>
+<li class='tocline'>5.6.2. <a href="abstract_modules#s_tablemodule" class="tocxref">Moduł tabel &#8212; Tables</a></li>
+</ul></li>
+<li class='tocline'>5.7. <a href="abstract_modules#s_imagemodule" class="tocxref">Moduł obrazów &#8212; Image</a></li>
+<li class='tocline'>5.8. <a href="abstract_modules#s_imapmodule" class="tocxref">Moduł map obrazkowych po stronie klienta &#8212; Client-side Image Map</a></li>
+<li class='tocline'>5.9. <a href="abstract_modules#s_servermapmodule" class="tocxref">Moduł map obrazkowych po stronie serwera &#8212; Server-side Image Map</a></li>
+<li class='tocline'>5.10. <a href="abstract_modules#s_objectmodule" class="tocxref">Moduł obiektu &#8212; Object</a></li>
+<li class='tocline'>5.11. <a href="abstract_modules#s_framesmodule" class="tocxref">Moduł ramek &#8212; Frames</a></li>
+<li class='tocline'>5.12. <a href="abstract_modules#s_targetmodule" class="tocxref">Moduł celu &#8212; Target</a></li>
+<li class='tocline'>5.13. <a href="abstract_modules#s_iframemodule" class="tocxref">Moduł ramek pływających &#8212; Iframe</a></li>
+<li class='tocline'>5.14. <a href="abstract_modules#s_intrinsiceventsmodule" class="tocxref">Moduł zdarzeń wewnętrznych &#8212; Intrinsic Events</a></li>
+<li class='tocline'>5.15. <a href="abstract_modules#s_metamodule" class="tocxref">Moduł metainformacji &#8212; Metainformation</a></li>
+<li class='tocline'>5.16. <a href="abstract_modules#s_scriptmodule" class="tocxref">Moduł skryptów &#8212; Scripting</a></li>
+<li class='tocline'>5.17. <a href="abstract_modules#s_stylemodule" class="tocxref">Moduł arkuszy stylów &#8212; Style Sheet</a></li>
+<li class='tocline'>5.18. <a href="abstract_modules#s_styleattributemodule" class="tocxref">Moduł atrybutu stylów &#8212; Style Attribute</a></li>
+<li class='tocline'>5.19. <a href="abstract_modules#s_linkmodule" class="tocxref">Moduł łączy &#8212; Link</a></li>
+<li class='tocline'>5.20. <a href="abstract_modules#s_basemodule" class="tocxref">Moduł bazy &#8212; Base</a></li>
+<li class='tocline'>5.21. <a href="abstract_modules#s_nameidentmodule" class="tocxref">Moduł identyfikacji nazw &#8212; Name Identification</a></li>
+<li class='tocline'>5.22. <a href="abstract_modules#s_legacymodule" class="tocxref">Moduł staroci &#8212; Legacy</a></li>
+</ul></li>
+
+<li class='tocline'>A. <a href="schema_module_rules#a_schema_module_rules" class="tocxref">Konstruowanie modułów Schema</a></li>
+
+<li class='tocline'>B. <a href="schema_developing#a_schema_developing" class="tocxref">Opracowywanie Schema ze zdefiniowanymi i rozszerzonymi modułami</a></li>
+
+<li class='tocline'>C. <a href="schema_module_defs#a_schema_module_defs" class="tocxref">Implementacje modułów XHTML w Schema</a></li>
+
+<li class='tocline'>D. <a href="dtd_module_rules#s_dtd_module_rules" class="tocxref">Konstruowanie modułów DTD</a>
+<ul class="toc">
+<li class='tocline'>D.1. <a href="dtd_module_rules#s_dtdrules_PEs" class="tocxref">Nazywanie encji parametrycznych</a></li>
+<li class='tocline'>D.2. <a href="dtd_module_rules#s_module_namespace" class="tocxref">Definiowanie przestrzeni nazw modułu</a>
+<ul class="toc">
+<li class='tocline'>D.2.1. <a href="dtd_module_rules#qnames" class="tocxref">Podmoduł nazw kwalifikowanych</a></li>
+<li class='tocline'>D.2.2. <a href="dtd_module_rules#declaration" class="tocxref">Podmoduł(y) deklaracji</a></li>
+<li class='tocline'>D.2.3. <a href="dtd_module_rules#stand_alone" class="tocxref">Używanie modułu jako samodzielnego DTD</a></li>
+<li class='tocline'>D.2.4. <a href="dtd_module_rules#sec_D.2.4." class="tocxref">Specyficzne własności przestrzeni nazw</a></li>
+</ul></li>
+</ul></li>
+
+<li class='tocline'>E. <a href="dtd_developing#s_developingdtds" class="tocxref">Opracowywanie DTD ze zdefiniowanymi i rozszerzonymi modułami</a>
+<ul class="toc">
+<li class='tocline'>E.1. <a href="dtd_developing#s_dev_attrs" class="tocxref">Definiowanie dodatkowych atrybutów</a></li>
+<li class='tocline'>E.2. <a href="dtd_developing#s_dev_elems" class="tocxref">Definiowanie dodatkowych elementów</a></li>
+<li class='tocline'>E.3. <a href="dtd_developing#s_dev_contentmodel" class="tocxref">Definiowanie modelu zawartości dla zestawu modułów</a>
+<ul class="toc">
+<li class='tocline'>E.3.1. <a href="dtd_developing#sec_E.3.1." class="tocxref">Włączanie samodzielnego modułu do XHTML</a></li>
+<li class='tocline'>E.3.2. <a href="dtd_developing#sec_E.3.2." class="tocxref">Mieszanie nowego modułu ze wszystkimi modułami XHTML</a></li>
+</ul></li>
+<li class='tocline'>E.4. <a href="dtd_developing#sec_E.4." class="tocxref">Tworzenie nowego DTD</a>
+<ul class="toc">
+<li class='tocline'>E.4.1. <a href="dtd_developing#sec_E.4.1." class="tocxref">Tworzenie prostego DTD</a></li>
+<li class='tocline'>E.4.2. <a href="dtd_developing#sec_E.4.2." class="tocxref">Tworzenie DTD poprzez rozszerzanie XHTML</a></li>
+<li class='tocline'>E.4.3. <a href="dtd_developing#sec_E.4.3." class="tocxref">Tworzenie DTD poprzez usuwanie i zamienianie modułów XHTML</a></li>
+<li class='tocline'>E.4.4. <a href="dtd_developing#sec_E.4.4." class="tocxref">Tworzenie nowego DTD</a></li>
+</ul></li>
+<li class='tocline'>E.5. <a href="dtd_developing#sec_E.5." class="tocxref">Używanie nowego DTD</a></li>
+</ul></li>
+
+<li class='tocline'>F. <a href="dtd_module_defs#a_dtd_module_defs" class="tocxref">Implementacje modułów XHTML w DTD</a>
+<ul class="toc">
+<li class='tocline'>F.1. <a href="dtd_module_defs#a_xhtml_character_entities" class="tocxref">Encje znakowe XHTML</a>
+<ul class="toc">
+<li class='tocline'>F.1.1. <a href="dtd_module_defs#a_module_XHTML_Latin_1_Character_Entities" class="tocxref">Encje znakowe alfabetu łacińskiego 1 dla XHTML</a></li>
+<li class='tocline'>F.1.2. <a href="dtd_module_defs#a_module_XHTML_Special_Characters" class="tocxref">Znaki specjalne dla XHTML</a></li>
+<li class='tocline'>F.1.3. <a href="dtd_module_defs#a_module_XHTML_Mathematical__Greek__and_Symbolic_Characters" class="tocxref">Znaki matematyczne, greckie i symbole dla XHTML</a></li>
+</ul></li>
+<li class='tocline'>F.2. <a href="dtd_module_defs#a_xhtml_framework" class="tocxref">Modularne zasady ogólne XHTML</a>
+<ul class="toc">
+<li class='tocline'>F.2.1. <a href="dtd_module_defs#a_module_XHTML_Base_Architecture" class="tocxref">Architektura zasadnicza XHTML</a></li>
+<li class='tocline'>F.2.2. <a href="dtd_module_defs#a_module_XHTML_Notations" class="tocxref">Notacje XHTML</a></li>
+<li class='tocline'>F.2.3. <a href="dtd_module_defs#a_module_XHTML_Datatypes" class="tocxref">Typy danych XHTML</a></li>
+<li class='tocline'>F.2.4. <a href="dtd_module_defs#a_module_XHTML_Common_Attribute_Definitions" class="tocxref">Definicje atrybutów wspólnych XHTML</a></li>
+<li class='tocline'>F.2.5. <a href="dtd_module_defs#a_module_XHTML_Qualified_Names" class="tocxref">Nazwy kwalifikowane XHTML</a></li>
+<li class='tocline'>F.2.6. <a href="dtd_module_defs#a_module_XHTML_Character_Entities" class="tocxref">Encje znakowe XHTML</a></li>
+</ul></li>
+<li class='tocline'>F.3. <a href="dtd_module_defs#a_dtdspecial" class="tocxref">Implementacje modułów XHTML</a>
+<ul class="toc">
+<li class='tocline'>F.3.1. <a href="dtd_module_defs#a_modules_basicmods" class="tocxref">Moduły jądra XHTML</a></li>
+<li class='tocline'>F.3.2. <a href="dtd_module_defs#a_module_Applet" class="tocxref">Aplet</a></li>
+<li class='tocline'>F.3.3. <a href="dtd_module_defs#a_textmodule" class="tocxref">Moduły tekstowe</a></li>
+<li class='tocline'>F.3.4. <a href="dtd_module_defs#sec_F.3.4." class="tocxref">Formularze</a></li>
+<li class='tocline'>F.3.5. <a href="dtd_module_defs#sec_F.3.5." class="tocxref">Tabele</a></li>
+<li class='tocline'>F.3.6. <a href="dtd_module_defs#a_module_Image" class="tocxref">Obrazy</a></li>
+<li class='tocline'>F.3.7. <a href="dtd_module_defs#a_module_Client-side_Image_Map" class="tocxref">Mapy obrazkowe po stronie klienta</a></li>
+<li class='tocline'>F.3.8. <a href="dtd_module_defs#a_module_Server-side_Image_Map" class="tocxref">Mapy obrazkowe po stronie serwera</a></li>
+<li class='tocline'>F.3.9. <a href="dtd_module_defs#a_module_Object" class="tocxref">Obiekt</a></li>
+<li class='tocline'>F.3.10. <a href="dtd_module_defs#a_module_Frames" class="tocxref">Ramki</a></li>
+<li class='tocline'>F.3.11. <a href="dtd_module_defs#a_module_Target" class="tocxref">Cel</a></li>
+<li class='tocline'>F.3.12. <a href="dtd_module_defs#a_module_Iframe" class="tocxref">Ramki pływające</a></li>
+<li class='tocline'>F.3.13. <a href="dtd_module_defs#a_module_Intrinsic_Events" class="tocxref">Zdarzenia wewnętrzne</a></li>
+<li class='tocline'>F.3.14. <a href="dtd_module_defs#a_module_Metainformation" class="tocxref">Metainformacje</a></li>
+<li class='tocline'>F.3.15. <a href="dtd_module_defs#a_module_Scripting" class="tocxref">Skrypty</a></li>
+<li class='tocline'>F.3.16. <a href="dtd_module_defs#a_module_Style_Sheet" class="tocxref">Arkusze stylów</a></li>
+<li class='tocline'>F.3.17. <a href="dtd_module_defs#a_module_Style_Attribute" class="tocxref">Atrybut stylu</a></li>
+<li class='tocline'>F.3.18. <a href="dtd_module_defs#a_module_Link" class="tocxref">Łącza</a></li>
+<li class='tocline'>F.3.19. <a href="dtd_module_defs#a_module_Base" class="tocxref">Baza</a></li>
+<li class='tocline'>F.3.20. <a href="dtd_module_defs#a_module_Name_Identification" class="tocxref">Identyfikacja nazw</a></li>
+<li class='tocline'>F.3.21. <a href="dtd_module_defs#a_module_Legacy" class="tocxref">Starocie</a></li>
+</ul></li>
+<li class='tocline'>F.4. <a href="dtd_module_defs#a_dtdsupport" class="tocxref">Moduły pomocnicze DTD XHTML</a>
+<ul class="toc">
+<li class='tocline'>F.4.1. <a href="dtd_module_defs#a_module_Block_Phrasal" class="tocxref">Frazowe elementy blokowe</a></li>
+<li class='tocline'>F.4.2. <a href="dtd_module_defs#a_module_Block_Presentational" class="tocxref">Prezentacyjne elementy blokowe</a></li>
+<li class='tocline'>F.4.3. <a href="dtd_module_defs#a_module_Block_Structural" class="tocxref">Strukturalne elementy blokowe</a></li>
+<li class='tocline'>F.4.4. <a href="dtd_module_defs#a_module_Inline_Phrasal" class="tocxref">Frazowe elementy wewnątrzwierszowe</a></li>
+<li class='tocline'>F.4.5. <a href="dtd_module_defs#a_module_Inline_Presentational" class="tocxref">Prezentacyjne elementy wewnątrzwierszowe</a></li>
+<li class='tocline'>F.4.6. <a href="dtd_module_defs#a_module_Inline_Structural" class="tocxref">Strukturalne elementy wewnątrzwierszowe</a></li>
+<li class='tocline'>F.4.7. <a href="dtd_module_defs#a_module_Param" class="tocxref">Param</a></li>
+<li class='tocline'>F.4.8. <a href="dtd_module_defs#a_module_Legacy_Redeclarations" class="tocxref">Powtórne deklaracje staroci</a></li>
+</ul></li>
+</ul></li>
+
+<li class='tocline'>G. <a href="references#a_refs" class="tocxref">Bibliografia</a>
+<ul class="toc">
+<li class='tocline'>G.1. <a href="references#a_normrefs" class="tocxref">Odnośniki normatywne</a></li>
+<li class='tocline'>G.2. <a href="references#a_inforefs" class="tocxref">Odnośniki informacyjne</a></li>
+</ul></li>
+
+<li class='tocline'>H. <a href="goals#s_intro_design" class="tocxref">Cele projektowe</a>
+<ul class="toc">
+<li class='tocline'>H.1. <a href="goals#s_intro_requirements" class="tocxref">Wymagania</a>
+<ul class="toc">
+<li class='tocline'>H.1.1. <a href="goals#s_req_granularity" class="tocxref">Ziarnistość</a></li>
+<li class='tocline'>H.1.2. <a href="goals#s_req_composibility" class="tocxref">Złożoność</a></li>
+<li class='tocline'>H.1.3. <a href="goals#s_req_easeofuse" class="tocxref">Łatwość użycia</a></li>
+<li class='tocline'>H.1.4. <a href="goals#s_req_compatibility" class="tocxref">Kompatybilność</a></li>
+<li class='tocline'>H.1.5. <a href="goals#s_req_conformance" class="tocxref">Zgodność ze standardem</a></li>
+</ul></li>
+</ul></li>
+
+<li class='tocline'>J. <a href="acknowledgements#a_acks" class="tocxref">Podziękowania</a></li>
+</ul>
+</div>
+
+<hr />
+
+<div class="navbar">[<a href="introduction">następny</a>] [<a href="#toc">spis treści</a>]
+</div>
+
+
+<table class="stopka"><tr>
+<td class="sle"><a href="../">Strona główna</a></td>
+<td class="spr">Ostatnia modyfikacja: 17 sierpnia 2005</td>
+</tr></table>
+
+</body>
+</html>

@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="pl" lang="pl">
+
+<head>
+<title>Modularyzacja XHTML – Terminy i definicje</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="stylesheet" type="text/css" href="../W3C-REC.css" />
+<link rel="stylesheet" type="text/css" href="xhtml.css" />
+<link rel="stylesheet" type="text/css" href="../trans.css" /><script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-35090831-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+</head>
+
+<body>
+
+
+<div class="navbar">[<a href="introduction">poprzedni</a>] [<a href="conformance">następny</a>] [<a href="overview#toc">spis treści</a>]
+<hr />
+</div>
+
+<h1><a name="a_terms" id="a_terms">2.</a> Terminy i definicje</h1>
+
+<p>Ten rozdział ma charakter<em> informacyjny</em>.</p>
+
+<p>Niektóre z terminów są definiowane na miejscu, natomiast poniższe definicje używane są w całym dokumencie. Zaznajomienie się z Rekomendacją W3C XML 1.0 <a href="references#ref_xml">[XML]</a> jest szczególnie zalecane.</p>
+
+<dl class="termlist">
+<dt>definicja typu dokumentu (DTD, ang. <i xml:lang="en" lang="en">document type definition</i>)</dt>
+
+<dd>formalne, odczytywalne przez maszyny wyrażenie struktury XML i reguł składniowych, z którymi egzemplarz dokumentu określonego typu dokumentu musi być zgodny; typ schematu używany XML 1.0 do sprawdzania
+poprawności strukturalnej egzemplarza dokumentu pod względem zadeklarowanego typu dokumentu. Ten sam model oznakowania może być wyrażony przez wiele różnych DTD.</dd>
+
+<dt>deklaracja oznakowania (ang. <i xml:lang="en" lang="en">markup declaration</i>)</dt>
+
+<dd>konstrukcja składniowa wewnątrz DTD deklarująca encję lub definiująca strukturę oznakowania. W ramach DTD XML są określone cztery typy: deklaracja encji definiuje powiązanie pomiędzy mnemonicznym
+symbolem a jej zawartością zastępującą; deklaracja elementu zawiera ograniczenia, które z typów elementów mogą pojawić się jako jako elementy potomne wewnątrz elementu (zobacz też:  model zawartości); deklaracja wykazu atrybutów
+definiuje zbiór atrybutów dla danego typu elementu i może też ustanowić ograniczenia dotyczące typu atrybutów i wartości domyślne; deklaracja notacji definiuje powiązanie pomiędzy nazwą notacji a zewnętrznym
+identyfikatorem odnoszącym się do formatu nieparsowanej encji.</dd>
+
+<dt>dokument hybrydowy (ang. <i xml:lang="en" lang="en">hybrid document</i>)</dt>
+
+<dd>dokument hybrydowy to dokument korzystający z więcej niż jednej przestrzeni nazw XML. Dokumenty hybrydowe mogą być definiowane jako dokumenty zawierające elementy lub atrybuty z hybrydowych typów dokumentu.</dd>
+
+<dt>element</dt>
+
+<dd>egzemplarz typu elementu.</dd>
+
+<dt>encja (ang. <i xml:lang="en" lang="en">entity</i>)</dt>
+
+<dd>encja to logiczna lub fizyczna jednostka przechowywania zawierająca treść dokumentu. Encje mogą składać się z parsowalnego oznakowania XML, danych znakowych lub nieparsowanej (np. nie-XML-owej, być może nietekstowej)
+zawartości. Zawartość encji może być zdefiniowana albo całkowicie wewnątrz encji dokumentu (&#8222;encje wewnętrzne&#8221;), albo na zewnątrz encji dokumentu (&#8222;encje zewnętrzne&#8221;). W encjach parsowanych tekst zastępujący
+może zawierać odwołania do innych encji.</dd>
+
+<dt>encja parametryczna (ang. <i xml:lang="en" lang="en">parameter entity</i>)</dt>
+
+<dd>encja, której zakres użycia mieści się wewnątrz prologu dokumentu (tj. zewnętrznym lub wewnętrznym podzbiorze DTD). Encje parametryczne są niedozwolone wewnątrz egzemplarza dokumentu.</dd>
+
+<dt>identyfikator ogólny (ang. <i xml:lang="en" lang="en">generic identifier</i>)</dt>
+
+<dd>nazwa identyfikująca typ danego elementu. Także nazwa typu elementu.</dd>
+
+<dt>model dokumentu (ang. <i xml:lang="en" lang="en">document model</i>)</dt>
+
+<dd>faktyczna struktura i ograniczenia danego typu dokumentu. Model dokumentu stanowi abstrakcyjną reprezentację fizycznych lub semantycznych struktur klasy dokumentów.</dd>
+
+<dt>model modularyzacji (ang. <i xml:lang="en" lang="en">modularization model</i>)</dt>
+
+<dd>abstrakcyjny projekt definicji typu dokumentu (DTD) służący osiągnięciu celów modularyzacji, takich jak: możliwość powtórnego użycia, rozszerzalność, ekspresywność, łatwość dokumentowania, wielkość kodu, spójność i
+intuicyjność użytkowania. Ważne, by zaznaczyć, że model modularyzacji jest tylko pośrednio powiązany z opisywanym przez niego modelem dokumentu, więc dwa bardzo
+różne modele modularyzacji mogą opisywać ten sam typ dokumentu.</dd>
+
+<dt>model oznakowania (ang. <i xml:lang="en" lang="en">markup model</i>)</dt>
+
+<dd>słownik oznakowania (tj. zbiór nazw elementów i atrybutów, notacji, itd.) i gramatyka (tj. nakazany sposób używania tego słownika) zdefiniowane przez definicję typu dokumentu (tj. schemat).
+Model oznakowania jest konkretną reprezentacją w składni oznakowania modelu dokumentu i może być zdefiniowany na różnych poziomach zgodności ze standardem. Ten sam model dokumentu może być wyrażony przez wiele różnych modelów oznakowania.</dd>
+
+<dt>model zawartości (ang. <i xml:lang="en" lang="en">content model</i>)</dt>
+
+<dd>zadeklarowana struktura oznakowania dozwolona wewnątrz egzemplarzy typu elementu. XML 1.0 rozróżnia dwa typy: elementy zawierające tylko zawartość elementu (żadnych danych znakowych) oraz zawartość mieszaną
+(elementy, które mogą zawierać dane znakowe opcjonalnie urozmaicone elementami potomnymi). Te ostatnie charakteryzowane są przez określenie zawartości rozpoczynające się łańcuchem &#8222;#PCDATA&#8221; (co oznacza dane znakowe).</dd>
+
+<dt>modularyzacja (ang. <i xml:lang="en" lang="en">modularization</i>)</dt>
+
+<dd>implementacja modelu modularyzacji; proces łączenia lub dzielenia DTD poprzez rozdzielenie jego deklaracji oznakowania na jednostki lub grupy dla osiągnięcia określonych celów. Moduły mogą, lecz nie muszą
+być oddzielnymi encjami plikowymi (tj. fizyczne i logiczne struktury DTD mogą się wzajemnie odzwierciedlać, lecz nie jest to konieczne).</dd>
+
+<dt>moduł (ang. <i xml:lang="en" lang="en">module</i>)</dt>
+
+<dd>abstrakcyjna jednostka wchodząca w skład modelu dokumentu wyrażona jako fragment DTD, używana do konsolidowania deklaracji oznakowania w celu zwiększenia elastyczności, modyfikowalności, możliwości powtórnego użycia i zrozumienia określonych
+logicznych lub semantycznych struktur.</dd>
+
+<dt>moduł abstrakcyjny (ang. <i xml:lang="en" lang="en">abstract module</i>)</dt>
+
+<dd>jednostka specyfikacji typu dokumentu odnosząca się do odrębnego rodzaju zawartości, odpowiadająca konstrukcji oznakowania odzwierciedlającej ten odrębny typ.</dd>
+
+<dt>odwołanie do encji (ang. <i xml:lang="en" lang="en">entity reference</i>)</dt>
+
+<dd>łatwy do zapamiętania <span class="trans" title="Przypis tłumacza">[dla użytkownika języka angielskiego]</span> łańcuch używany jako odwołanie do zawartości zadeklarowanej encji (np. <code>&amp;amp;</code> dla &#8222;&amp;&#8221;, <code>&amp;lt;</code> dla &#8222;&lt;&#8221;, <code>&amp;copy;</code> dla &#8222;&#169;&#8221;).</dd>
+
+<dt>rodzicielski typ dokumentu (ang. <i xml:lang="en" lang="en">parent document type</i>)</dt>
+
+<dd>rodzicielski typ dokumentu dokumentu hybrydowego to typ dokumentu elementu głównego.</dd>
+
+<dt>rozwijać (ang. <i xml:lang="en" lang="en">instantiate</i>)</dt>
+
+<dd>zamieniać odwołanie do encji na egzemplarz jej zadeklarowanej zawartości.</dd>
+
+<dt>sterownik (ang. <i xml:lang="en" lang="en">driver</i>)</dt>
+
+<dd>zazwyczaj niewielki plik używany do deklarowania i rozwijania modułów DTD. Dobrze jest przyjąć regułę, że sterownik DTD nie zawiera żadnych deklaracji oznakowania stanowiących jakąkolwiek część modelu dokumentu.</dd>
+
+<dt>typ dokumentu (ang. <i xml:lang="en" lang="en">document type</i>)</dt>
+
+<dd>klasa dokumentów posiadających wspólną abstrakcyjną strukturę. Definicja ISO 8879 <a href="references#ref_sgml">[SGML]</a> jest następująca: &#8222;klasa dokumentów mających podobne
+właściwości, na przykład dziennik, artykuł, podręcznik czy notatka. (4.102)&#8221;</dd>
+
+<dt>typ elementu (ang. <i xml:lang="en" lang="en">element type</i>)</dt>
+
+<dd>definicja elementu, tj. pojemnik dla różnych klas zawartości dokumentu.</dd>
+
+<dt>znacznik (ang. <i xml:lang="en" lang="en">tag</i>)</dt>
+
+<dd>opisowe oznakowanie wyznaczające początek i koniec (włączając jego identyfikator ogólny i wszystkie atrybuty) elementu.</dd>
+</dl>
+
+<hr />
+
+<div class="navbar">[<a href="introduction">poprzedni</a>] [<a href="conformance">następny</a>] [<a href="overview#toc">spis treści</a>] 
+</div>
+
+
+<table class="stopka"><tr>
+<td class="sle"><a href="../">Strona główna</a></td>
+<td class="spr">Ostatnia modyfikacja: 17 sierpnia 2005</td>
+</tr></table>
+
+</body>
+</html>

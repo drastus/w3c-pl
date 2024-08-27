@@ -1,0 +1,751 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="pl" lang="pl">
+
+<head>
+<title>Modularyzacja XHTML – Opracowywanie DTD ze zdefiniowanymi i rozszerzonymi modułami</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="stylesheet" type="text/css" href="../W3C-REC.css" />
+<link rel="stylesheet" type="text/css" href="xhtml.css" />
+<link rel="stylesheet" type="text/css" href="../trans.css" /><script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-35090831-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+</head>
+
+<body>
+
+
+<div class="navbar">[<a href="dtd_module_rules">poprzedni</a>] [<a href="dtd_module_defs">następny</a>] [<a href="overview#toc">spis treści</a>]
+<hr />
+</div>
+
+<h1><a name="s_developingdtds" id="s_developingdtds">E.</a> Opracowywanie DTD ze zdefiniowanymi i rozszerzonymi modułami</h1>
+
+<div class='subtoc'>
+<p><strong>Zawartość</strong></p>
+<ul class="toc">
+<li class='tocline'>E.1. <a href="#s_dev_attrs" class="tocxref">Definiowanie dodatkowych atrybutów</a></li>
+<li class='tocline'>E.2. <a href="#s_dev_elems" class="tocxref">Definiowanie dodatkowych elementów</a></li>
+<li class='tocline'>E.3. <a href="#s_dev_contentmodel" class="tocxref">Definiowanie modelu zawartości dla zestawu modułów</a> 
+<ul class="toc">
+<li class='tocline'>E.3.1. <a href="#sec_E.3.1." class="tocxref">Włączanie samodzielnego modułu do XHTML</a></li>
+<li class='tocline'>E.3.2. <a href="#sec_E.3.2." class="tocxref">Mieszanie nowego modułu ze wszystkimi modułami XHTML</a></li>
+</ul></li>
+</ul>
+</div>
+
+<p>Ten dodatek ma charakter<em> informacyjny</em>.</p>
+
+<p>Podstawowym celem definiowania modułów XHTML i ogólną metodyką modularyzacji jest ułatwianie opracowywania typów dokumentu opartych na XHTML. Te typy dokumentu mogą rozszerzać
+XHTML poprzez dołączanie dodatkowych możliwości (np. <a href="references#ref_smil">[SMIL]</a>), mogą też definiować podzbiór XHTML w celu użycia na wyspecjalizowanym urządzeniu. Ten rozdział opisuje techniki,
+które projektanci typów dokumentu muszą użyć w celu wykorzystania implementacji tej architektury modularyzacji w DTD XML. Robi to poprzez zastosowanie technik modularyzacji
+XHTML w coraz bardziej złożony sposób, kończąc stworzeniem kompletnego typu dokumentu z całkowicie różnych modułów.</p>
+
+<p>Zauważ, że w żadnym wypadku przykłady te nie wymagają modyfikacji<em> encji plikowych </em>modułów dostarczanych przez XHTML. Encje plikowe modułów XHTML są całkowicie sparametryzowane, można
+dzięki temu poprzez definicje w oddzielnych modułach i<em> pliki sterownika </em>dostosować do swych potrzeb definicję i model zawartości każdego z elementów oraz hierarchię każdego z elementów.</p>
+
+<p>Pamiętaj też, że od większości użytkowników XHTML<em> nie </em>oczekuje się, by byli autorami DTD. Autorzy DTD, ogólnie rzecz biorąc, to ludzie definiujący wyspecjalizowane oznakowanie, które poprawi czytelność,
+uprości renderowanie dokumentu, czy ułatwi automatyczne przetwarzanie dokumentów, albo są projektantami oprogramowania klienckiego i muszą definiować wyspecjalizowane DTD dla swoich określonych klientów.
+Rozważ następujące przypadki:</p>
+
+<ul>
+<li>
+<p>Organizacja dostarcza zaprenumerowane informacje poprzez interfejs WWW. Organizacja ta przechowuje subskrybowane informacje w bazie danych opartej na XML. Jednym ze sposobów
+ekstrakcji tych informacji z bazy danych jest umieszczenie rekordów XML z bazy danych bezpośrednio w dokumencie XHTML. Choć możliwe jest jedynie zagnieżdżenie rekordów, organizacja może zdefiniować moduł DTD opisujący te rekordy, przypisać ten moduł do DTD
+XHTML i tym samym stworzyć kompletne DTD dla stron. Organizacja może następnie uzyskać dostęp do danych wewnątrz nowych elementów poprzez obiektowy model dokumentu <a href="references#ref_dom">[DOM]</a>,
+dokonać walidacji dokumentów, dodać definicje stylów dla elementów przy użyciu kaskadowych arkuszy stylów <a href="references#ref_css2">
+[CSS2]</a>, itd. Definiując strukturę danych i tworząc DTD przy użyciu działań opisanych w tym rozdziale organizacja może w pełni czerpać korzyści ze stosowania XML.</p>
+</li>
+
+<li>
+<p>Twórca internetowego oprogramowania klienckiego projektuje wyspecjalizowane urządzenie. Będzie ono obsługiwało jedynie podzbiór XHTML, a dostęp do Internetu bedzie zawsze uzyskiwało porzez serwer proxy, który
+waliduje zawartość przed przekazaniem jej do klienta (by zminimalizować konieczność obsługi błędów przez klienta). W celu upewnienia się, że zawartość jest poprawna strukturalnie, wspomniany twórca konstruuje DTD będące podzbiorem XHTML, stosując działania
+opisane w tym rozdziale. Następnie nowe DTD stosowane jest na serwerach proxy i w urządzeniach, jest ono też udostępniane innym twórcom, by mogli walidować zawartość
+przed jej udostępnieniem. Stosując kilka prostych kroków twórca klientów może używać architektury zdefiniowanej w tym dokumencie, by ogromnie zmniejszyć koszty opracowywania DTD<em> oraz </em> zapewnić pełne obsługiwanie przez te klienty podzbioru XHTML, który został przez niego włączony.</p>
+</li>
+</ul>
+
+<h2><a name="s_dev_attrs" id="s_dev_attrs">E.1.</a> Definiowanie dodatkowych atrybutów</h2>
+
+<p>W niektórych wypadkach rozszerzenie XHTML może sprowadzać się do dodania atrybutów. Atrybuty powinny być dodane do elementu po prostu poprzez określenie dodatkowego wykazu ATTLIST dla tego elementu, na przykład:</p>
+
+<pre class="example">
+&lt;!ATTLIST %a.qname;
+      %MyModule.pfx;myattr   CDATA        #IMPLIED
+      %MyModule.xmlns.extras.attrib;
+&gt;
+</pre>
+
+<p>doda atrybut "myattr" z opcjonalnym przedrostkiem zdefiniowanym przez "%MyModule.pfx", z wartością typu CDATA, do elementu "a". Będzie to działać, ponieważ  XML zezwala na definiowanie lub rozszerzanie
+wykazu atrybutów w dowolnym miejscu w DTD.<em> Omówienie kwestii nazw kwalifikowanych i przedrostków przestrzeni nazw znajduje się w części <a href="dtd_module_rules#s_module_namespace">Definiowanie przestrzeni nazw modułu</a>.</em></p>
+
+<p>Naturalnie dodanie atrybutu do DTD nie oznacza, że w jakimkolwiek kliencie zdefiniowane jest jakieś nowe zachowanie. Jednakże twórcy treści powinni używać dodatkowych atrybutów w celu przechowywania informacji, do
+których poprzez obiektowy model dokumentu mają dostęp skojarzone skrypty (na przykład).</p>
+
+<h2><a name="s_dev_elems" id="s_dev_elems">E.2.</a> Definiowanie dodatkowych elementów</h2>
+
+<p>Definiowanie dodatkowych elementów jest tylko trochę bardziej skomplikowane od definiowania dodatkowych atrybutów. W zasadzie autorzy DTD powinni napisać deklarację dodatkowego elementu dla każdego z elementów:</p>
+
+<pre class="example">
+&lt;!-- W podmodule nazw kwalifikowanych --&gt;
+&lt;!ENTITY % MyModule.myelement.qname  "%MyModule.pfx;myelement" &gt;
+&lt;!ENTITY % MyModule.myotherelement.qname  "%MyModule.pfx;myotherelement" &gt;
+
+&lt;!-- W podmodule deklaracji --&gt;
+&lt;!ELEMENT %MyModule.myelement.qname; 
+           ( #PCDATA | %MyModule.myotherelement.qname; )* &gt;
+&lt;!ATTLIST %MyModule.myelement.qname;
+          myattribute    CDATA    #IMPLIED
+&gt;
+
+&lt;!ELEMENT %MyModule.myotherelement.qname; EMPTY &gt;
+</pre>
+
+<p>Po zdefiniowaniu elementów, muszą one być włączone do modelu zawartości. Strategiami włączania nowych elementów lub zbiorów elementów do modelu zawartości zajmuje się następna część dodatku.</p>
+
+<h2><a name="s_dev_contentmodel" id="s_dev_contentmodel">E.3.</a> Definiowanie modelu zawartości dla zestawu modułów</h2>
+
+<p>Choć model zawartości modułów XHTML jest w pełni sparametryzowany, autorzy DTD moga modyfikować model zawartości dla każdego elementu w każdym module. Szczegóły interfejsu modułu DTD są zdefiniowane w dodatku
+<a href="dtd_module_rules#s_dtd_module_rules">Konstruowanie modułów DTD</a>. Zasadniczo istnieją dwa sposoby podejścia do tej modyfikacji:</p>
+
+<ol>
+<li>Powtórnie zdefiniuj encję parametryczną ".content" dla każdego elementu.</li>
+
+<li>Powtórnie zdefiniuj jedną lub więcej z globalnych encji modelu zawartości (normalnie poprzez encję parametryczną ".extras").</li>
+</ol>
+
+<p>Obrana strategia zależna będzie od natury łączonych modułów i elementów. Reszta niniejszej części opisuje techniki łączenia dwu różnych klas modułów.</p>
+
+<h3><a name="sec_E.3.1." id="sec_E.3.1.">E.3.1.</a> Włączanie samodzielnego modułu do XHTML</h3>
+
+<p>Gdy moduł (pamiętaj &#8212; moduł może być też zestawem innych modułów) zawiera elementy, z których wszystkie w swoich modelach zawartości odwołują się do siebie, jest on nazywany "wewnętrznie kompletnym". Jako
+taki, moduł ten może być używany samodzielnie; (na przykład możesz zdefiniować DTD będący po prostu tym modułem i użyć jeden z jego elementów jako element główny). Włączanie takiego modułu do XHTML jest trzyetapowym procesem:</p>
+
+<ol>
+<li>Zdecyduj, który/które element(y) może/mogą pełnić rolę korzeni(a) w nowym module.</li>
+
+<li>Zdecyduj, w którym miejscu drzewa zawartości XHTML elementy te powinny być przyłączone.</li>
+
+<li>Następnie dla każdego miejsca przyłączenia w drzewie zawartości dodaj element(y) główny/główne do definicji zawartości dla elementów XHTML.</li>
+</ol>
+
+<p>Rozważ przyłączenie elementów zdefiniowanych <a href="#s_dev_elems">powyżej</a>. W tamtym przykładzie element <tt>myelement</tt> jest korzeniem. By przyłączyć ten element pod element <tt>img</tt> i
+tylko element <tt>img</tt>, z XHTML, dobrze jest postąpić następująco:</p>
+
+<pre class="example">
+&lt;!ENTITY % img.content "( %MyModule.myelement.qname; )*"&gt;
+</pre>
+
+<p>DTD zdefiniowane wraz z tym modelem zawartości pozwoli na zastosowanie fragmentu dokumentu podobnego do tego:</p>
+
+<pre class="example">
+&lt;img src="..."&gt;
+&lt;myml:myelement&gt;To jest zawartość elementu zdefiniowanego lokalnie&lt;/myml:myelement&gt;
+&lt;/img&gt;
+</pre>
+
+<p>Ważne, by zauważyć, że normalnie model zawartości elementu <code>img</code> to <code>EMPTY</code>. Dodając element <code>myelement</code> do tego modelu zawartości tak naprawdę po prostu zamieniamy
+<code>EMPTY</code> na <code>myelement</code>. W przypadku innych elementów, które już mają zdefiniowane modele zawartości, dodanie elementu będzie wymagać także odświeżenia istniejącego modelu zawartości oprócz elementu <code>myelement</code>.</p>
+
+<h3><a name="sec_E.3.2." id="sec_E.3.2.">E.3.2.</a> Mieszanie nowego modułu ze wszystkimi modułami XHTML</h3>
+
+<p>Rozszerzając powyższy przykład, przyłączenie tego modułu wszędzie tam, gdzie dozwolona jest grupa modelów zawartości <tt>%Flow.mix</tt> będzie wymagało czegoś w tym stylu:</p>
+
+<pre class="example">
+&lt;!ENTITY % Misc.extra
+     "| %MyModule.myelement.qname;" &gt;
+</pre>
+
+<p>Gdy klasa modelów zawartości %Misc.extra jest używana w encji parametrycznej %Misc.class, a ta encja parametryczna jest używana we wszystkich modułach XHTML, nowy moduł stanie się dostępny w całym rozszerzonym typie dokumentu XHTML.</p>
+
+<h2><a name="sec_E.4." id="sec_E.4.">E.4.</a> Tworzenie nowego DTD</h2>
+
+<p>Dotychczas przykłady w tej części opisywały metody rozszerzania XHTML i modelu zawartości XHTML. Gdy jest to już zrobione, następnym etapem będzie zebranie modułów składających się na DTD w pojedynczym sterowniku DTD,
+przyłączając nowe definicje odpowiednio nadpisujące i uzupełniające podstawowe definicje XHTML.</p>
+
+<h3><a name="sec_E.4.1." id="sec_E.4.1.">E.4.1.</a> Tworzenie prostego DTD</h3>
+
+<p>Korzystając z banalnego przykładu przedstawionego powyżej można zdefiniować nowe DTD, które używa i całkiem łatwo rozszerza moduły XHTML. Najpierw zdefiniuj w module nowe elementy i ich model zawartości:</p>
+
+<pre class="dtd">
+&lt;!-- Plik: simpleml-model-1.mod --&gt;
+
+&lt;!-- Zadeklaruj encję parametryczną (EP), która definiuje wszystkie zewnętrzne
+     przestrzenie nazw używane przez ten moduł --&gt;
+
+&lt;!ENTITY % SimpleML.xmlns.attrib
+  "%NS.decl.attrib;"
+&gt;
+
+&lt;!-- Ustaw EP, która jest używana w każdej deklaracji ATTLIST w tym module.
+     NS.prefixed.attrib jest inicjalizowana w module xhtml-qname, a
+     SimpleML.ns.noprefix.attrib jest inicjalizowana w pliku sterownika DTD
+     SimpleML. --&gt;
+
+&lt;!ENTITY % SimpleML.Common.attrib
+  "%SimpleML.xmlns.attrib;
+   id           ID           #IMPLIED"
+&gt;
+
+&lt;!ENTITY % SimpleML.element.qname "%SimpleML.pfx;element" &gt;
+&lt;!ENTITY % SimpleML.otherelement.qname "%SimpleML.pfx;otherelement" &gt;
+
+&lt;!ELEMENT %SimpleML.element.qname;
+          ( #PCDATA | %SimpleML.otherelement.qname; )* &gt;
+&lt;!ATTLIST %SimpleML.element.qname;
+          myattribute   CDATA  #IMPLIED
+          %SimpleML.Common.attrib;
+&gt;
+&lt;!ELEMENT %SimpleML.otherelement.qname; EMPTY &gt;
+&lt;!ATTLIST %SimpleML.otherelement.qname;
+          %SimpleML.Common.attrib;
+&gt;
+
+&lt;!ENTITY % SimpleML.img.myattr.qname "%SimpleML.pfx;myattr" &gt;
+&lt;!ATTLIST %img.qname;
+          %SimpleML.img.myattr.qname;  CDATA  #IMPLIED
+&gt;
+
+&lt;!-- Dodaj nasze elementy do modelu zawartości XHTML --&gt;
+&lt;!ENTITY % Misc.class
+     "| %SimpleML.element.qname;" &gt;
+
+&lt;!-- Teraz wprowadź model zawartości XHTML Basic --&gt;
+&lt;!ENTITY % xhtml-basic-model.mod
+     PUBLIC "-//W3C//ENTITIES XHTML Basic 1.0 Document Model 1.0//EN"
+            "http://www.w3.org/TR/xhtml-basic/xhtml-basic10-model-1.mod" &gt;
+%xhtml-basic-model.mod;
+
+</pre>
+
+<p>Następnie zdefiniuj sterownik DTD dla nowego języka:</p>
+
+<pre class="dtd">
+&lt;!-- plik: simpleml-1_0.dtd --&gt;
+
+&lt;!-- Wprowadź typy danych XHTML --&gt;
+&lt;!ENTITY % xhtml-datatypes.mod
+     PUBLIC "-//W3C//ENTITIES XHTML Datatypes 1.0//EN"
+            "http://www.w3.org/TR/xhtml-modularization/DTD/xhtml-datatypes-1.mod" &gt;
+%xhtml-datatypes.mod;
+
+&lt;!-- Zadeklaruj rzeczywistą przestrzeń nazw tego modułu --&gt;
+&lt;!ENTITY % SimpleML.xmlns "http://www.example.com/xmlns/simpleml1" &gt;
+
+&lt;!-- Ustaw domyślne niedodawanie przedrostków w nowym module --&gt;
+&lt;!ENTITY % NS.prefixed "IGNORE" &gt;
+&lt;!ENTITY % SimpleML.prefixed "%NS.prefixed;" &gt;
+
+&lt;!-- Domyślny przedrostek dla elements i atrybutów modułu --&gt;
+&lt;!ENTITY % SimpleML.prefix "simpleml" &gt;
+
+&lt;!-- Jeśli do przestrzeni nazw tego modułu dodawany jest przedrostek --&gt;
+&lt;![%SimpleML.prefixed;[
+  &lt;!ENTITY % SimpleML.pfx  "%SimpleML.prefix;:" &gt;
+]]&gt;
+&lt;!ENTITY % SimpleML.pfx  "" &gt;
+
+&lt;![%SimpleML.prefixed;[
+  &lt;!ENTITY % SimpleML.xmlns.extra.attrib
+       "xmlns:%SimpleML.prefix; %URI.datatype; #FIXED '%SimpleML.xmlns;'" &gt;
+]]&gt;
+&lt;!ENTITY % SimpleML.xmlns.extra.attrib "" &gt;
+
+&lt;!ENTITY % XHTML.xmlns.extra.attrib
+       "%SimpleML.xmlns.extra.attrib;"
+&gt;
+&lt;!-- Ustaw model zawartości dla naszego języka --&gt;
+&lt;!ENTITY % xhtml-model.mod
+     SYSTEM "simpleml-model-1.mod" &gt;
+&lt;!-- Rozwiń DTD XHTML Basic, by to wszystko zrobił --&gt;
+&lt;!ENTITY % xhtml-basic.dtd
+     PUBLIC "-//W3C//DTD XHTML Basic 1.0//EN"
+            "http://www.w3.org/TR/xhtml-basic/xhtml-basic10.dtd" &gt;
+%xhtml-basic.dtd;
+
+</pre>
+
+<p>Używając tego DTD istnieje możliwość włączenia używania przedrostków przestrzeni nazw XML. W takim wypadku początek dokumentu używającego tego nowego DTD mógłby wyglądać tak:</p>
+
+<pre class="dtd">
+&lt;!DOCTYPE html SYSTEM "simpleml-1_0.dtd" [
+  &lt;!ENTITY % SimpleML.prefixed "INCLUDE"&gt;
+]&gt;
+&lt;html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:simpleml="http://www.example.com/xmlns/simpleml1" &gt;
+&lt;head&gt;
+&lt;title&gt;Przykład z użyciem domyślnych ustawień&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;p&gt;To jest zawartość będąca w przestrzeni nazw XHTML&lt;/p&gt;
+&lt;simpleml:element&gt;
+  To jest zawartość w przestrzeni nazw SimpleML.
+  &lt;simpleml:otherelement /&gt;
+&lt;/simpleml:element&gt;
+&lt;p&gt;&lt;img src="missing" alt="Missing image" simpleml:myattr="value"/&gt;&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+
+</pre>
+
+<h3><a name="sec_E.4.2." id="sec_E.4.2.">E.4.2.</a> Tworzenie DTD poprzez rozszerzanie XHTML</h3>
+
+<p>Teraz mamy sytuację, w której kompletny, dodatkowy i złożony moduł jest dodany do XHTML (lub do pozbioru XHTML). W gruncie rzeczy jest on taki sam, jak w powyższym trywialnym przykładzie, jedyną różnicą jest to, że moduł dodawany jest dołączany do DTD poprzez odwołanie, zamiast bezpośredniego dołączenia nowych definicji do DTD.</p>
+
+<p>Jednym z takich złożonych modułów jest DTD dla <a href="references#ref_mathml">[MATHML]</a>. W celu połączenia MathML i XHTML w pojedynczy DTD, autor mógłby po prostu zadecydować, gdzie zawartość MathML
+powinna być dopuszczalna w dokumencie i dodać element główny MathML modelu zawartości w tym miejscu. Najpierw zdefiniuj moduł modelu zawartości rozwijający DTD MathML i łączący go z modelem zawartości:</p>
+
+<pre class="example">
+&lt;!-- plik: mathml-model.mod --&gt;
+&lt;!ENTITY % XHTML1-math
+     PUBLIC "-//W3C//DTD MathML 2.0//EN"
+            "http://www.w3.org/TR/MathML2/dtd/mathml2.dtd" &gt;
+%XHTML1-math;
+
+&lt;!ENTITY % Inlspecial.extra 
+     "%a.qname; | %img.qname; | %object.qname; | %map.qname; 
+      | %Mathml.Math.qname;" &gt;
+</pre>
+
+<p>Następnie zdefiniuj sterownik DTD, który zidentyfikuje nasz nowy moduł modelu zawartości jako model zawartości dla DTD i przekaże przetwarzanie do sterownika XHTML 1.1 (na przykład):</p>
+
+<pre class="example">
+&lt;!-- plik: xhtml-mathml.dtd --&gt;
+&lt;!ENTITY % xhtml-model.mod
+      SYSTEM "mathml-model.mod" &gt;
+&lt;!ENTITY % xhtml11.dtd
+     PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+            "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd" &gt;
+%xhtml11.dtd;
+</pre>
+
+<h3><a name="sec_E.4.3." id="sec_E.4.3.">E.4.3.</a> Tworzenie DTD poprzez usuwanie i zamienianie modułów XHTML</h3>
+
+<p>Innym sposobem, w który autorzy DTD mogą użyć modułów XHTML jest zdefiniowanie DTD będącego podzbiorem typu dokumentu rodziny XHTML (ponieważ, na przykład, tworzą urządzenia lub oprogramowanie które obsługuje
+tylko podzbiór XHTML). Jest to tylko trochę bardziej skomplikowane niż poprzedni przykład. Oto podstawowe kroki, które musisz wykonać:</p>
+
+<ol>
+<li>Weź za podstawę nowego typu dokumentu DTD rodziny XHTML (my będziemy używać XHTML 1.1).</li>
+
+<li>Wybierz moduły do usunięcia z tego DTD.</li>
+
+<li>Zdefiniuj nowe DTD, które zignoruje (za pomocą słowa kluczowego IGNORE) te moduły.</li>
+
+<li>Wprowadź jakieś nowe moduły.</li>
+</ol>
+
+<p>Rozważ na przykład urządzenie używające modułów XHTML, ale bez formularzy i tabel. DTD dla takiego urządzenia wyglądałoby tak:</p>
+
+<pre class="example">
+&lt;!-- plik: xhtml-simple.dtd --&gt;
+&lt;!ENTITY % xhtml-form.module "IGNORE" &gt;
+&lt;!ENTITY % xhtml-table.module "IGNORE" &gt;
+&lt;!ENTITY % xhtml-table.module "IGNORE" &gt;
+&lt;!-- Wprowadź modeuł prostych tabel --&gt;
+&lt;!ENTITY % xhtml-basic-table.mod
+     PUBLIC "-//W3C//ELEMENTS XHTML Basic Tables 1.0//EN"
+       "http://www.w3.org/TR/xhtml-modularization/DTD/xhtml-basic-table-1.mod"
+&gt;
+%xhtml-basic-table.mod;
+&lt;!ENTITY % xhtml11.mod
+     PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+            "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd" &gt;
+%xhtml11.mod;
+</pre>
+
+<p>Zauważ, że właściwie nie następuje tu modyfikacja modelu zawartości dla DTD XHTML 1.1. Jednak w sytuacji, gdy XML ignoruje elementy w modelach zawartości, które są niezdefiniowane, elementy formularzy i tabel są automatycznie usuwane z tego modelu.</p>
+
+<h3><a name="sec_E.4.4." id="sec_E.4.4.">E.4.4.</a> Tworzenie nowego DTD</h3>
+
+<p>Niektórzy autorzy DTD mogą chcieć zacząć od zera, używając ogólnych zasad modularyzacji XHTML jako narzędzia do konstruowania nowego języka znaczników. Język ten musi składać się z minimalnie
+wymaganych modułów z XHTML. Może także zawierać inne zdefiniowane w XHTNL moduły czy jakiekolwiek inne moduły, które autor chce włączyć. W tym przykładzie weźmiemy wymagane moduły XHTML, dodamy kilka modułów zdefiniowanych w
+XHTML i dodamy też moduł, który zdefiniowaliśmy powyżej.</p>
+
+<p>Pierwszym krokiem jest użycie dostarczanego wraz z XHTML <a href="DTD/templates/template-qname-1.mod">szablonu</a> dla nowego modułu nazw
+kwalifikowanych, zmodyfikowanego w celu zdefiniowania nazw kwalifikowanych i przestrzeni nazw dla naszych nowych elementów.</p>
+
+<pre class="dtd">
+&lt;!-- plik: myml-qname-1.mod --&gt;
+
+&lt;!-- Wprowadź typy danych - do deklarowania atrybutów xmlns używamy
+     encji parametrycznej URI.datatype. --&gt;
+&lt;!ENTITY % MyML-datatypes.mod
+         PUBLIC "-//W3C//ENTITIES XHTML Datatypes 1.0//EN"
+         "http://www.w3.org/TR/xhtml-modularization/DTD/xhtml-datatypes-1.mod" &gt;
+%MyML-datatypes.mod;
+
+&lt;!-- Ustaw domyślne niedodawanie przedrostków w tym module --&gt;
+&lt;!ENTITY % NS.prefixed "IGNORE" &gt;
+&lt;!ENTITY % MyML.prefixed "%NS.prefixed;" &gt;
+
+&lt;!-- Zadeklaruj rzeczywistą przestrzeń nazw tego modułu --&gt;
+&lt;!ENTITY % MyML.xmlns "http://www.example.com/xmlns/myml" &gt;
+
+&lt;!-- Zadeklaruj domyślny przedrostek dla tego modułu --&gt;
+&lt;!ENTITY % MyML.prefix "myml" &gt;
+
+&lt;!-- Jeśli do przestrzeni nazw tego modułu dodawany jest przedrostek --&gt;
+&lt;![%MyML.prefixed;[
+  &lt;!ENTITY % MyML.pfx  "%MyML.prefix;:" &gt;
+]]&gt;
+&lt;!ENTITY % MyML.pfx  "" &gt;
+
+&lt;!-- Zadeklaruj encję parametryczną (EP), która definiuje wszystkie zewnętrzne
+     przestrzenie nazw używane przez ten moduł --&gt;
+&lt;!ENTITY % MyML.xmlns.extra.attrib "" &gt;
+
+&lt;!-- Zadeklaruj EP definiującą atrybuty xmlns mające być używane przez MyML. --&gt;
+&lt;![%MyML.prefixed;[
+&lt;!ENTITY % MyML.xmlns.attrib
+   "xmlns:%MyML.prefix;  %URI.datatype;  #FIXED '%MyML.xmlns;'
+   %MyML.xmlns.extra.attrib;"
+&gt;
+]]&gt;
+&lt;!ENTITY % MyML.xmlns.attrib
+   "xmlns   %URI.datatype;  #FIXED '%MyML.xmlns;'
+    %MyML.xmlns.extra.attrib;"
+&gt;
+
+&lt;!-- Upewnij się, że atrybuty przestrzeni nazw MyML są zawarte w zestawie
+     atrybutów XHTML --&gt;
+&lt;![%NS.prefixed;[
+&lt;!ENTITY % XHTML.xmlns.extra.attrib
+    "%MyML.xmlns.attrib;" &gt;
+]]&gt;
+&lt;!ENTITY % XHTML.xmlns.extra.attrib
+    ""
+&gt;
+&lt;!-- Teraz zadeklaruj nazwy elementów --&gt;
+
+&lt;!ENTITY % MyML.myelement.qname "%MyML.pfx;myelement" &gt;
+&lt;!ENTITY % MyML.myotherelement.qname "%MyML.pfx;myotherelement" &gt;
+
+</pre>
+
+<p>Następnie zdefiniuj moduł definiujący elementy i atrybuty przy użyciu dostarczanego wraz z XHTML <a href="DTD/templates/template-1.mod">szablonu</a>.</p>
+
+<pre class="dtd">
+&lt;!-- ...................................................................... --&gt;
+&lt;!-- My Elements Module ................................................... --&gt;
+&lt;!-- plik: myml-elements-1_0.mod
+
+     PUBLIC "-//MY COMPANY//ELEMENTS XHTML MyML Elements 1.0//EN"
+     SYSTEM "http://example.com/DTDs/myml-elements-1_0.mod"
+
+     xmlns:myml="http://example.com/DTDs/myml-1_0.dtd"
+     ...................................................................... --&gt;
+
+&lt;!-- Moduł My Elements
+
+     myelement
+     myotherelement
+
+     Jedynym zadaniem tego modułu jest dostarczenie struktury
+     dla zawartości typu PCDATA.
+--&gt;
+
+&lt;!ELEMENT %MyML.myelement.qname;
+     ( #PCDATA | %MyML.myotherelement.qname; )* &gt;
+&lt;!ATTLIST %MyML.myelement.qname;
+     myattribute    CDATA   #IMPLIED
+     %MyML.xmlns.attrib;
+&gt;
+
+&lt;!ELEMENT %MyML.myotherelement.qname; EMPTY &gt;
+&lt;!ATTLIST %MyML.myotherelement.qname;
+      %MyML.xmlns.attrib;
+&gt;
+
+&lt;!ENTITY % MyML.img.myattr.qname "%MyML.pfx;myattr" &gt;
+&lt;!ATTLIST %img.qname;
+      %MyML.img.myattr.qname;   CDATA  #IMPLIED
+      %MyML.xmlns.attrib;
+&gt;
+
+&lt;!-- koniec pliku myml-elements-1_0.mod --&gt;
+
+</pre>
+
+<p>Teraz utwórz opis modelu zawartości, który przyłącza nowe elementy i atrybuty do innych elementów XHTML. Następujący przykład odpowiada modelowi zawartości XHTML Basic, jest 
+jednak kompletnym, niezależnym modułem modelu zawartości:</p>
+
+<pre class="dtd">
+&lt;!-- ...................................................................... --&gt;
+&lt;!-- MyML Model Module  ................................................... --&gt;
+&lt;!-- plik: myml-model-1.mod
+
+     PUBLIC "-//MY COMPANY//ELEMENTS XHTML MyML Model 1.0//EN"
+     SYSTEM "http://example.com/DTDs/myml-model-1_0.mod"
+
+     xmlns:myml="http://www.example.com/xmlns/myml"
+     ...................................................................... --&gt;
+
+&lt;!-- Zdefiniuj model zawartości dla Misc.extra --&gt;
+&lt;!ENTITY % Misc.class
+     "| %MyML.myelement.qname; "&gt;
+
+&lt;!-- ..................  Elementy wewnątrzwierszowe  .................... --&gt;
+
+&lt;!ENTITY % HeadOpts.mix
+     "( %meta.qname; )*" &gt;
+
+&lt;!ENTITY % I18n.class "" &gt;
+
+&lt;!ENTITY % InlStruct.class "%br.qname; | %span.qname;" &gt;
+
+&lt;!ENTITY % InlPhras.class
+     "| %em.qname; | %strong.qname; | %dfn.qname; | %code.qname;
+      | %samp.qname; | %kbd.qname; | %var.qname; | %cite.qname;
+      | %abbr.qname; | %acronym.qname; | %q.qname;" &gt;
+
+&lt;!ENTITY % InlPres.class
+     "" &gt;
+
+&lt;!ENTITY % Anchor.class "| %a.qname;" &gt;
+
+&lt;!ENTITY % InlSpecial.class "| %img.qname; " &gt;
+
+&lt;!ENTITY % Inline.extra "" &gt;
+
+&lt;!-- %Inline.class; zawiera wszystkie elementy wewnątrzwierszowe
+     używane jako składniki w różnych połączeniach
+--&gt;
+&lt;!ENTITY % Inline.class
+     "%InlStruct.class;
+      %InlPhras.class;
+      %InlPres.class;
+      %Anchor.class;
+      %InlSpecial.class;"
+&gt;
+
+&lt;!-- %InlNoAnchor.class; zawiera wszystkie niekotwicowe elementy wewnątrzwierszowe
+     używane jako składniki w różnych połączeniach
+--&gt;
+&lt;!ENTITY % InlNoAnchor.class
+     "%InlStruct.class;
+      %InlPhras.class;
+      %InlPres.class;
+      %InlSpecial.class;"
+&gt;
+
+&lt;!-- %InlNoAnchor.mix; zawiera wszystkie niekotwicowe elementy wewnątrzwierszowe
+--&gt;
+&lt;!ENTITY % InlNoAnchor.mix
+     "%InlNoAnchor.class;
+      %Misc.class;"
+&gt;
+
+&lt;!-- %Inline.mix; zawiera wszystkie elementy wewnątrzwierszowe, łącznie z %Misc.class;
+--&gt;
+&lt;!ENTITY % Inline.mix
+     "%Inline.class;
+      %Misc.class;"
+&gt;
+
+&lt;!-- .....................  Elementy blokowe  ...................... --&gt;
+
+&lt;!ENTITY % Heading.class
+     "%h1.qname; | %h2.qname; | %h3.qname;
+      | %h4.qname; | %h5.qname; | %h6.qname;" &gt;
+
+&lt;!ENTITY % List.class "%ul.qname; | %ol.qname; | %dl.qname;" &gt;
+
+&lt;!ENTITY % BlkStruct.class "%p.qname; | %div.qname;" &gt;
+
+&lt;!ENTITY % BlkPhras.class
+     "| %pre.qname; | %blockquote.qname; | %address.qname;" &gt;
+
+&lt;!ENTITY % BlkPres.class "" &gt;
+
+&lt;!ENTITY % Block.extra "" &gt;
+
+&lt;!-- %Block.class; zawiera wszystkie elementy blokowe
+     używane jako składniki w różnych połączeniach
+--&gt;
+&lt;!ENTITY % Block.class
+     "%BlkStruct.class;
+      %BlkPhras.class;
+      %BlkPres.class;
+      %Block.extra;"
+&gt;
+
+&lt;!-- %Block.mix; zawiera wszystkie elementy blokowe plus %Misc.class;
+--&gt;
+&lt;!ENTITY % Block.mix
+     "%Heading.class;
+      | %List.class;
+      | %Block.class;
+      %Misc.class;"
+&gt;
+
+&lt;!-- ..............  Wszystkie elementy zawartości  ................ --&gt;
+
+&lt;!-- %Flow.mix; zawiera wszystkie elementy zawartości tekstowej,
+     blokowe i wewnątrzwierszowe --&gt;
+&lt;!ENTITY % Flow.mix
+     "%Heading.class;
+      | %List.class;
+      | %Block.class;
+      | %Inline.class;
+      %Misc.class;"
+&gt;
+
+&lt;!-- specjalny model zawartości dla elementu pre --&gt;
+&lt;!ENTITY % pre.content
+    "( #PCDATA
+     | %Inline.class; )*"
+&gt;
+
+&lt;!-- koniec pliku myml-model-1.mod --&gt;
+
+</pre>
+
+<p>Na koniec użyj dostarczanego wraz z XHTML <a href="DTD/templates/template.dtd">szablonu</a> dla nowego DTD, zmodyfikowanego w sposób odpowiedni dla naszego nowego języka znaczników:</p>
+
+<pre class="dtd">
+&lt;!-- ....................................................................... --&gt;
+&lt;!-- MYML DTD  ............................................................. --&gt;
+&lt;!-- plik: myml-1_0.dtd --&gt;
+
+&lt;!-- To jest sterownik DTD dla myml 1.0.
+
+     Do identyfikacji proszę użyć tego formalnego identyfikatora publicznego:
+
+         "-//MY COMPANY//DTD XHTML MYML 1.0//EN"
+
+     To jest przestrzeń nazw dla elementów właściwych tylko dla myml:
+
+         xmlns:myml="http://www.example.com/xmlns/myml"
+--&gt;
+&lt;!ENTITY % XHTML.version  "-//MY COMPANY//DTD XHTML MYML 1.0//EN" &gt;
+
+&lt;!-- zarezerwowane do użycia z profilami dokumentu --&gt;
+&lt;!ENTITY % XHTML.profile  "" &gt;
+
+&lt;!-- Nakaż zasadom ogólnym używanie naszego modułu nazw kwalifikowanych
+     jako dodatkowego sterownika nazw kwalifikowanych
+--&gt;
+&lt;!ENTITY % xhtml-qname-extra.mod
+     SYSTEM "myml-qname-1.mod" &gt;
+
+&lt;!-- Zdefiniuj Model Zawartości dla użytku zasad ogólnych --&gt;
+&lt;!ENTITY % xhtml-model.mod
+     SYSTEM "myml-model-1.mod" &gt;
+
+&lt;!-- Wyłącz obsługę tekstu dwukierunkowego --&gt;
+&lt;!ENTITY % XHTML.bidi  "IGNORE" &gt;
+
+&lt;!-- Wprowadź zasady ogólne XHTML --&gt;
+&lt;!ENTITY % xhtml-framework.mod
+     PUBLIC "-//W3C//ENTITIES XHTML Modular Framework 1.0//EN"
+            "http://www.w3.org/TR/xhtml-modularization/DTD/xhtml-framework-1.mod" &gt;
+%xhtml-framework.mod;
+
+&lt;!-- Moduł Basic Text (wymagany)  ............................... --&gt;
+&lt;!ENTITY % xhtml-text.mod
+     PUBLIC "-//W3C//ELEMENTS XHTML Basic Text 1.0//EN"
+            "http://www.w3.org/TR/xhtml-modularization/DTD/xhtml-text-1.mod" &gt;
+%xhtml-text.mod;
+
+&lt;!-- Moduł Hypertext (wymagany) ................................. --&gt;
+&lt;!ENTITY % xhtml-hypertext.mod
+     PUBLIC "-//W3C//ELEMENTS XHTML Hypertext 1.0//EN"
+            "http://www.w3.org/TR/xhtml-modularization/DTD/xhtml-hypertext-1.mod" &gt;
+%xhtml-hypertext.mod;
+
+&lt;!-- Moduł Lists (wymagany)  .................................... --&gt;
+&lt;!ENTITY % xhtml-list.mod
+     PUBLIC "-//W3C//ELEMENTS XHTML Lists 1.0//EN"
+            "http://www.w3.org/TR/xhtml-modularization/DTD/xhtml-list-1.mod" &gt;
+%xhtml-list.mod;
+
+&lt;!-- Moduł My Elements   ........................................ --&gt;
+&lt;!ENTITY % MyML-elements.mod
+     SYSTEM "myml-elements-1.mod" &gt;
+%MyML-elements.mod;
+
+&lt;!-- Moduł XHTML Images  ........................................ --&gt;
+&lt;!ENTITY % xhtml-image.mod
+     PUBLIC "-//W3C//ELEMENTS XHTML Images 1.0//EN"
+            "http://www.w3.org/TR/xhtml-modularization/DTD/xhtml-image-1.mod" &gt;
+%xhtml-image.mod;
+
+&lt;!-- Moduł Document Metainformation  ............................ --&gt;
+&lt;!ENTITY % xhtml-meta.mod
+     PUBLIC "-//W3C//ELEMENTS XHTML Metainformation 1.0//EN"
+            "http://www.w3.org/TR/xhtml-modularization/DTD/xhtml-meta-1.mod" &gt;
+%xhtml-meta.mod;
+
+&lt;!-- Moduł Document Structure (wymagany)  ....................... --&gt;
+&lt;!ENTITY % xhtml-struct.mod
+     PUBLIC "-//W3C//ELEMENTS XHTML Document Structure 1.0//EN"
+            "http://www.w3.org/TR/xhtml-modularization/DTD/xhtml-struct-1.mod" &gt;
+%xhtml-struct.mod;
+
+</pre>
+
+<h2><a name="sec_E.5." id="sec_E.5.">E.5.</a> Używanie nowego DTD</h2>
+
+<p>Nowo opracowane DTD może być teraz używane w dowolnym dokumencie. Używanie takiego DTD jest bardzo proste &#8212; wystarczy odwołać się do niego w deklaracji DOCTYPE dokumentu:</p>
+
+<pre class="dtd">
+&lt;!DOCTYPE html SYSTEM "myml-1_0.dtd" &gt;
+&lt;html xmlns="http://www.w3.org/1999/xhtml" &gt;
+&lt;head&gt;
+&lt;title&gt;Przykład z użyciem domyślnych ustawień&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;p&gt;To jest zawartość w przestrzeni nazw XHTML &lt;/p&gt;
+&lt;myelement&gt;
+  To jest zawartość w przestrzeni nazw SimpleML.
+  &lt;myotherelement /&gt;
+&lt;/myelement&gt;
+&lt;p&gt;&lt;img src="missing" alt="Missing image" myattr="value"/&gt;&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+
+</pre>
+
+<p>Dokument ten może też używać elementów spoza przestrzeni nazw XHTML poprzez dodanie do nich przedrostka:</p>
+
+<pre class="dtd">
+&lt;!DOCTYPE html SYSTEM "myml-1_0.dtd" [
+  &lt;!ENTITY % MyML.prefixed "INCLUDE" &gt;
+]&gt;
+&lt;html xmlns="http://www.w3.org/1999/xhtml" &gt;
+&lt;head&gt;
+&lt;title&gt;Przykład z użyciem domyślnych ustawień&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;p&gt;To jest zawartość w przestrzeni nazw XHTML&lt;/p&gt;
+&lt;myml:myelement&gt;
+  To jest zawartość w przestrzeni nazw myml.
+  &lt;myml:myotherelement /&gt;
+&lt;/myml:myelement&gt;
+&lt;p&gt;&lt;img src="missing" alt="Missing image" myml:myattr="value" /&gt;&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+
+</pre>
+
+<hr />
+
+<div class="navbar">[<a href="dtd_module_rules">poprzedni</a>] [<a href="dtd_module_defs">następny</a>] [<a href="overview#toc">spis treści</a>]
+</div>
+
+
+<table class="stopka"><tr>
+<td class="sle"><a href="../">Strona główna</a></td>
+<td class="spr">Ostatnia modyfikacja: 17 sierpnia 2005</td>
+</tr></table>
+
+</body>
+</html>
